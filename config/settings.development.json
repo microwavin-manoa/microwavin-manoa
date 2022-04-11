@@ -34,5 +34,9 @@
     { "name": "White Bread", "vendor": "Costco", "price": 3.99 },
     { "name": "Ham", "vendor": "Nijiya", "price": 2.78 },
     { "name": "Lettuce", "vendor": "Down to Earth", "price": 5.88 }
+  ],
+  "defaultRecipes": [
+    { "name":  "Boiled Egg", "imageURL": "/images/food.jpg", "prepTime": "4 minutes", "servingSize": "1", "ingredients": ["Egg"],
+      "description": "Use a microwave-safe bowl. Place eggs on bottom of bowl with water. Add half a teaspoon of salt for each egg to avoid an explosion. Microwave on high for four minutes for two eggs, adding one minute for every additional two eggs. Use a spoon to place the eggs in an ice water bath for five minutes. Drain and peel."}
   ]
 }

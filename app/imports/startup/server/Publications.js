@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 import { Contacts } from '../../api/contact/Contacts';
 import { Ingredients } from '../../api/ingredient/Ingredient';
+import { Recipes } from '../../api/recipe/Recipes';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
@@ -25,6 +26,13 @@ Meteor.publish(Contacts.userPublicationName, function () {
 Meteor.publish(Ingredients.userPublicationName, function () {
   if (this.userId) {
     return Ingredients.collection.find();
+  }
+  return this.ready();// if users isnt logged in, publication does nothing
+});
+
+Meteor.publish(Recipes.userPublicationName, function () {
+  if (this.userId) {
+    return Recipes.collection.find();
   }
   return this.ready();// if users isnt logged in, publication does nothing
 });

@@ -10,6 +10,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Ingredients } from '../../api/ingredient/Ingredient';
+import { Recipes } from '../../api/recipe/Recipes';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const makeSchema = (allIngredients) => new SimpleSchema({
@@ -75,10 +76,12 @@ AddRecipe.propTypes = {
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+
 export default withTracker(() => {
   // Ensure that minimongo is populated with all collections prior to running render().
   const sub1 = Meteor.subscribe(Ingredients.userPublicationName);
+  const sub2 = Meteor.subscribe(Recipes.userPublicationName);
   return {
-    ready: sub1.ready(),
+    ready: sub1.ready() && sub2.ready(),
   };
 })(AddRecipe);
