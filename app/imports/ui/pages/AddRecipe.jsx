@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
-import { Stuffs } from '../../api/stuff/Stuff';
+import { Ingredients } from '../../api/ingredient/Ingredient';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const makeSchema = (allIngredients) => new SimpleSchema({
@@ -30,7 +30,7 @@ class AddRecipe extends React.Component {
   submit(data, formRef) {
     const { name, quantity, condition } = data;
     const owner = Meteor.user().username;
-    Stuffs.collection.insert({ name, quantity, condition, owner },
+    Ingredients.collection.insert({ name, quantity, condition, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -45,7 +45,7 @@ class AddRecipe extends React.Component {
   render() {
     let fRef = null;
     // const allIngredients = _.pluck(Stuffs.collection.find().fetch(), 'name');
-    const allIngredients = _.pluck(Stuffs.collection.find().fetch(), 'name');
+    const allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allIngredients);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
@@ -77,7 +77,7 @@ AddRecipe.propTypes = {
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Ensure that minimongo is populated with all collections prior to running render().
-  const sub1 = Meteor.subscribe(Stuffs.userPublicationName);
+  const sub1 = Meteor.subscribe(Ingredients.userPublicationName);
   return {
     ready: sub1.ready(),
   };

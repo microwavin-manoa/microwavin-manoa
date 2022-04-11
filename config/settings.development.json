@@ -27,5 +27,12 @@
       "description": "Kim Binsted received her BSc in Physics at McGill (1991), and her PhD in Artificial Intelligence from the University of Edinburgh (1996). Her thesis topic was the computational modeling and generation of punning riddles, and her program, JAPE (Joke Analysis and Production Engine), generated puns such as What do you call a Martian who drinks beer? An ale-ien!.",
       "owner": "admin@foo.com"
     }
+  ],
+  "defaultIngredients": [
+    { "name": "Egg", "vendor": "Safeway", "price": 3.18 },
+    { "name": "Egg", "vendor": "Foodland", "price": 4.11 },
+    { "name": "White Bread", "vendor": "Costco", "price": 3.99 },
+    { "name": "Ham", "vendor": "Nijiya", "price": 2.78 },
+    { "name": "Lettuce", "vendor": "Down to Earth", "price": 5.88 }
   ]
 }
