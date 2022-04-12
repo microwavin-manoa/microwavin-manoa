@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Container, Form, Grid, Header, Message, Segment, Radio } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
 
 /**
@@ -18,6 +18,8 @@ class Signup extends React.Component {
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value });
   }
+
+  handleChange2 = (e, { value }) => this.setState({ value })
 
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
@@ -67,6 +69,25 @@ class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                 />
+                <Form>
+                  <Form.Field>
+                    I am a... <b>{this.state.value}</b>
+                  </Form.Field>
+                  <Radio
+                    label='User'
+                    name='radioGroup'
+                    value='User'
+                    checked={this.state.value === 'User'}
+                    onChange={this.handleChange2}
+                  />
+                  <Radio
+                    label='Vendor'
+                    name='radioGroup'
+                    value='Vendor'
+                    checked={this.state.value === 'Vendor'}
+                    onChange={this.handleChange2}
+                  />
+                </Form>
                 <Form.Button id="signup-form-submit" content="Submit"/>
               </Segment>
             </Form>
