@@ -10,6 +10,7 @@ import Landing from '../pages/Landing';
 import SearchRecipe from '../pages/SearchRecipe';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
 import EditStuff from '../pages/EditStuff';
+import MyRecipes from '../pages/MyRecipes';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
@@ -31,6 +32,7 @@ class App extends React.Component {
             <Route path="/signout" component={Signout}/>
             <ProtectedRoute path="/search" component={SearchRecipe}/>
             <ProtectedRoute path="/add" component={AddRecipe}/>
+            <ProtectedRoute path="/myrecipes" component={MyRecipes}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <ProtectedRoute path="/recipe/:_id" component={Recipe}/>
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
