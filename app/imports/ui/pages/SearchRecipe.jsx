@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Header, Loader, Card, Dropdown } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import Contact from '../components/Contact';
-import { Contacts } from '../../api/contact/Contacts';
+import { Recipes } from '../../api/recipe/Recipes';
+import RecipeCard from '../components/RecipeCard';
 
 const options = [
   { key: 'Vegan', text: 'Vegan', value: 'Vegan' },
@@ -24,10 +24,11 @@ class SearchRecipe extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Dropdown placeholder='Skills' fluid multiple selection options={options} />
-        <Header as="h2" textAlign="center" inverted>List Contacts</Header>
+        <Header as="h2" textAlign="center">Search Recipes</Header>
+        <Dropdown placeholder='Filter by Tag' fluid multiple selection options={options} />
+        <br/><br/>
         <Card.Group centered>
-          {this.props.contacts.map((contact, index) => <Contact key={index} contact={contact}/>)}
+          {this.props.recipe.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
         </Card.Group>
       </Container>
     );
@@ -36,20 +37,20 @@ class SearchRecipe extends React.Component {
 
 // Require an array of Stuff documents in the props.
 SearchRecipe.propTypes = {
-  contacts: PropTypes.array.isRequired,
+  recipe: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Contacts.userPublicationName);
+  const subscription = Meteor.subscribe(Recipes.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents
-  const contacts = Contacts.collection.find({}).fetch();
+  const recipe = Recipes.collection.find({}).fetch();
   return {
-    contacts,
+    recipe,
     ready,
   };
 })(SearchRecipe);
