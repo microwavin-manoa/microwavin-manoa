@@ -11,6 +11,7 @@ import SimpleSchema from 'simpl-schema';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Ingredients } from '../../api/ingredient/Ingredient';
 import { Recipes } from '../../api/recipe/Recipes';
+import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const makeSchema = (allIngredients) => new SimpleSchema({
@@ -81,7 +82,8 @@ export default withTracker(() => {
   // Ensure that minimongo is populated with all collections prior to running render().
   const sub1 = Meteor.subscribe(Ingredients.userPublicationName);
   const sub2 = Meteor.subscribe(Recipes.userPublicationName);
+  const sub3 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
   return {
-    ready: sub1.ready() && sub2.ready(),
+    ready: sub1.ready() && sub2.ready() && sub3.ready(),
   };
 })(AddRecipe);

@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
 import { Contacts } from '../../api/contact/Contacts';
 import { Ingredients } from '../../api/ingredient/Ingredient';
+import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import { Recipes } from '../../api/recipe/Recipes';
 import { Vendors } from '../../api/vendor/Vendors';
 
@@ -18,11 +19,14 @@ function addContact(data) {
   Contacts.collection.insert(data);
 }
 
-function addIngredient(data) {
-  console.log(`  Adding: ${data.name}`);
-  Ingredients.collection.insert(data);
+// to be changed
+function addIngredient({ name, vendor, price }) {
+  console.log(`  Defining ingredient: ${name}`);
+  Ingredients.collection.insert({ name: name });
+  IngredientVendorPrice.collection.insert({ ingredient: name, vendor: vendor, price: price });
 }
 
+// to be changed
 function addRecipe(data) {
   console.log(`  Adding: ${data.name}`);
   Recipes.collection.insert(data);

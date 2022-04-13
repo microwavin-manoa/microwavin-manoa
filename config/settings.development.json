@@ -31,9 +31,9 @@
   "defaultIngredients": [
     { "name": "Egg", "vendor": "Safeway", "price": 3.18 },
     { "name": "Egg", "vendor": "Foodland", "price": 4.11 },
-    { "name": "White Bread", "vendor": "Costco", "price": 3.99 },
-    { "name": "Ham", "vendor": "Nijiya", "price": 2.78 },
-    { "name": "Lettuce", "vendor": "Down to Earth", "price": 5.88 },
+    { "name": "White Bread", "vendor": "Safeway", "price": 3.99 },
+    { "name": "Ham", "vendor": "Safeway", "price": 2.78 },
+    { "name": "Lettuce", "vendor": "Foodland", "price": 5.88 },
     { "name": "Avocado", "vendor": "Foodland", "price": 3.00 }
   ],
   "defaultRecipes": [
@@ -43,6 +43,7 @@
       "description": "Put piece of bread in toaster. Mash up avocado to your liking. Spread on the toast. (Bonus: top it off with squeezed lemon, salt and pepper, or anything else you want!)"}
   ],
   "defaultVendors": [
-    { "name": "Foodland", "address": "2939 Harding Ave Honolulu, HI 96816", "hours": "6:00am - 9:00pm", "imageURL": "/images/foodland.jpeg" }
+    { "name": "Foodland", "address": "2939 Harding Ave Honolulu, HI 96816", "hours": "6:00am - 9:00pm", "imageURL": "/images/foodland.jpeg" },
+    { "name": "Safeway", "address": "2855 E Manoa Rd Honolulu, HI 96822", "hours": "open 24 hours", "imageURL": "/images/safeway.png" }
   ]
 }
