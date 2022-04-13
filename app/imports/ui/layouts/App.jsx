@@ -8,7 +8,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import SearchRecipe from '../pages/SearchRecipe';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
+import AdminPage from '../pages/AdminPage';
 import EditStuff from '../pages/EditStuff';
 import MyRecipes from '../pages/MyRecipes';
 import NotFound from '../pages/NotFound';
@@ -35,7 +35,7 @@ class App extends React.Component {
             <ProtectedRoute path="/myrecipes" component={MyRecipes}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <ProtectedRoute path="/recipe/:_id" component={Recipe}/>
-            <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
+            <AdminProtectedRoute path="/admin" component={AdminPage}/>
             <Route component={NotFound}/>
           </Switch>
           <Footer/>
