@@ -23,7 +23,8 @@ function addContact(data) {
 function addIngredient({ name, vendor, price }) {
   console.log(`  Defining ingredient: ${name}`);
   Ingredients.collection.insert({ name: name });
-  IngredientVendorPrice.collection.insert({ ingredient: name, vendor: vendor, price: price });
+  const nameId = Ingredients.collection.findOne({ name: name })._id;
+  IngredientVendorPrice.collection.insert({ ingredient: name, ingredientId: nameId, vendor: vendor, price: price });
 }
 
 // to be changed

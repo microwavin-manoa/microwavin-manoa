@@ -30,7 +30,6 @@
   ],
   "defaultIngredients": [
     { "name": "Egg", "vendor": "Safeway", "price": 3.18 },
-    { "name": "Egg", "vendor": "Foodland", "price": 4.11 },
     { "name": "White Bread", "vendor": "Safeway", "price": 3.99 },
     { "name": "Ham", "vendor": "Safeway", "price": 2.78 },
     { "name": "Lettuce", "vendor": "Foodland", "price": 5.88 },
