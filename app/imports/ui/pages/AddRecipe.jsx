@@ -43,7 +43,6 @@ class AddRecipe extends React.Component {
       });
   }
 
-  // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   render() {
     let fRef = null;
     // const allIngredients = _.pluck(Stuffs.collection.find().fetch(), 'name');
@@ -54,7 +53,7 @@ class AddRecipe extends React.Component {
       <Grid container centered>
         <Grid.Column>
           <Header as="h2" textAlign="center">Add Recipe</Header>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
+          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
             <Segment>
               <TextField name='name'/>
               <TextField name='imageURL'/>
