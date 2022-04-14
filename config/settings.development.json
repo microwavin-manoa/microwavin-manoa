@@ -3,14 +3,6 @@
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "john@foo.com", "password": "changeme" }
   ],
-
-  "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
-  ],
-
   "defaultContacts": [
     { "firstName": "Philip", "lastName": "Johnson", "address": "POST 307, University of Hawaii",
       "image": "https://philipmjohnson.github.io/images/philip2.jpeg",
@@ -36,9 +28,9 @@
     { "name": "Avocado", "vendor": "Foodland", "price": 3.00 }
   ],
   "defaultRecipes": [
-    { "name":  "Boiled Egg", "imageURL": "/images/egg.jpeg", "prepTime": "4 minutes", "servingSize": "1", "ingredients": ["Egg"],
+    { "name":  "Boiled Egg", "imageURL": "/images/egg.jpeg", "prepTime": "4 minutes", "servingSize": "1", "ingredients": ["Egg"],"owner": "john@foo.com",
       "description": "Use a microwave-safe bowl. Place eggs on bottom of bowl with water. Add half a teaspoon of salt for each egg to avoid an explosion. Microwave on high for four minutes for two eggs, adding one minute for every additional two eggs. Use a spoon to place the eggs in an ice water bath for five minutes. Drain and peel."},
-    { "name":  "Avocado Toast", "imageURL": "/images/avocadotoast.png", "prepTime": "5 minutes", "servingSize": "1", "ingredients": ["Avocado", "Bread"],
+    { "name":  "Avocado Toast", "imageURL": "/images/avocadotoast.png", "prepTime": "5 minutes", "servingSize": "1", "ingredients": ["Avocado", "Bread"], "owner": "john@foo.com",
       "description": "Put piece of bread in toaster. Mash up avocado to your liking. Spread on the toast. (Bonus: top it off with squeezed lemon, salt and pepper, or anything else you want!)"}
   ],
   "defaultVendors": [

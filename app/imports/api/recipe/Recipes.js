@@ -17,6 +17,7 @@ class RecipesCollection {
       imageURL: String,
       prepTime: String,
       servingSize: String,
+      owner: String,
       ingredients: Array,
       'ingredients.$': { type: String },
       description: String,
