@@ -12,7 +12,7 @@ class StuffRecipe extends React.Component {
         <Table.Cell><Image size = 'small' src={this.props.recipe.imageURL}/></Table.Cell>
         <Table.Cell>{this.props.recipe.description}</Table.Cell>
         <Table.Cell>
-          <Link to={`/edit/${this.props.recipe._id}`}>Edit</Link>
+          <Link to={`/editrecipe/${this.props.recipe._id}`}>Edit</Link>
         </Table.Cell>
       </Table.Row>
     );

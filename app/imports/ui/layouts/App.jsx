@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import SearchRecipe from '../pages/SearchRecipe';
 import AdminPage from '../pages/AdminPage';
-import EditStuff from '../pages/EditStuff';
+import EditRecipe from '../pages/EditRecipe';
 import MyRecipes from '../pages/MyRecipes';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -33,7 +33,7 @@ class App extends React.Component {
             <ProtectedRoute path="/search" component={SearchRecipe}/>
             <ProtectedRoute path="/add" component={AddRecipe}/>
             <ProtectedRoute path="/myrecipes" component={MyRecipes}/>
-            <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
+            <ProtectedRoute path="/editrecipe/:_id" component={EditRecipe}/>
             <ProtectedRoute path="/recipe/:_id" component={Recipe}/>
             <AdminProtectedRoute path="/admin" component={AdminPage}/>
             <Route component={NotFound}/>
