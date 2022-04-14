@@ -10,10 +10,10 @@ class StuffRecipeAdmin extends React.Component {
         <Table.Cell>{this.props.recipe.name}</Table.Cell>
         <Table.Cell><Image size = 'small' src={this.props.recipe.imageURL}/></Table.Cell>
         <Table.Cell>{this.props.recipe.description}</Table.Cell>
+        <Table.Cell>{this.props.recipe.owner}</Table.Cell>
         <Table.Cell>
           <Link to={`/edit/${this.props.recipe._id}`}>Edit</Link>
         </Table.Cell>
-        <Table.Cell>{this.props.recipe.owner}</Table.Cell>
       </Table.Row>
     );
   }

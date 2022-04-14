@@ -49,8 +49,7 @@ class AdminPage extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {this.props.vendors.map((vendor) => <StuffVendor key={vendor._id} vendor={vendor} />)}
-          </Table.Body>
+            {this.props.vendors.map((vendor) => <StuffVendor key={vendor._id} vendor={vendor} />)}          </Table.Body>
         </Table>
       </Container>
     );
@@ -67,9 +66,10 @@ AdminPage.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Recipes.userPublicationName);
+  const sub1 = Meteor.subscribe(Recipes.userPublicationName);
+  const sub2 = Meteor.subscribe(Vendors.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = sub1.ready() && sub2.ready();
   // Get the Stuff documents
   const recipes = Recipes.collection.find({}).fetch();
   const vendors = Vendors.collection.find({}).fetch();
