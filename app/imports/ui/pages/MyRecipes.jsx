@@ -39,7 +39,6 @@ class MyRecipes extends React.Component {
 
 // Require an array of Stuff documents in the props.
 MyRecipes.propTypes = {
-  stuffs: PropTypes.array.isRequired,
   recipes: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };

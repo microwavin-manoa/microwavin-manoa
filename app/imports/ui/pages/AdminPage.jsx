@@ -1,10 +1,12 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader, Image } from 'semantic-ui-react';
+import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import StuffRecipeAdmin from '../components/StuffRecipeAdmin';
+import StuffVendor from '../components/StuffVendor';
 import { Recipes } from '../../api/recipe/Recipes';
+import { Vendors } from '../../api/vendor/Vendors';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class AdminPage extends React.Component {
@@ -36,26 +38,18 @@ class AdminPage extends React.Component {
           </Table.Body>
         </Table>
         <Header as="h2" textAlign="center">Vendor Profiles</Header>
-        <Table basic='very' celled collapsing>
+        <Table celled>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Vendor Name</Table.HeaderCell>
-              <Table.HeaderCell>Edit Vendor Profile</Table.HeaderCell>
+              <Table.HeaderCell>Image</Table.HeaderCell>
+              <Table.HeaderCell>Address</Table.HeaderCell>
+              <Table.HeaderCell>Hours</Table.HeaderCell>
+              <Table.HeaderCell>Edit Vendor</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            <Table.Row>
-              <Table.Cell>
-                <Header as='h4' image>
-                  <Image src="/images/foodland.jpeg" rounded size='mini' />
-                  <Header.Content>
-                    Foodland
-                    <Header.Subheader>Hours: 6:00am - 9:00pm</Header.Subheader>
-                  </Header.Content>
-                </Header>
-              </Table.Cell>
-              <Table.Cell>Edit Profile Here</Table.Cell>
-            </Table.Row>
+            {this.props.vendors.map((vendor) => <StuffVendor key={vendor._id} vendor={vendor} />)}
           </Table.Body>
         </Table>
       </Container>
@@ -65,9 +59,9 @@ class AdminPage extends React.Component {
 
 // Require an array of Stuff documents in the props.
 AdminPage.propTypes = {
-  stuffs: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
   recipes: PropTypes.array.isRequired,
+  vendors: PropTypes.array.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -78,8 +72,10 @@ export default withTracker(() => {
   const ready = subscription.ready();
   // Get the Stuff documents
   const recipes = Recipes.collection.find({}).fetch();
+  const vendors = Vendors.collection.find({}).fetch();
   return {
     recipes,
+    vendors,
     ready,
   };
 })(AdminPage);
