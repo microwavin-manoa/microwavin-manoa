@@ -39,34 +39,22 @@ class AdminPage extends React.Component {
         <Table basic='very' celled collapsing>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Employee</Table.HeaderCell>
-              <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
+              <Table.HeaderCell>Vendor Name</Table.HeaderCell>
+              <Table.HeaderCell>Edit Vendor Profile</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
             <Table.Row>
               <Table.Cell>
                 <Header as='h4' image>
-                  <Image src='/images/avatar/small/lena.png' rounded size='mini' />
+                  <Image src="/images/foodland.jpeg" rounded size='mini' />
                   <Header.Content>
-                    Lena
-                    <Header.Subheader>Human Resources</Header.Subheader>
+                    Foodland
+                    <Header.Subheader>Hours: 6:00am - 9:00pm</Header.Subheader>
                   </Header.Content>
                 </Header>
               </Table.Cell>
-              <Table.Cell>22</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                <Header as='h4' image>
-                  <Image src='/images/avatar/small/matthew.png' rounded size='mini' />
-                  <Header.Content>
-                    Matthew
-                    <Header.Subheader>Fabric Design</Header.Subheader>
-                  </Header.Content>
-                </Header>
-              </Table.Cell>
-              <Table.Cell>15</Table.Cell>
+              <Table.Cell>Edit Profile Here</Table.Cell>
             </Table.Row>
           </Table.Body>
         </Table>
