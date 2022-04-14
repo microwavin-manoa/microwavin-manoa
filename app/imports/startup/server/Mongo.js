@@ -2,7 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
 import { Contacts } from '../../api/contact/Contacts';
 import { Ingredients } from '../../api/ingredient/Ingredient';
+import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import { Recipes } from '../../api/recipe/Recipes';
+import { Vendors } from '../../api/vendor/Vendors';
 
 /* eslint-disable no-console */
 
@@ -17,14 +19,23 @@ function addContact(data) {
   Contacts.collection.insert(data);
 }
 
-function addIngredient(data) {
-  console.log(`  Adding: ${data.name}`);
-  Ingredients.collection.insert(data);
+// to be changed
+function addIngredient({ name, vendor, price }) {
+  console.log(`  Defining ingredient: ${name}`);
+  Ingredients.collection.insert({ name: name });
+  const nameId = Ingredients.collection.findOne({ name: name })._id;
+  IngredientVendorPrice.collection.insert({ ingredient: name, ingredientId: nameId, vendor: vendor, price: price });
 }
 
+// to be changed
 function addRecipe(data) {
   console.log(`  Adding: ${data.name}`);
   Recipes.collection.insert(data);
+}
+
+function addVendor(data) {
+  console.log(`  Adding: ${data.name}`);
+  Vendors.collection.insert(data);
 }
 
 // Initialize the StuffsCollection if empty.
@@ -34,11 +45,10 @@ if (Stuffs.collection.find().count() === 0) {
     Meteor.settings.defaultData.map(data => addData(data));
   }
 }
-
 // Initialize the ContactCollection if empty.
 if (Contacts.collection.find().count() === 0) {
   if (Meteor.settings.defaultContacts) {
-    console.log('Creating default Ingredient.');
+    console.log('Creating default contact.');
     Meteor.settings.defaultContacts.map(data => addContact(data));
   }
 }
@@ -53,5 +63,11 @@ if (Recipes.collection.find().count() === 0) {
   if (Meteor.settings.defaultRecipes) {
     console.log('Creating default Recipes.');
     Meteor.settings.defaultRecipes.map(data => addRecipe(data));
+  }
+}
+if (Vendors.collection.find().count() === 0) {
+  if (Meteor.settings.defaultVendors) {
+    console.log('Creating default Vendors.');
+    Meteor.settings.defaultVendors.map(data => addVendor(data));
   }
 }

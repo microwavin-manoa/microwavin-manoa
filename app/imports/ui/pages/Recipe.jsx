@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header } from 'semantic-ui-react';
+import { Header, Image, Grid } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -9,12 +9,20 @@ import { Recipes } from '../../api/recipe/Recipes';
 class Recipe extends React.Component {
   render() {
     return (
-      <Container>
-        <Header as="h2" textAlign="center">Recipe name</Header>
-        <p>
-          recipe info and everything will go here. will have to subscribe to this specific recipe
-        </p>
-      </Container>
+      <div container>
+        <Grid verticalAlign='middle' textAlign='center'>
+          <Grid.Column width={5}>
+            <Image size='large' fluid rounded src={this.props.doc.imageURL}/>
+          </Grid.Column>
+          <Grid.Column width={8}>
+            <Header as="h2" textAlign="center">{this.props.doc.name}</Header>
+            <Header as='h3' textAlign='center'>Ingredients</Header>
+            <p>{this.props.doc.ingredients}</p>
+            <Header as='h3' textAlign='center'>Recipe</Header>
+            <p>{this.props.doc.description}</p>
+          </Grid.Column>
+        </Grid>
+      </div>
     );
   }
 }
