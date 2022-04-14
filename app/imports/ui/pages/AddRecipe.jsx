@@ -12,6 +12,7 @@ import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Ingredients } from '../../api/ingredient/Ingredient';
 import { Recipes } from '../../api/recipe/Recipes';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
+import AddIngredient from '../components/AddIngredient';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const makeSchema = (allIngredients) => new SimpleSchema({
@@ -61,6 +62,7 @@ class AddRecipe extends React.Component {
               <TextField name='prepTime'/>
               <TextField name='servingSize'/>
               <MultiSelectField name='ingredients' placeholder='Select ingredients'/>
+              <AddIngredient/><br/>
               <LongTextField name='description'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
