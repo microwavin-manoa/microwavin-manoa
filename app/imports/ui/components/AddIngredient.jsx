@@ -1,20 +1,26 @@
 import React from 'react';
-import { Grid, Segment, Header, Accordion, Icon } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, NumField, SubmitField, TextField } from 'uniforms-semantic';
+import { Segment, Accordion, Icon } from 'semantic-ui-react';
+import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
+import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Stuffs } from '../../api/stuff/Stuff';
+import PropTypes from 'prop-types';
+import { Vendors } from '../../api/vendor/Vendors';
+import { Ingredients } from '../../api/ingredient/Ingredient';
 
 // Create a schema to specify the structure of the data to appear in the form.
-const formSchema = new SimpleSchema({
+const makeSchema = (allVendors) => new SimpleSchema({
   name: String,
-  vendor: String,
+  vendor: {
+    type: String,
+    defaultValue: 'Foodland',
+    allowedValues: allVendors,
+  },
   price: Number,
 });
-
-const bridge = new SimpleSchema2Bridge(formSchema);
 
 /** Renders the Page for adding a document. */
 class AddIngredient extends React.Component {
@@ -23,12 +29,12 @@ class AddIngredient extends React.Component {
   submit(data, formRef) {
     const { name, vendor, price } = data;
     const owner = Meteor.user().username;
-    Stuffs.collection.insert({ name, vendor, price, owner },
+    Ingredients.collection.insert({ name, vendor, price, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Item added successfully', 'success');
+          swal('Success', 'Ingredient added successfully', 'success');
           formRef.reset();
         }
       });
@@ -48,6 +54,9 @@ class AddIngredient extends React.Component {
   render() {
     let fRef = null;
     const { activeIndex } = this.state;
+    const allVendors = _.pluck(Vendors.collection.find().fetch(), 'name');
+    const formSchema = makeSchema(allVendors);
+    const bridge = new SimpleSchema2Bridge(formSchema);
     return (
       <Accordion styled>
         <Accordion.Title active={activeIndex === -1} index={0} onClick={this.handleClick}>
@@ -58,8 +67,7 @@ class AddIngredient extends React.Component {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
             <Segment>
               <TextField name='name' size={'small'}/>
-              {/* make vendor a multiselect */}
-              <TextField name='vendor'/>
+              <SelectField name='vendor'/>
               <NumField name='price' decimal={true}/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
@@ -71,4 +79,14 @@ class AddIngredient extends React.Component {
   }
 }
 
-export default AddIngredient;
+AddIngredient.propTypes = {
+  ready: PropTypes.bool.isRequired,
+};
+
+export default withTracker(() => {
+  // Ensure that minimongo is populated with all collections prior to running render().
+  const sub1 = Meteor.subscribe(Vendors.userPublicationName);
+  return {
+    ready: sub1.ready(),
+  };
+})(AddIngredient);

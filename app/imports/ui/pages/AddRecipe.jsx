@@ -22,7 +22,6 @@ const makeSchema = (allIngredients) => new SimpleSchema({
   servingSize: String,
   ingredients: { type: Array, label: 'Ingredients' },
   'ingredients.$': { type: String, allowedValues: allIngredients },
-  // 'ingredients.$': { type: String, allowedValues: allIngredients },
   description: String,
 });
 
