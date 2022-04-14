@@ -33,7 +33,10 @@ function addRecipe({ name, imageURL, prepTime, servingSize, ingredients, descrip
   console.log(`  Adding: ${name}`);
   Recipes.collection.insert({ name: name, imageURL: imageURL, prepTime: prepTime, servingSize: servingSize, description: description });
   const recipeId = Recipes.collection.findOne({ name: name })._id;
-  ingredients.map(ingredient => IngredientRecipe.collection.insert({ ingredientID: ingredient._id, recipeID: recipeId }));
+  ingredients.map(ingredient => IngredientRecipe.collection.insert({
+    ingredientID: Ingredients.collection.findOne({ name: ingredient })._id,
+    recipeID: recipeId,
+  }));
 }
 
 function addVendor(data) {
