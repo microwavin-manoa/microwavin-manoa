@@ -74,6 +74,7 @@ class AddRecipe extends React.Component {
 
 AddRecipe.propTypes = {
   ready: PropTypes.bool.isRequired,
+  ingredients: PropTypes.array.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -85,5 +86,6 @@ export default withTracker(() => {
   const sub3 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
   return {
     ready: sub1.ready() && sub2.ready() && sub3.ready(),
+    ingredients: Ingredients.collection.find().fetch(),
   };
 })(AddRecipe);
