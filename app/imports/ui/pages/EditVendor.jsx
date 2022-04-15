@@ -13,6 +13,7 @@ const bridge = new SimpleSchema2Bridge(Vendors.schema);
 /** Renders the Page for editing a single document. */
 class EditVendor extends React.Component {
   // On successful submit, insert the data.
+  // STILL NEED TO UPDATE VENDOR NAME IN INGREDIENTVENDORPRICE COLLECTION IF NEEDED
   submit(data) {
     const { name, address, hours, imageURL, _id } = data;
     Vendors.collection.update(_id, { $set: { name, address, hours, imageURL } }, (error) => (error ?
