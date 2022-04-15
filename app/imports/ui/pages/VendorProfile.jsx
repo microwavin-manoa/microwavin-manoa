@@ -15,8 +15,6 @@ class VendorProfile extends React.Component {
   }
 
   renderPage() {
-    console.log(this.props.vendors);
-    console.log(this.props.ivp);
     return (
       <Container>
         <Grid verticalAlign='middle' textAlign='center'>
