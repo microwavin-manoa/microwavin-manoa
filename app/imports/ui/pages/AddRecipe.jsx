@@ -46,7 +46,6 @@ class AddRecipe extends React.Component {
 
   render() {
     let fRef = null;
-    // const allIngredients = _.pluck(Stuffs.collection.find().fetch(), 'name');
     const allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allIngredients);
     const bridge = new SimpleSchema2Bridge(formSchema);
