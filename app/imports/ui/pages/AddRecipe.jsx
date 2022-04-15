@@ -13,6 +13,8 @@ import { Ingredients } from '../../api/ingredient/Ingredient';
 import { Recipes } from '../../api/recipe/Recipes';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
+import { TagRecipe } from '../../api/tag/TagRecipe';
+import { Tags } from '../../api/tag/Tags';
 import AddIngredient from '../components/AddIngredient';
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -85,8 +87,10 @@ export default withTracker(() => {
   const sub2 = Meteor.subscribe(Recipes.userPublicationName);
   const sub3 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
   const sub4 = Meteor.subscribe(IngredientRecipe.userPublicationName);
+  const sub5 = Meteor.subscribe(Tags.userPublicationName);
+  const sub6 = Meteor.subscribe(TagRecipe.userPublicationName);
   return {
-    ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready(),
+    ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready(),
     ingredients: Ingredients.collection.find().fetch(),
   };
 })(AddRecipe);
