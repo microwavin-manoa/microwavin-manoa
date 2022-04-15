@@ -87,7 +87,7 @@ export default withTracker(() => {
   const sub3 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
   const sub4 = Meteor.subscribe(IngredientRecipe.userPublicationName);
   return {
-    ready: sub1.ready() && sub2.ready() && sub3.ready(),
+    ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready(),
     ingredients: Ingredients.collection.find().fetch(),
   };
 })(AddRecipe);
