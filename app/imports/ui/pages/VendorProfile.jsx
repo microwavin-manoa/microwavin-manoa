@@ -17,26 +17,32 @@ class VendorProfile extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Grid verticalAlign='middle' textAlign='center'>
-          <Grid.Column width={7}>
+        <Grid textAlign='center'>
+          <Grid.Row>
             <h1>{this.props.vendors.name}</h1>
-            <Image size='large' rounded src={this.props.vendors.imageURL}/>
-            <Grid.Row width={2}>
-              <Grid.Column>
-                <h3>Address</h3>
-                <p>{this.props.vendors.address}</p>
-              </Grid.Column>
-              <Grid.Column>
-                <h3>Hours</h3>
-                <p>{this.props.vendors.hours}</p>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={7}>
+              <Image size='large' rounded src={this.props.vendors.imageURL}/>
+              <br></br>
+              <Grid.Row>
+                <Grid.Column>
+                  <h3>Address</h3>
+                  <p>{this.props.vendors.address}</p>
+                </Grid.Column>
+                <br></br>
+                <Grid.Column>
+                  <h3>Hours</h3>
+                  <p>{this.props.vendors.hours}</p>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <h3>Stock</h3>
+              {this.props.ivp.map((ingredient) => <StuffIngredientVendorPrice key={ingredient._id} ivp={ingredient}/>)}
+            </Grid.Column>
+          </Grid.Row>
 
-          <Grid.Column width={8}>
-            <h3>Stock</h3>
-            {this.props.ivp.map((ingredient) => <StuffIngredientVendorPrice key={ingredient._id} ivp={ingredient}/>)}
-          </Grid.Column>
         </Grid>
       </Container>
     );
