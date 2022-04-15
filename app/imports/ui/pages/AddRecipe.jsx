@@ -44,7 +44,6 @@ class AddRecipe extends React.Component {
       });
   }
 
-  // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   render() {
     let fRef = null;
     // const allIngredients = _.pluck(Stuffs.collection.find().fetch(), 'name');
@@ -55,7 +54,7 @@ class AddRecipe extends React.Component {
       <Grid container centered>
         <Grid.Column>
           <Header as="h2" textAlign="center">Add Recipe</Header>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
+          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
             <Segment>
               <TextField name='name'/>
               <TextField name='imageURL'/>
@@ -76,6 +75,7 @@ class AddRecipe extends React.Component {
 
 AddRecipe.propTypes = {
   ready: PropTypes.bool.isRequired,
+  ingredients: PropTypes.array.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -87,6 +87,7 @@ export default withTracker(() => {
   const sub3 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
   const sub4 = Meteor.subscribe(IngredientRecipe.userPublicationName);
   return {
-    ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready(),
+    ready: sub1.ready() && sub2.ready() && sub3.ready(),
+    ingredients: Ingredients.collection.find().fetch(),
   };
 })(AddRecipe);

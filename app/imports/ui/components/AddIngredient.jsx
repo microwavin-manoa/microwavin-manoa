@@ -26,10 +26,13 @@ const makeSchema = (allVendors) => new SimpleSchema({
 class AddIngredient extends React.Component {
 
   // On submit, insert the data.
+  // NEED TO USE METEOR METHOD TO ADD TO INGREDIENTS-VENDOR COLLECTION
   submit(data, formRef) {
-    const { name, vendor, price } = data;
-    const owner = Meteor.user().username;
-    Ingredients.collection.insert({ name, vendor, price, owner },
+    let { name } = data;
+    const { vendor, price } = data;
+    name = ((name.toLowerCase()));
+    name = name[0].toUpperCase() + name.slice(1);
+    Ingredients.collection.insert({ name, vendor, price },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
