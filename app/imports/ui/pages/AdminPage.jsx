@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import StuffRecipeAdmin from '../components/StuffRecipeAdmin';
 import StuffVendor from '../components/StuffVendor';
 import { Recipes } from '../../api/recipe/Recipes';
@@ -19,39 +20,53 @@ class AdminPage extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container>
-        <Header as="h2" textAlign="center">Admin Edit Page</Header>
-        <Header as="h4" textAlign="center">Admin can edit the recipes of all users and profiles of vendors</Header>
-        <Header as="h2" textAlign="center">All Recipes</Header>
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Name</Table.HeaderCell>
-              <Table.HeaderCell>Image</Table.HeaderCell>
-              <Table.HeaderCell>Description</Table.HeaderCell>
-              <Table.HeaderCell>Edit</Table.HeaderCell>
-              <Table.HeaderCell>Owner</Table.HeaderCell>
+      <div>
+        <Container>
+          <Header as="h2" textAlign="center">Admin Edit Page</Header>
+          <Header as="h4" textAlign="center">Admin can edit the recipes of all users and profiles of vendors. Admin
+          can also add new vendors.</Header>
+          <Header as="h2" textAlign="center">All Recipes</Header>
+          <Table celled>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Name</Table.HeaderCell>
+                <Table.HeaderCell>Image</Table.HeaderCell>
+                <Table.HeaderCell>Description</Table.HeaderCell>
+                <Table.HeaderCell>Edit</Table.HeaderCell>
+                <Table.HeaderCell>Owner</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {this.props.recipes.map((recipe) => <StuffRecipeAdmin key={recipe._id} recipe={recipe} />)}
+            </Table.Body>
+          </Table>
+          <Header as="h2" textAlign="center">Vendor Profiles</Header>
+          <Table celled>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Vendor Name</Table.HeaderCell>
+                <Table.HeaderCell>Image</Table.HeaderCell>
+                <Table.HeaderCell>Address</Table.HeaderCell>
+                <Table.HeaderCell>Hours</Table.HeaderCell>
+                <Table.HeaderCell>Edit Vendor</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {this.props.vendors.map((vendor) => <StuffVendor key={vendor._id} vendor={vendor} />)}
+            </Table.Body>
+          </Table>
+        </Container>
+        <Container>
+          <Table color='olive' inverted>
+            <Table.Row textAlign='center'>
+              <Table.Cell width='6' textAlign='center'>
+                <Link to={'/addvendor'}>Add Vendor</Link>
+              </Table.Cell>
             </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {this.props.recipes.map((recipe) => <StuffRecipeAdmin key={recipe._id} recipe={recipe} />)}
-          </Table.Body>
-        </Table>
-        <Header as="h2" textAlign="center">Vendor Profiles</Header>
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Vendor Name</Table.HeaderCell>
-              <Table.HeaderCell>Image</Table.HeaderCell>
-              <Table.HeaderCell>Address</Table.HeaderCell>
-              <Table.HeaderCell>Hours</Table.HeaderCell>
-              <Table.HeaderCell>Edit Vendor</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {this.props.vendors.map((vendor) => <StuffVendor key={vendor._id} vendor={vendor} />)}          </Table.Body>
-        </Table>
-      </Container>
+          </Table>
+        </Container>
+      </div>
+
     );
   }
 }

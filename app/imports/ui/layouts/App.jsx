@@ -17,6 +17,7 @@ import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import AddRecipe from '../pages/AddRecipe';
+import AddVendor from '../pages/AddVendor';
 import Recipe from '../pages/Recipe';
 import VendorProfile from '../pages/VendorProfile';
 
@@ -40,6 +41,7 @@ class App extends React.Component {
             <ProtectedRoute path="/recipe/:_id" component={Recipe}/>
             <ProtectedRoute path="/vendor/:_id" component={VendorProfile}/>
             <AdminProtectedRoute path="/admin" component={AdminPage}/>
+            <AdminProtectedRoute path="/addvendor" component={AddVendor}/>
             <Route component={NotFound}/>
           </Switch>
           <Footer/>

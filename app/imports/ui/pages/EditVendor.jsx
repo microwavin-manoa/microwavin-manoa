@@ -15,7 +15,10 @@ class EditVendor extends React.Component {
   // On successful submit, insert the data.
   // STILL NEED TO UPDATE VENDOR NAME IN INGREDIENTVENDORPRICE COLLECTION IF NEEDED
   submit(data) {
-    const { name, address, hours, imageURL, _id } = data;
+    let { name } = data;
+    const { address, hours, imageURL, _id } = data;
+    name = name.toLowerCase();
+    name = name[0].toUpperCase() + name.slice(1);
     Vendors.collection.update(_id, { $set: { name, address, hours, imageURL } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Vendor updated successfully', 'success')));
