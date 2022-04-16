@@ -17,6 +17,7 @@ import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import AddRecipe from '../pages/AddRecipe';
+import AddVendor from '../pages/AddVendor';
 import Recipe from '../pages/Recipe';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -38,6 +39,7 @@ class App extends React.Component {
             <ProtectedRoute path="/editvendor/:_id" component={EditVendor}/>
             <ProtectedRoute path="/recipe/:_id" component={Recipe}/>
             <AdminProtectedRoute path="/admin" component={AdminPage}/>
+            <AdminProtectedRoute path="/addvendor" component={AddVendor}/>
             <Route component={NotFound}/>
           </Switch>
           <Footer/>
