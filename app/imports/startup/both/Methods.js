@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Ingredients } from '../../api/ingredient/Ingredient';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
-import { Recipes } from '../../api/recipe/Recipes';
 
 /**
  * In Bowfolios, insecure mode is enabled, so it is possible to update the server's Mongo database by making
