@@ -80,7 +80,6 @@ class VendorProfile extends React.Component {
   }
 }
 
-// Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
 VendorProfile.propTypes = {
   doc: PropTypes.object,
   ready: PropTypes.bool.isRequired,
@@ -89,14 +88,13 @@ VendorProfile.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(({ match }) => {
   const documentId = match.params._id;
-  // Get access to Stuff documents.
+  // Get access to collections
   const sub = Meteor.subscribe(Vendors.userPublicationName);
   const sub2 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
   const sub3 = Meteor.subscribe(Ingredients.userPublicationName);
   // Determine if the subscription is ready
   const ready = sub.ready() && sub2.ready() && sub3.ready();
   // Get the document
-  // const ivp = IngredientVendorPrice.collection.find({}).fetch();
   const doc = Vendors.collection.findOne(documentId);
   return {
     doc,
