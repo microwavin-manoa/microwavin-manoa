@@ -32,8 +32,8 @@ class AdminPage extends React.Component {
                 <Table.HeaderCell>Name</Table.HeaderCell>
                 <Table.HeaderCell>Image</Table.HeaderCell>
                 <Table.HeaderCell>Description</Table.HeaderCell>
-                <Table.HeaderCell>Edit</Table.HeaderCell>
                 <Table.HeaderCell>Owner</Table.HeaderCell>
+                <Table.HeaderCell>Edit</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
