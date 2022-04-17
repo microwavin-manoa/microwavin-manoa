@@ -23,7 +23,7 @@ class VendorProfile extends React.Component {
   }
 
   renderPage() {
-    const vendors = this.props.doc.name;
+    const vendors = _.pluck(Vendors.collection.find().fetch(), this.props.doc.vendor);
     const vendorData = vendors.map(vendor => getVendorIngredients(vendor));
 
     // const mapped = this.props.ivp.map((ingredient) => <StuffIngredientVendorPrice key={ingredient._id} ivp={ingredient}/>);
@@ -31,19 +31,19 @@ class VendorProfile extends React.Component {
       <Container>
         <Grid textAlign='center'>
           <Grid.Row>
-            <h1>{this.props.vendors.name}</h1>
+            <h1>{this.props.doc.name}</h1>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column width={7}>
-              <Image size='large' rounded src={this.props.vendors.imageURL}/>
+              <Image size='large' rounded src={this.props.doc.imageURL}/>
               <Grid.Row>
                 <Grid.Column>
                   <h3>Address</h3>
-                  <p>{this.props.vendors.address}</p>
+                  <p>{this.props.doc.address}</p>
                 </Grid.Column>
                 <Grid.Column>
                   <h3>Hours</h3>
-                  <p>{this.props.vendors.hours}</p>
+                  <p>{this.props.doc.hours}</p>
                 </Grid.Column>
               </Grid.Row>
             </Grid.Column>
@@ -61,7 +61,6 @@ class VendorProfile extends React.Component {
 
 // Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
 VendorProfile.propTypes = {
-  vendors: PropTypes.object,
   ivp: PropTypes.array,
   ready: PropTypes.bool.isRequired,
   doc: PropTypes.object.isRequired,
@@ -76,11 +75,9 @@ export default withTracker(({ match }) => {
   // Determine if the subscription is ready
   const ready = sub.ready() && sub2.ready();
   // Get the document
-  const vendors = Vendors.collection.findOne(documentId);
-  const ivp = IngredientVendorPrice.collection.find({}).fetch();
   const doc = Vendors.collection.findOne(documentId);
+  const ivp = IngredientVendorPrice.collection.find({}).fetch();
   return {
-    vendors,
     ivp,
     ready,
     doc,
