@@ -6,14 +6,16 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 
+function formatPrice(price) {
+  return `$${(Math.round(price * 100) / 100).toFixed(2)}`;
+}
+
 class StuffIngredientVendorPrice extends React.Component {
   render() {
     return (
       <Table.Row>
         <Table.Cell>{this.props.ivp.ingredient}</Table.Cell>
-        <Table.Cell>{this.props.ivp.ingredientId}</Table.Cell>
-        <Table.Cell>{this.props.ivp.vendor}</Table.Cell>
-        <Table.Cell>{this.props.ivp.price}</Table.Cell>
+        <Table.Cell>{formatPrice(this.props.ivp.price)}</Table.Cell>
         <Table.Cell>
           <Link to={`/edit/${this.props.ivp._id}`}>Edit</Link>
         </Table.Cell>
