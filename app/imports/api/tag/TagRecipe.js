@@ -2,15 +2,16 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 
-class TagsCollection {
+class TagRecipeCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'TagsCollection';
+    this.name = 'TagRecipeCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      name: String,
+      tagID: String,
+      recipeID: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
@@ -20,4 +21,4 @@ class TagsCollection {
   }
 }
 
-export const Tags = new TagsCollection();
+export const TagRecipe = new TagRecipeCollection();

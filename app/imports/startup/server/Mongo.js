@@ -4,6 +4,8 @@ import { Contacts } from '../../api/contact/Contacts';
 import { Ingredients } from '../../api/ingredient/Ingredient';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
+import { TagRecipe } from '../../api/tag/TagRecipe';
+import { Tags } from '../../api/tag/Tags';
 import { Recipes } from '../../api/recipe/Recipes';
 import { Vendors } from '../../api/vendor/Vendors';
 
@@ -29,7 +31,7 @@ function addIngredient({ name, vendor, price }) {
 }
 
 // to be changed
-function addRecipe({ name, imageURL, prepTime, servingSize, ingredients, owner, description }) {
+function addRecipe({ name, imageURL, prepTime, servingSize, ingredients, owner, description, tags }) {
   console.log(`  Adding: ${name}`);
   Recipes.collection.insert({ name: name, imageURL: imageURL, prepTime: prepTime, servingSize: servingSize, owner: owner, description: description });
   const recipeId = Recipes.collection.findOne({ name: name })._id;
@@ -37,11 +39,24 @@ function addRecipe({ name, imageURL, prepTime, servingSize, ingredients, owner, 
     ingredientID: Ingredients.collection.findOne({ name: ingredient })._id,
     recipeID: recipeId,
   }));
+  tags.map(tag => TagRecipe.collection.insert({
+    tagID: Tags.collection.findOne({ name: tag })._id,
+    recipeID: recipeId,
+  }));
+  // delete later vvv
+  for (let i = 0; i < tags.length; i++) {
+    console.log(Tags.collection.findOne({ name: tags[i] }));
+  }
 }
 
 function addVendor(data) {
   console.log(`  Adding: ${data.name}`);
   Vendors.collection.insert(data);
+}
+
+function addTag({ name }) {
+  console.log(`  Adding: ${name}`);
+  Tags.collection.insert({ name: name });
 }
 
 // Initialize the StuffsCollection if empty.
@@ -65,6 +80,14 @@ if (Ingredients.collection.find().count() === 0) {
     Meteor.settings.defaultIngredients.map(data => addIngredient(data));
   }
 }
+
+if (Tags.collection.find().count() === 0) {
+  if (Meteor.settings.defaultTags) {
+    console.log('Creating default Tags.');
+    Meteor.settings.defaultTags.map(data => addTag(data));
+  }
+}
+
 if (Recipes.collection.find().count() === 0) {
   if (Meteor.settings.defaultRecipes) {
     console.log('Creating default Recipes.');
