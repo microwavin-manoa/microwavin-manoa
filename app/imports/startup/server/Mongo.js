@@ -43,6 +43,10 @@ function addRecipe({ name, imageURL, prepTime, servingSize, ingredients, owner, 
     tagID: Tags.collection.findOne({ name: tag })._id,
     recipeID: recipeId,
   }));
+  // delete later vvv
+  for (let i = 0; i < tags.length; i++) {
+    console.log(Tags.collection.findOne({ name: tags[i] }));
+  }
 }
 
 function addVendor(data) {
