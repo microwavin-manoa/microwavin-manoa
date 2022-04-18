@@ -1,6 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Ingredients } from '../../api/ingredient/Ingredient';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
+import { TagRecipe } from '../../api/tag/TagRecipe';
+import { Recipes } from '../../api/recipe/Recipes';
+import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
+import { Tags } from '../../api/tag/Tags';
 
 /**
  * In Bowfolios, insecure mode is enabled, so it is possible to update the server's Mongo database by making
@@ -41,4 +45,23 @@ Meteor.methods({
   },
 });
 
-export { addIngredientMethod };
+const addRecipeMethod = 'Recipes.add';
+
+/** Creates a new ingredient in the Ingredients collection, and also updates IngredientVendorPrice. */
+Meteor.methods({
+  'Recipes.add'({ name, imageURL, prepTime, servingSize, ingredients, tags, description }) {
+    if (ingredients && ingredients.length > 0) {
+      const owner = Meteor.user().username;
+      Recipes.collection.insert({ name: name, imageURL: imageURL, prepTime: prepTime, servingSize: servingSize, owner: owner, description: description });
+      const recipeID = Recipes.collection.findOne({ name: name })._id;
+      ingredients.map(ingredient => IngredientRecipe.collection.insert({ ingredientID: Ingredients.collection.findOne({ name: ingredient })._id, recipeID: recipeID }));
+      if (tags && tags.length > 0) {
+        tags.map(tag => TagRecipe.collection.insert({ tagID: Tags.collection.findOne({ name: tag })._id, recipeID: recipeID }));
+      }
+    } else {
+      throw new Meteor.Error('Must enter at least one ingredient!');
+    }
+  },
+});
+
+export { addIngredientMethod, addRecipeMethod };

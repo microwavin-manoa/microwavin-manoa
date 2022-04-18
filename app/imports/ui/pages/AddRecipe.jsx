@@ -16,6 +16,7 @@ import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
 import { TagRecipe } from '../../api/tag/TagRecipe';
 import { Tags } from '../../api/tag/Tags';
 import AddIngredient from '../components/AddIngredient';
+import { addRecipeMethod } from '../../startup/both/Methods';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const makeSchema = (allIngredients, allTags) => new SimpleSchema({
@@ -23,7 +24,7 @@ const makeSchema = (allIngredients, allTags) => new SimpleSchema({
   imageURL: String,
   prepTime: String,
   servingSize: String,
-  ingredients: { type: Array, label: 'Ingredients' },
+  ingredients: { type: Array, label: 'Ingredients', optional: false },
   'ingredients.$': { type: String, allowedValues: allIngredients },
   tags: { type: Array, label: 'Tags', optional: true },
   'tags.$': { type: String, allowedValues: allTags },
@@ -35,18 +36,13 @@ class AddRecipe extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { name, quantity, condition } = data;
-    const owner = Meteor.user().username;
-    TagRecipe.collection.insert({ });
-    Ingredients.collection.insert({ name, quantity, condition, owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Item added successfully', 'success');
-          formRef.reset();
-        }
-      });
+    Meteor.call(addRecipeMethod, data, (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        swal('Success', 'Recipe added successfully', 'success').then(() => formRef.reset());
+      }
+    });
   }
 
   render() {
@@ -63,7 +59,7 @@ class AddRecipe extends React.Component {
             <Segment>
               <TextField name='name'/>
               <TextField name='imageURL'/>
-              <TextField name='prepTime'/>
+              <TextField name='prepTime' placeholder='5 minutes'/>
               <TextField name='servingSize'/>
               <MultiSelectField name='ingredients' placeholder='Select ingredients'/>
               <AddIngredient/><br/>
