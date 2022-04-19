@@ -11,7 +11,6 @@ import SimpleSchema from 'simpl-schema';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Ingredients } from '../../api/ingredient/Ingredient';
 import { Recipes } from '../../api/recipe/Recipes';
-import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
 import { TagRecipe } from '../../api/tag/TagRecipe';
 import { Tags } from '../../api/tag/Tags';
@@ -47,8 +46,10 @@ class AddRecipe extends React.Component {
 
   render() {
     let fRef = null;
+    // get all ingredients and tags to choose from
     const allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'name');
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
+    // create the form schema
     const formSchema = makeSchema(allIngredients, allTags);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
@@ -78,7 +79,6 @@ class AddRecipe extends React.Component {
 AddRecipe.propTypes = {
   ready: PropTypes.bool.isRequired,
   ingredients: PropTypes.array.isRequired,
-  tags: PropTypes.array.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -87,13 +87,11 @@ export default withTracker(() => {
   // Ensure that minimongo is populated with all collections prior to running render().
   const sub1 = Meteor.subscribe(Ingredients.userPublicationName);
   const sub2 = Meteor.subscribe(Recipes.userPublicationName);
-  const sub3 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
-  const sub4 = Meteor.subscribe(IngredientRecipe.userPublicationName);
-  const sub5 = Meteor.subscribe(Tags.userPublicationName);
-  const sub6 = Meteor.subscribe(TagRecipe.userPublicationName);
+  const sub3 = Meteor.subscribe(IngredientRecipe.userPublicationName);
+  const sub4 = Meteor.subscribe(Tags.userPublicationName);
+  const sub5 = Meteor.subscribe(TagRecipe.userPublicationName);
   return {
-    ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready(),
+    ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready(),
     ingredients: Ingredients.collection.find().fetch(),
-    tags: Tags.collection.find().fetch(),
   };
 })(AddRecipe);
