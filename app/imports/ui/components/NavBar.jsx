@@ -18,32 +18,34 @@ class NavBar extends React.Component {
     const navbarColor = { backgroundColor: '#ceb793' };
     return (
       <Segment style={navbarColor}>
-        <Menu inverted style={menuStyle}attached="top" borderless pointing secondary>
+        <Menu inverted style={menuStyle} attached="top" borderless pointing secondary>
           <Menu.Item as={NavLink} activeClassName="" exact to="/">
             <Header as='h1' style={headerColor}>Microwavin Manoa</Header>
           </Menu.Item>
           {this.props.currentUser ? (
-            [<Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/add" key='add'><Icon name='add' />Add Recipe</Menu.Item>,
-              <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/search" key='search'><Icon name='search' />Search Recipe</Menu.Item>,
-              <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/myrecipes" key='myrecipes'><Icon name='like' />My Recipes</Menu.Item>]
+            [<Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/add" key='add'><Icon name='add'/>Add Recipe</Menu.Item>,
+              <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/search" key='search'><Icon name='search'/>Search Recipe</Menu.Item>,
+              <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/vendors" key='vendors'><Icon name='tags'/>Vendors</Menu.Item>,
+              <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/myrecipes" key='myrecipes'><Icon name='like'/>My Recipes</Menu.Item>,
+            ]
           ) : ''}
           {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-            <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/admin" key='admin'><Icon name='wrench' />Admin</Menu.Item>
+            <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/admin" key='admin'><Icon name='wrench'/>Admin</Menu.Item>
           ) : ''}
           <Menu.Item position="right">
             {this.props.currentUser === '' ? (
               <Button.Group>
-                <Button animated='vertical' style={signupButton} >
+                <Button animated='vertical' style={signupButton}>
                   <Button.Content style={font} hidden as={NavLink} exact to="/signup">Sign Up!</Button.Content>
                   <Button.Content visible>
-                    <Icon name='signup' />
+                    <Icon name='signup'/>
                   </Button.Content>
                 </Button>
                 <ButtonOr/>
                 <Button animated='vertical' style={signinButton}>
                   <Button.Content style={font} inverted hidden as={NavLink} exact to="/signin">Sign In!</Button.Content>
                   <Button.Content visible>
-                    <Icon name='sign-in' />
+                    <Icon name='sign-in'/>
                   </Button.Content>
                 </Button>
               </Button.Group>
@@ -51,7 +53,7 @@ class NavBar extends React.Component {
               <Button animated='vertical' style={signinButton}>
                 <Button.Content style={font} inverted hidden as={NavLink} exact to="/signout">Sign Out</Button.Content>
                 <Button.Content visible>
-                  <Icon name='sign-out' />
+                  <Icon name='sign-out'/>
                 </Button.Content>
               </Button>
             )}
