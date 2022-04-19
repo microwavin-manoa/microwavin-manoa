@@ -107,6 +107,7 @@ EditRecipe.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
   ready: PropTypes.bool.isRequired,
+  ingredients: PropTypes.array.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -122,6 +123,7 @@ export default withTracker(({ match }) => {
   // Get the document
   const doc = Recipes.collection.findOne(documentId);
   return {
+    ingredients: Ingredients.collection.find().fetch(),
     doc,
     ready,
   };
