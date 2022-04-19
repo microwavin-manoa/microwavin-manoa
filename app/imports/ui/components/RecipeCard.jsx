@@ -1,30 +1,22 @@
 import React from 'react';
 import { Card, Image, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { TagRecipe } from '../../api/tag/TagRecipe';
 import { Tags } from '../../api/tag/Tags';
 import { Recipes } from '../../api/recipe/Recipes';
 
-/** get access to the tags by using recipeID and access corresponding tag ids from tag recipe collection
- then from those tag ids use the tags collection to get the name */
-/**
- *   const ingredient = _.pluck(IngredientVendorPrice.collection.find({ vendor: vendorName }).fetch(), 'ingredient');
- *   const ingredientID = ingredient.map(ing => Ingredients.collection.findOne({ name: ing })._id);
- *   const price = _.pluck(IngredientVendorPrice.collection.find({ vendor: vendorName }).fetch(), 'price');
- */
-
-function getTags(recipeName) {
-  const recipeId = Recipes.collection.findOne({ name: recipeName })._id;
-  console.log(recipeId);
-  const tags = _.pluck(TagRecipe.collection.find({ recipeID: recipeId }.fetch()), 'tagID');
-  console.log(tags);
-
+// returns an array of tags for this recipe
+function getTags(name) {
+  const recipeID = Recipes.collection.findOne({ name })._id;
+  const tagVal = _.pluck(TagRecipe.collection.find({ recipeID: recipeID }).fetch(), 'tagID');
+  return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
+const tagColor = { color: '#4f583d' };
 
-
-class Recipe extends React.Component {
+class RecipeCard extends React.Component {
   render() {
     const tagData = getTags(this.props.recipe.name);
     return (
@@ -40,6 +32,7 @@ class Recipe extends React.Component {
           </Card.Meta>
         </Card.Content>
         <Card.Content extra>
+          {_.map(tagData, (tag, index) => <Label key={index} color='brown' size='small' >{tag}</Label>)}
         </Card.Content>
       </Card>
     );
@@ -47,9 +40,17 @@ class Recipe extends React.Component {
 }
 
 // Require a recipe to be passed to this component.
-Recipe.propTypes = {
+RecipeCard.propTypes = {
   recipe: PropTypes.object.isRequired,
 };
 
-// Wrap this component in withRouter since we use the <Link> React Router element.
-export default withRouter(Recipe);
+// withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+export default withTracker(() => {
+  const sub1 = Meteor.subscribe(Recipes.userPublicationName);
+  const sub2 = Meteor.subscribe(Tags.userPublicationName);
+  const sub3 = Meteor.subscribe(TagRecipe.userPublicationName);
+  const ready = sub1.ready() && sub2.ready() && sub3.ready();
+  return {
+    ready,
+  };
+})(RecipeCard);
