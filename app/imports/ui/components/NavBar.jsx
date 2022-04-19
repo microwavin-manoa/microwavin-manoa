@@ -48,7 +48,12 @@ class NavBar extends React.Component {
                 </Button>
               </Button.Group>
             ) : (
-              <Button primary as={NavLink} exact to="/signout">Sign Out</Button>
+              <Button animated='vertical' style={signinButton}>
+                <Button.Content style={font} inverted hidden as={NavLink} exact to="/signout">Sign Out</Button.Content>
+                <Button.Content visible>
+                  <Icon name='sign-out' />
+                </Button.Content>
+              </Button>
             )}
           </Menu.Item>
         </Menu>
