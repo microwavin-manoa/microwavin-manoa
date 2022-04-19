@@ -1,11 +1,32 @@
 import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { _ } from 'meteor/underscore';
+import { TagRecipe } from '../../api/tag/TagRecipe';
+import { Tags } from '../../api/tag/Tags';
+import { Recipes } from '../../api/recipe/Recipes';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** get access to the tags by using recipeID and access corresponding tag ids from tag recipe collection
+ then from those tag ids use the tags collection to get the name */
+/**
+ *   const ingredient = _.pluck(IngredientVendorPrice.collection.find({ vendor: vendorName }).fetch(), 'ingredient');
+ *   const ingredientID = ingredient.map(ing => Ingredients.collection.findOne({ name: ing })._id);
+ *   const price = _.pluck(IngredientVendorPrice.collection.find({ vendor: vendorName }).fetch(), 'price');
+ */
+
+function getTags(recipeName) {
+  const recipeId = Recipes.collection.findOne({ name: recipeName })._id;
+  console.log(recipeId);
+  const tags = _.pluck(TagRecipe.collection.find({ recipeID: recipeId }.fetch()), 'tagID');
+  console.log(tags);
+
+}
+
+
 class Recipe extends React.Component {
   render() {
+    const tagData = getTags(this.props.recipe.name);
     return (
       <Card href={`#/recipe/${this.props.recipe._id}`}>
         <Image src={this.props.recipe.imageURL} wrapped ui={false}/>
@@ -19,7 +40,6 @@ class Recipe extends React.Component {
           </Card.Meta>
         </Card.Content>
         <Card.Content extra>
-          any tags will appear here
         </Card.Content>
       </Card>
     );

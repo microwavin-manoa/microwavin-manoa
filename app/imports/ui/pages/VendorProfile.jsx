@@ -11,8 +11,11 @@ import { Ingredients } from '../../api/ingredient/Ingredient';
 
 function getVendorData(vendorName) {
   const ingredient = _.pluck(IngredientVendorPrice.collection.find({ vendor: vendorName }).fetch(), 'ingredient');
+  console.log(ingredient);
   const ingredientID = ingredient.map(ing => Ingredients.collection.findOne({ name: ing })._id);
+  console.log(ingredientID);
   const price = _.pluck(IngredientVendorPrice.collection.find({ vendor: vendorName }).fetch(), 'price');
+  console.log(price);
   return _.extend({ ingredient, ingredientID, price });
 }
 
