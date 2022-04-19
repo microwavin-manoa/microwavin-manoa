@@ -3,43 +3,56 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Header } from 'semantic-ui-react';
+import { Menu, Header, Segment, Icon, Button, ButtonOr } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
   render() {
     const menuStyle = { marginBottom: '10px' };
+    const headerFont = { fontSize: '16px' };
+    const signinButton = { backgroundColor: '#85865f', color: '#f5f0e6' };
+    const signupButton = { backgroundColor: '#4f583d', color: '#f5f0e6' };
+    const font = { color: '#f5f0e6' };
+    const headerColor = { color: '#4f583d' };
+    const navbarColor = { backgroundColor: '#ceb793' };
     return (
-      <Menu style={menuStyle} attached="top" borderless inverted>
-        <Menu.Item as={NavLink} activeClassName="" exact to="/">
-          <Header inverted as='h1'>Microwavin Manoa</Header>
-        </Menu.Item>
-        {this.props.currentUser ? (
-          [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Recipe</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/search" key='search'>Search Recipe</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/myrecipes" key='myrecipes'>My Recipes</Menu.Item>]
-        ) : ''}
-        {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-          <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>
-        ) : ''}
-        <Menu.Item position="right">
-          {this.props.currentUser === '' ? (
-            <Dropdown id="login-dropdown" text="Login" pointing="top right" icon={'user'}>
-              <Dropdown.Menu>
-                <Dropdown.Item id="login-dropdown-sign-in" icon="user" text="Sign In" as={NavLink} exact to="/signin"/>
-                <Dropdown.Item id="login-dropdown-sign-up" icon="add user" text="Sign Up" as={NavLink} exact to="/signup"/>
-              </Dropdown.Menu>
-            </Dropdown>
-          ) : (
-            <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={'user'}>
-              <Dropdown.Menu>
-                <Dropdown.Item id="navbar-sign-out" icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
-              </Dropdown.Menu>
-            </Dropdown>
-          )}
-        </Menu.Item>
-      </Menu>
+      <Segment style={navbarColor}>
+        <Menu inverted style={menuStyle}attached="top" borderless pointing secondary>
+          <Menu.Item as={NavLink} activeClassName="" exact to="/">
+            <Header as='h1' style={headerColor}>Microwavin Manoa</Header>
+          </Menu.Item>
+          {this.props.currentUser ? (
+            [<Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/add" key='add'><Icon name='add' />Add Recipe</Menu.Item>,
+              <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/search" key='search'><Icon name='search' />Search Recipe</Menu.Item>,
+              <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/myrecipes" key='myrecipes'><Icon name='like' />My Recipes</Menu.Item>]
+          ) : ''}
+          {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+            <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/admin" key='admin'><Icon name='wrench' />Admin</Menu.Item>
+          ) : ''}
+          <Menu.Item position="right">
+            {this.props.currentUser === '' ? (
+              <Button.Group>
+                <Button animated='vertical' style={signupButton} >
+                  <Button.Content style={font} hidden as={NavLink} exact to="/signup">Sign Up!</Button.Content>
+                  <Button.Content visible>
+                    <Icon name='signup' />
+                  </Button.Content>
+                </Button>
+                <ButtonOr/>
+                <Button animated='vertical' style={signinButton}>
+                  <Button.Content style={font} inverted hidden as={NavLink} exact to="/signin">Sign In!</Button.Content>
+                  <Button.Content visible>
+                    <Icon name='sign-in' />
+                  </Button.Content>
+                </Button>
+              </Button.Group>
+            ) : (
+              <Button primary as={NavLink} exact to="/signout">Sign Out</Button>
+            )}
+          </Menu.Item>
+        </Menu>
+      </Segment>
     );
   }
 }
