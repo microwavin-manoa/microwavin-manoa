@@ -36,8 +36,10 @@ const addIngredientMethod = 'Ingredients.add';
 Meteor.methods({
   'Ingredients.add'({ name, vendor, price }) {
     if (vendor && price) {
+      // insert to Ingredients collection
       Ingredients.collection.insert({ name });
       const ingredientID = Ingredients.collection.findOne({ name: name })._id;
+      // insert to IngredientVendorPrice
       IngredientVendorPrice.collection.insert({ ingredient: name, ingredientId: ingredientID, vendor: vendor, price: price });
     } else {
       throw new Meteor.Error('A vendor and price must be entered!');
@@ -47,15 +49,18 @@ Meteor.methods({
 
 const addRecipeMethod = 'Recipes.add';
 
-/** Creates a new ingredient in the Ingredients collection, and also updates IngredientVendorPrice. */
+/** Creates a new recipe in the Recipes collection, and also updates IngredientRecipe and TagRecipe. */
 Meteor.methods({
   'Recipes.add'({ name, imageURL, prepTime, servingSize, ingredients, tags, description }) {
     if (ingredients && ingredients.length > 0) {
       const owner = Meteor.user().username;
+      // insert to Recipes Collection
       Recipes.collection.insert({ name: name, imageURL: imageURL, prepTime: prepTime, servingSize: servingSize, owner: owner, description: description });
       const recipeID = Recipes.collection.findOne({ name: name })._id;
+      // insert to IngredientRecipe Collection
       ingredients.map(ingredient => IngredientRecipe.collection.insert({ ingredientID: Ingredients.collection.findOne({ name: ingredient })._id, recipeID: recipeID }));
       if (tags && tags.length > 0) {
+        // insert to TagRecipe Collection
         tags.map(tag => TagRecipe.collection.insert({ tagID: Tags.collection.findOne({ name: tag })._id, recipeID: recipeID }));
       }
     } else {
@@ -64,4 +69,28 @@ Meteor.methods({
   },
 });
 
-export { addIngredientMethod, addRecipeMethod };
+const updateRecipeMethod = 'Recipes.update';
+
+/** Updates Recipe data in Recipes collection along with IngredientRecipe and TagRecipe. */
+Meteor.methods({
+  'Recipes.update'({ name, imageURL, prepTime, servingSize, ingredients, tags, description, owner, oldName }) {
+    if (ingredients && ingredients.length > 0) {
+      // update Recipe Collection
+      Recipes.collection.update({ name: oldName }, { $set: { name, imageURL, prepTime, servingSize, description, owner } });
+      const recipeID = Recipes.collection.findOne({ name })._id;
+      // remove all associated ingredients and insert new ingredients to IngredientRecipe
+      IngredientRecipe.collection.remove({ recipeID });
+      ingredients.map(ingredient => IngredientRecipe.collection.insert({ ingredientID: Ingredients.collection.findOne({ name: ingredient })._id, recipeID }));
+      // remove tags now in case we update to zero tags
+      TagRecipe.collection.remove({ recipeID });
+      if (tags && tags.length > 0) {
+        // insert new tags to TagRecipe
+        tags.map(tag => TagRecipe.collection.insert({ tagID: Tags.collection.findOne({ name: tag })._id, recipeID }));
+      }
+    } else {
+      throw new Meteor.Error('Must enter at least one ingredient!');
+    }
+  },
+});
+
+export { addIngredientMethod, addRecipeMethod, updateRecipeMethod };
