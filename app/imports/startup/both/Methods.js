@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
 import { Ingredients } from '../../api/ingredient/Ingredient';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import { TagRecipe } from '../../api/tag/TagRecipe';
@@ -35,14 +36,24 @@ const addIngredientMethod = 'Ingredients.add';
 /** Creates a new ingredient in the Ingredients collection, and also updates IngredientVendorPrice. */
 Meteor.methods({
   'Ingredients.add'({ name, vendor, price }) {
-    if (vendor && price) {
-      // insert to Ingredients collection
+    // check if ingredient exists
+    if (Ingredients.collection.find({ name }).count() > 0) {
+      const ingredientID = Ingredients.collection.findOne({ name })._id;
+      // get all existing vendors tied to this ingredient
+      const ingVendor = _.pluck(IngredientVendorPrice.collection.find({ ingredientId: ingredientID }).fetch(), 'vendor');
+      // if the vendor you want to add is not there, you can add it
+      if (!ingVendor.includes(vendor)) {
+        IngredientVendorPrice.collection.insert({ ingredient: name, ingredientId: ingredientID, vendor: vendor, price: price });
+      } else {
+        // otherwise, can't add
+        throw new Meteor.Error('Ingredient already exists for this vendor!');
+      }
+    } else {
+      // insert new ingredient to Ingredients collection
       Ingredients.collection.insert({ name });
       const ingredientID = Ingredients.collection.findOne({ name: name })._id;
       // insert to IngredientVendorPrice
       IngredientVendorPrice.collection.insert({ ingredient: name, ingredientId: ingredientID, vendor: vendor, price: price });
-    } else {
-      throw new Meteor.Error('A vendor and price must be entered!');
     }
   },
 });

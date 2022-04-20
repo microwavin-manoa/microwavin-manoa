@@ -8,6 +8,7 @@ import { Vendors } from '../../api/vendor/Vendors';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import StuffIngredientVendorPrice from '../components/StuffIngredientVendorPrice';
 import { Ingredients } from '../../api/ingredient/Ingredient';
+import AddIngredientVendor from '../components/AddIngredientVendor';
 
 function getVendorData(vendorName) {
   // get all ingredients for a vendor
@@ -72,6 +73,7 @@ class VendorProfile extends React.Component {
                   {_.map(vendorData, (ingredient, index) => <StuffIngredientVendorPrice key={index} ivp={ingredient}/>)}
                 </Table.Body>
               </Table>
+              <AddIngredientVendor vendorName={this.props.doc.name}/>
             </Grid.Column>
           </Grid.Row>
 
@@ -84,6 +86,8 @@ class VendorProfile extends React.Component {
 VendorProfile.propTypes = {
   doc: PropTypes.object,
   ready: PropTypes.bool.isRequired,
+  ingredients: PropTypes.array.isRequired,
+  ingredientVendorPrice: PropTypes.array.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -98,6 +102,8 @@ export default withTracker(({ match }) => {
   // Get the document
   const doc = Vendors.collection.findOne(documentId);
   return {
+    ingredients: Ingredients.collection.find().fetch(),
+    ingredientVendorPrice: IngredientVendorPrice.collection.find().fetch(),
     doc,
     ready,
   };
