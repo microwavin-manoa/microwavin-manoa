@@ -12,7 +12,6 @@ import { Ingredients } from '../../api/ingredient/Ingredient';
 import { addIngredientMethod } from '../../startup/both/Methods';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import { Vendors } from '../../api/vendor/Vendors';
-import { Recipes } from '../../api/recipe/Recipes';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const makeSchema = (allVendors) => new SimpleSchema({
