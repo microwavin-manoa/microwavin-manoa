@@ -1,5 +1,10 @@
 import React from 'react';
 import { Grid, Segment, Container } from 'semantic-ui-react';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import { Roles } from 'meteor/alanning:roles';
+import { Meteor } from 'meteor/meteor';
+import { withRouter } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
@@ -29,11 +34,20 @@ class Landing extends React.Component {
                     Each recipe will come with detailed instructions, as well as locations to buy the
                     ingredients and how much it will cost overall. </p>
                 </Grid.Column>
-                <Grid.Column style={fontSize}>
-                  <h1>Get to Microwavin</h1>
-                  <p>After finding a recipe, users are able to view vendors nearby that sell that recipe&apos;s ingredients, as well as the price of each ingredient.
-                    These recipes can be made with simple equipment that most have on-hand.</p>
-                </Grid.Column>
+                {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+                  <Grid.Column style={fontSize}>
+                    <h1>Edit Recipes and Vendors</h1>
+                    <p>Admin are able to edit and delete recipes, as well as edit vendor profiles from a list of all
+                      available recipes and vendors. Admin are able to view the owner of each recipe.</p>
+                  </Grid.Column>
+                ) : ''}
+                {!Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+                  <Grid.Column style={fontSize}>
+                    <h1>Get to Microwavin</h1>
+                    <p>After finding a recipe, users are able to view vendors nearby that sell that recipe&apos;s ingredients, as well as the price of each ingredient.
+                      These recipes can be made with simple equipment that most have on-hand.</p>
+                  </Grid.Column>
+                ) : ''}
               </Grid.Row>
             </Grid>
           </Container>
@@ -42,5 +56,13 @@ class Landing extends React.Component {
     );
   }
 }
+// Declare the types of all properties.
+Landing.propTypes = {
+  currentUser: PropTypes.string,
+};
 
-export default Landing;
+// withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+const LandingContainer = withTracker(() => ({
+  currentUser: Meteor.user() ? Meteor.user().username : '',
+}))(Landing);
+export default withRouter(LandingContainer);
