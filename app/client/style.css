@@ -7,3 +7,9 @@
   background-color: #a37f2a !important;
   color: #f5f0e6;
 }
+
+#landingimage {
+  background: url("images/food.jpg") no-repeat center center fixed;
+  background-size: cover;
+  box-shadow: inset 0 0 0 25vw rgba(0, 0, 0, .5);
+}
