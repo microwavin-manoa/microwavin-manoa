@@ -58,6 +58,16 @@ Meteor.methods({
   },
 });
 
+const updateIngredientMethod = 'Ingredients.update';
+
+/** Creates a new ingredient in the Ingredients collection, and also updates IngredientVendorPrice. */
+Meteor.methods({
+  'Ingredients.update'({ name, vendor, price }) {
+    const ingredientId = Ingredients.collection.findOne({ name })._id;
+    IngredientVendorPrice.collection.update({ ingredient: name, vendor }, { $set: { name, vendor, price, ingredientId } });
+  },
+});
+
 const addRecipeMethod = 'Recipes.add';
 
 /** Creates a new recipe in the Recipes collection, and also updates IngredientRecipe and TagRecipe. */
@@ -104,4 +114,4 @@ Meteor.methods({
   },
 });
 
-export { addIngredientMethod, addRecipeMethod, updateRecipeMethod };
+export { addIngredientMethod, addRecipeMethod, updateRecipeMethod, updateIngredientMethod };

@@ -59,18 +59,17 @@ class VendorProfile extends React.Component {
                 </Grid.Column>
               </Grid.Row>
             </Grid.Column>
-            <Grid.Column width={6}>
+            <Grid.Column width={5}>
               <Header as="h3" textAlign="center">Stock</Header>
               <Table celled>
                 <Table.Header>
                   <Table.Row>
                     <Table.HeaderCell>Ingredient</Table.HeaderCell>
                     <Table.HeaderCell>Price</Table.HeaderCell>
-                    <Table.HeaderCell>Edit</Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                  {_.map(vendorData, (ingredient, index) => <StuffIngredientVendorPrice key={index} ivp={ingredient}/>)}
+                  {_.map(vendorData, (ingredient, index) => <StuffIngredientVendorPrice key={index} ivp={ingredient} vendorName={this.props.doc.name}/>)}
                 </Table.Body>
               </Table>
               <AddIngredientVendor vendorName={this.props.doc.name}/>
