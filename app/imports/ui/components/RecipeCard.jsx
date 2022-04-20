@@ -14,7 +14,7 @@ function getTags(name) {
   const tagVal = _.pluck(TagRecipe.collection.find({ recipeID: recipeID }).fetch(), 'tagID');
   return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
-const tagColor = { color: '#4f583d' };
+const tagStyle = { backgroundColor: '#85865f', color: '#f5f0e6', marginBottom: '5px', fontSize: '12.5px' };
 
 class RecipeCard extends React.Component {
   render() {
@@ -32,7 +32,7 @@ class RecipeCard extends React.Component {
           </Card.Meta>
         </Card.Content>
         <Card.Content extra>
-          {_.map(tagData, (tag, index) => <Label key={index} color='brown' size='small' >{tag}</Label>)}
+          {_.map(tagData, (tag, index) => <Label tag key={index} style={tagStyle}>{tag}</Label>)}
         </Card.Content>
       </Card>
     );
