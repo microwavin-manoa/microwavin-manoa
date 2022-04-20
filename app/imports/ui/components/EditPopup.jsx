@@ -17,7 +17,7 @@ class EditPopup extends React.Component {
           <EditIngredientVendor ing={this.props.ing} vendorName={this.props.vendorName}/>
         }
         on='click'
-        position={'bottom right'}
+        position={'bottom center'}
         trigger={<Button floated={'right'} size={'tiny'} compact toggle active={active}>Edit</Button>}
       />
     );
