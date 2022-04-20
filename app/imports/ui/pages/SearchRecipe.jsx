@@ -41,9 +41,14 @@ class SearchRecipe extends React.Component {
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allTags);
     const bridge = new SimpleSchema2Bridge(formSchema);
+    // vv all of tags' id's
     const tagIDPluck = _.pluck(Tags.collection.find({ name: { $in: this.state.tags } }).fetch(), '_id');
-    const tagPluck = _.pluck(TagRecipe.collection.find({ tagID: { $in: tagIDPluck } }).fetch(), 'recipeID');
-    const recipeMap = tagPluck.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch());
+    // vv all of the recipe ids that have any of those tags
+    const tagPluck = _.uniq(_.pluck(TagRecipe.collection.find({ tagID: { $in: tagIDPluck } }).fetch(), 'recipeID'));
+    // vv get all of the recipes that have those recipe ids from ^^
+    const recipeMap = _.flatten(tagPluck.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
+    // const filteredRec = _.filter(recipeMap, function (rec) { return });
+    // ^^ make sure all the tags associated with this recipe matches all of the tags from this.state.tags ^^
     console.log(tagIDPluck);
     console.log(tagPluck);
     console.log(recipeMap);
