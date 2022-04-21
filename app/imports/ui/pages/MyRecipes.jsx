@@ -24,6 +24,10 @@ class MyRecipes extends React.Component {
             <Table.Row>
               <Table.HeaderCell>Name</Table.HeaderCell>
               <Table.HeaderCell>Image</Table.HeaderCell>
+              <Table.HeaderCell>Prep-Time</Table.HeaderCell>
+              <Table.HeaderCell>Serving Size</Table.HeaderCell>
+              <Table.HeaderCell>Ingredients</Table.HeaderCell>
+              <Table.HeaderCell>Tags</Table.HeaderCell>
               <Table.HeaderCell>Description</Table.HeaderCell>
               <Table.HeaderCell>Edit</Table.HeaderCell>
             </Table.Row>
