@@ -45,6 +45,8 @@ class AddRecipe extends React.Component {
   }
 
   render() {
+    const color = { color: '#4f583d' };
+    const textStyle = { color: '#4f583d', fontSize: '16px' };
     let fRef = null;
     // get all ingredients and tags to choose from
     const allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'name');
@@ -55,18 +57,18 @@ class AddRecipe extends React.Component {
     return (
       <Grid container centered>
         <Grid.Column>
-          <Header as="h2" textAlign="center">Add Recipe</Header>
+          <Header as="h2" textAlign="center" style={ color }>Add Recipe</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
             <Segment>
-              <TextField name='name'/>
-              <TextField name='imageURL'/>
-              <TextField name='prepTime' placeholder='5 minutes'/>
-              <TextField name='servingSize'/>
-              <MultiSelectField name='ingredients' placeholder='Select ingredients'/>
+              <TextField style={ textStyle } name='name'/>
+              <TextField style={ textStyle } name='imageURL'/>
+              <TextField style={ textStyle } name='prepTime' placeholder='5 minutes'/>
+              <TextField style={ textStyle } name='servingSize'/>
+              <MultiSelectField style={ textStyle } name='ingredients' placeholder='Select ingredients'/>
               <AddIngredient/><br/>
-              <MultiSelectField name='tags' placeholder='Select tags'/>
-              <LongTextField name='description'/>
-              <SubmitField value='Submit'/>
+              <MultiSelectField style={ textStyle } name='tags' placeholder='Select tags'/>
+              <LongTextField style={ textStyle } name='description'/>
+              <SubmitField style={ textStyle } value='Submit'/>
               <ErrorsField/>
             </Segment>
           </AutoForm>
