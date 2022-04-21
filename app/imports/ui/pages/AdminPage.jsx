@@ -1,9 +1,9 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import StuffRecipeAdmin from '../components/StuffRecipeAdmin';
 import StuffVendor from '../components/StuffVendor';
 import { Recipes } from '../../api/recipe/Recipes';
@@ -11,7 +11,6 @@ import { Vendors } from '../../api/vendor/Vendors';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class AdminPage extends React.Component {
-
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
@@ -19,6 +18,7 @@ class AdminPage extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
+    const buttonStyle = { backgroundColor: '#4f583d', color: '#f5f0e6' };
     return (
       <div>
         <Container>
@@ -57,13 +57,7 @@ class AdminPage extends React.Component {
           </Table>
         </Container>
         <Container>
-          <Table color='olive' inverted>
-            <Table.Row textAlign='center'>
-              <Table.Cell width='6' textAlign='center'>
-                <Link to={'/addvendor'}>Add Vendor</Link>
-              </Table.Cell>
-            </Table.Row>
-          </Table>
+          <Button as={Link} to='/addvendor' fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
         </Container>
       </div>
 

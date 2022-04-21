@@ -1,9 +1,18 @@
-#ui.signin.button {
-  background-color: #289946 !important;
-  color: #f5f0e6;
-}
-
 .ui.signin.button {
   background-color: #a37f2a !important;
   color: #f5f0e6;
+}
+
+#landingimage {
+  background: url("images/food.jpg") no-repeat center center fixed;
+  background-size: cover;
+  box-shadow: inset 0 0 0 50vw rgba(0, 0, 0, .5);
+}
+
+.footer {
+  background-Color: #ceb793;
+  color: #f5f0e6;
+  padding: 11px 0px;
+  font-size: 14px;
+  margin-top: 50px;
 }
