@@ -21,32 +21,33 @@ import AllVendors from '../pages/AllVendors';
 import AddVendor from '../pages/AddVendor';
 import Recipe from '../pages/Recipe';
 import VendorProfile from '../pages/VendorProfile';
-import AdminLanding from '../pages/AdminLanding';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
   render() {
     return (
       <Router>
-        <div>
+        <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
           <NavBar/>
-          <Switch>
-            <Route exact path="/" component={Landing}/>
-            <Route path="/signin" component={Signin}/>
-            <Route path="/signup" component={Signup}/>
-            <Route path="/signout" component={Signout}/>
-            <ProtectedRoute path="/search" component={SearchRecipe}/>
-            <ProtectedRoute path="/vendors" component={AllVendors}/>
-            <ProtectedRoute path="/add" component={AddRecipe}/>
-            <ProtectedRoute path="/myrecipes" component={MyRecipes}/>
-            <ProtectedRoute path="/editrecipe/:_id" component={EditRecipe}/>
-            <ProtectedRoute path="/editvendor/:_id" component={EditVendor}/>
-            <ProtectedRoute path="/recipe/:_id" component={Recipe}/>
-            <ProtectedRoute path="/vendor/:_id" component={VendorProfile}/>
-            <AdminProtectedRoute path="/admin" component={AdminPage}/>
-            <AdminProtectedRoute path="/addvendor" component={AddVendor}/>
-            <Route component={NotFound}/>
-          </Switch>
+          <div style={{ flex: '1' }}>
+            <Switch>
+              <Route exact path="/" component={Landing}/>
+              <Route path="/signin" component={Signin}/>
+              <Route path="/signup" component={Signup}/>
+              <Route path="/signout" component={Signout}/>
+              <ProtectedRoute path="/search" component={SearchRecipe}/>
+              <ProtectedRoute path="/vendors" component={AllVendors}/>
+              <ProtectedRoute path="/add" component={AddRecipe}/>
+              <ProtectedRoute path="/myrecipes" component={MyRecipes}/>
+              <ProtectedRoute path="/editrecipe/:_id" component={EditRecipe}/>
+              <ProtectedRoute path="/editvendor/:_id" component={EditVendor}/>
+              <ProtectedRoute path="/recipe/:_id" component={Recipe}/>
+              <ProtectedRoute path="/vendor/:_id" component={VendorProfile}/>
+              <AdminProtectedRoute path="/admin" component={AdminPage}/>
+              <AdminProtectedRoute path="/addvendor" component={AddVendor}/>
+              <Route component={NotFound}/>
+            </Switch>
+          </div>
           <Footer/>
         </div>
       </Router>
