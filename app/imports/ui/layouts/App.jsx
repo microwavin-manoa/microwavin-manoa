@@ -19,8 +19,8 @@ import Signout from '../pages/Signout';
 import AddRecipe from '../pages/AddRecipe';
 import AllVendors from '../pages/AllVendors';
 import AddVendor from '../pages/AddVendor';
-import Recipe from '../pages/Recipe';
 import VendorProfile from '../pages/VendorProfile';
+import Recipe from '../pages/Recipe';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
