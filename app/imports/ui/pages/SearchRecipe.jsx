@@ -19,6 +19,21 @@ const makeSchema = (allTags) => new SimpleSchema({
   'tags.$': { type: String, allowedValues: allTags },
 });
 
+// Get the tags associated with a recipe
+function getTags(recID) {
+  const tagVal = _.pluck(TagRecipe.collection.find({ recipeID: recID }).fetch(), 'tagID');
+  return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
+}
+
+//
+function checkTags(allTags) {
+  const checked = _.every(this.state.tags, function (tag) { return allTags.contains(tag); });
+  if (checked) {
+    return allTags;
+  }
+  return [];
+}
+
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class SearchRecipe extends React.Component {
   constructor(props) {
@@ -45,9 +60,13 @@ class SearchRecipe extends React.Component {
     const tagIDPluck = _.pluck(Tags.collection.find({ name: { $in: this.state.tags } }).fetch(), '_id');
     // vv all of the recipe ids that have any of those tags
     const tagPluck = _.uniq(_.pluck(TagRecipe.collection.find({ tagID: { $in: tagIDPluck } }).fetch(), 'recipeID'));
+    // const filteredRec = _.filter(tagPluck, function (rec) { return })
+    // object that has (id and recipename)
+    const filteredRec = _.map(tagPluck, tagId => (checkTags(getTags(tagId))));
+    const hold = _.zip(filteredRec, tagPluck);
+    console.log(hold);
     // vv get all of the recipes that have those recipe ids from ^^
-    const recipeMap = _.flatten(tagPluck.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
-    // const filteredRec = _.filter(recipeMap, function (rec) { return });
+    const recipeMap = _.flatten(filteredRec.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
     // ^^ make sure all the tags associated with this recipe matches all of the tags from this.state.tags ^^
     console.log(tagIDPluck);
     console.log(tagPluck);
