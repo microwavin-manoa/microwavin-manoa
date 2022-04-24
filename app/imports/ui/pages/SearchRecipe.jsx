@@ -25,14 +25,21 @@ function getTags(recID) {
   return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
 
-//
-function checkTags(allTags) {
-  const checked = _.every(this.state.tags, function (tag) { return allTags.contains(tag); });
-  if (checked) {
-    return allTags;
+/**
+function checkTags(tagObj) {
+   return _.filter(tagObj, function (item) {
+    return _.every(item.tags, function (tag) { return tag.contains(this.state.tags)}; );
+  });
+  // return this.state.tags.map((tag) => (_.filter(tagObj, function (obj) { obj.tags.contains(tag); })));
+  console.log(this.state.tags);
+  console.log(tagObj);
+  console.log(tagObj.tags);
+  if (_.every(this.state.tags, (tag) => (tagObj.tags.includes(tag)))) {
+    return tagObj.id;
   }
   return [];
 }
+*/
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class SearchRecipe extends React.Component {
@@ -56,21 +63,22 @@ class SearchRecipe extends React.Component {
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allTags);
     const bridge = new SimpleSchema2Bridge(formSchema);
+    // console.log(this.state.tags);
     // vv all of tags' id's
     const tagIDPluck = _.pluck(Tags.collection.find({ name: { $in: this.state.tags } }).fetch(), '_id');
     // vv all of the recipe ids that have any of those tags
     const tagPluck = _.uniq(_.pluck(TagRecipe.collection.find({ tagID: { $in: tagIDPluck } }).fetch(), 'recipeID'));
-    // const filteredRec = _.filter(tagPluck, function (rec) { return })
-    // object that has (id and recipename)
-    const filteredRec = _.map(tagPluck, tagId => (checkTags(getTags(tagId))));
-    const hold = _.zip(filteredRec, tagPluck);
-    console.log(hold);
-    // vv get all of the recipes that have those recipe ids from ^^
-    const recipeMap = _.flatten(filteredRec.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
-    // ^^ make sure all the tags associated with this recipe matches all of the tags from this.state.tags ^^
-    console.log(tagIDPluck);
-    console.log(tagPluck);
-    console.log(recipeMap);
+    // const tagPluckTags = tagPluck.map((recId) => (getTags(recId))) // array of the tags for each recID
+    // const tagPluckObj = _.object(tagPluck, tagPluckTags); // object has recipeID: [array of tags]
+    // const checkTagPluckObj = checkTags(tagPluckObj);
+    const mapTagPluck = _.map(tagPluck, (rec) => ({ id: rec, tags: getTags(rec), stateTags: this.state.tags }));
+    const testing = _.map(mapTagPluck, function (rec) {
+      if (_.every(rec.stateTags, (tag) => (rec.tags.includes(tag)))) {
+        return rec.id;
+      }
+      return [];
+    });
+    const recipeMap = _.flatten(testing.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
     return (
       <Container>
         <Header as="h2" textAlign="center">Search Recipes</Header>
