@@ -81,6 +81,7 @@ class SearchRecipe extends React.Component {
     const recipeMap = _.flatten(testing.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
     return (
       <Container>
+        <br/>
         <Header as="h2" textAlign="center">Search Recipes</Header>
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
           <Segment>

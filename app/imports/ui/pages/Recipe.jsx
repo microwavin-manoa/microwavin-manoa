@@ -29,7 +29,6 @@ function getTags(name) {
 
 function getTotalPrice(ingredientData) {
   const groups = _.groupBy(ingredientData, 'ingredient');
-  console.log(groups);
   // _.mapObject doesn't seem to be defined in meteor so I had to use _.each
   // const lowestPrices = _.mapObject(groups, ing => _.min(_.pluck(ing, 'price')));
   const lowestPrices = {};
@@ -62,6 +61,7 @@ class Recipe extends React.Component {
       <Container>
         <Grid verticalAlign='middle' textAlign='center' padded>
           <Grid.Row stretched>
+            <br/>
             <Header as="h1" textAlign="center">{this.props.doc.name}</Header>
           </Grid.Row>
           <Grid.Column width={5}>
@@ -69,7 +69,7 @@ class Recipe extends React.Component {
             <Grid.Row>{_.map(allTags, (tag, index) => <Label tag key={index} style={tagStyle}>{tag}</Label>)}</Grid.Row>
           </Grid.Column>
           <Grid.Column width={5}>
-            <div height={'0px'}>
+            <div>
               <Header as={'h3'}>Ingredients:</Header>
               <div>{_.map(allIngredients, (ing, index) => <Label style={ingStyle} key={index}>{ing}</Label>)}</div>
               <Header as={'h5'}>Lowest Calculated Cost: {formatPrice(totalPrice)}</Header>

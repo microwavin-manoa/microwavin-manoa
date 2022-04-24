@@ -61,7 +61,7 @@ class AdminPage extends React.Component {
           </Table>
         </Container>
         <Container>
-          <Button as={Link} to='/addvendor' fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
+          <Button id={'addVendorButton'} as={Link} to='/addvendor' fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
         </Container>
       </div>
 

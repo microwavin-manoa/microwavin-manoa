@@ -22,6 +22,7 @@ class MyRecipes extends React.Component {
   renderPage() {
     return (
       <Container>
+        <br/>
         <Header as="h2" textAlign="center">My Recipes</Header>
         <Table celled>
           <Table.Header>
