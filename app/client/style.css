@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Akshar');
+
 a {
   color: #85865F !important;
 }
@@ -5,6 +7,10 @@ a:hover {
   color: #4F583D !important;
 }
 
+#card-title {
+  font-family: "Akshar", monospace !important;
+  font-size: 25px;
+}
 /*#addVendorButton {*/
 /*  color: #F5EACF !important;*/
 /*  background-color: #8FA6AC !important;*/
