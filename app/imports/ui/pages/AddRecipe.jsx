@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-semantic';
+import { Grid, Header, Form, Input, Segment, Image } from 'semantic-ui-react';
+import { AutoForm, ErrorsField, LongTextField, SubmitField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -57,23 +57,38 @@ class AddRecipe extends React.Component {
     const formSchema = makeSchema(allIngredients, allTags);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
-      <Grid container centered>
-        <Grid.Column>
+      <Grid container centered style={{ marginTop: '10px' }}>
+        <Grid.Column centered>
           <Header as="h2" textAlign="center" style={ color }>Add Recipe</Header>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
-            <Segment>
-              <TextField style={ textStyle } name='name'/>
-              <TextField style={ textStyle } name='imageURL'/>
-              <TextField style={ textStyle } name='prepTime' placeholder='5 minutes'/>
-              <TextField style={ textStyle } name='servingSize'/>
+          <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>,<br/>
+          <Segment>
+            <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
+              <Form.Field inline required style={ textStyle } value={'name'}>
+                <label>Name</label>
+                <Input style={{ width: '1030px' }}/>
+              </Form.Field>
+              <Form.Field inline required style={ textStyle } value={'imageURL'}>
+                <label>ImageURL</label>
+                <Input style={{ width: '1000px' }}/>
+              </Form.Field>
+              <Form.Group widths={'equal'}>
+                <Form.Field inline required style={ textStyle } value={'prepTime'}>
+                  <label>Prep Time</label>
+                  <Input placeholder='15 minutes' style={{ width: '540px' }}/>
+                </Form.Field>
+                <Form.Field inline required style={ textStyle } value={'servingSize'}>
+                  <label>Serving Size</label>
+                  <Input style={{ width: '540px' }}/>
+                </Form.Field>
+              </Form.Group>
               <MultiSelectField style={ textStyle } name='ingredients' placeholder='Select ingredients'/>
               <AddIngredient/><br/>
               <MultiSelectField style={ textStyle } name='tags' placeholder='Select tags'/>
               <LongTextField style={ textStyle } name='description'/>
               <SubmitField style={ textStyle } value='Submit'/>
               <ErrorsField/>
-            </Segment>
-          </AutoForm>
+            </AutoForm>
+          </Segment>
         </Grid.Column>
       </Grid>
     );
