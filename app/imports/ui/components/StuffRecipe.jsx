@@ -1,6 +1,4 @@
 import React from 'react';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Meteor } from 'meteor/meteor';
 import { Table, Image, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -18,7 +16,7 @@ function getTags(name) {
   return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
 
-const tagStyle = { backgroundColor: '#85865f', color: '#f5f0e6', marginBottom: '5px', fontSize: '12px' };
+const tagStyle = { backgroundColor: '#85865f', color: '#f5f0e6', marginBottom: '5px', fontSize: '10px' };
 const ingStyle = { backgroundColor: '#4f583d', color: '#f5f0e6', marginBottom: '5px', fontSize: '12px' };
 
 // returns an array of ingredients for this recipe
@@ -59,14 +57,4 @@ StuffRecipe.propTypes = {
   recipe: PropTypes.object.isRequired,
 };
 
-export default withTracker(() => {
-  const sub1 = Meteor.subscribe(Recipes.userPublicationName);
-  const sub2 = Meteor.subscribe(Tags.userPublicationName);
-  const sub3 = Meteor.subscribe(TagRecipe.userPublicationName);
-  const sub4 = Meteor.subscribe(IngredientRecipe.userPublicationName);
-  const sub5 = Meteor.subscribe(Ingredients.userPublicationName);
-  const ready = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready();
-  return {
-    ready,
-  };
-})(StuffRecipe);
+export default StuffRecipe;

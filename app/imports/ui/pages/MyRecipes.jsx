@@ -5,6 +5,10 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Recipes } from '../../api/recipe/Recipes';
 import StuffRecipe from '../components/StuffRecipe';
+import { Tags } from '../../api/tag/Tags';
+import { TagRecipe } from '../../api/tag/TagRecipe';
+import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
+import { Ingredients } from '../../api/ingredient/Ingredient';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class MyRecipes extends React.Component {
@@ -49,13 +53,15 @@ MyRecipes.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Recipes.userPublicationName);
-  // Determine if the subscription is ready
-  const ready = subscription.ready();
-  // Get the Stuff documents
+  const sub1 = Meteor.subscribe(Recipes.userPublicationName);
+  const sub2 = Meteor.subscribe(Tags.userPublicationName);
+  const sub3 = Meteor.subscribe(TagRecipe.userPublicationName);
+  const sub4 = Meteor.subscribe(IngredientRecipe.userPublicationName);
+  const sub5 = Meteor.subscribe(Ingredients.userPublicationName);
   let recipes = Recipes.collection.find().fetch();
   recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
+  const ready = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready();
+
   return {
     recipes,
     ready,

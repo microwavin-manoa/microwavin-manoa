@@ -16,6 +16,8 @@ import { Tags } from '../../api/tag/Tags';
 import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
 import { TagRecipe } from '../../api/tag/TagRecipe';
 import { updateRecipeMethod } from '../../startup/both/Methods';
+import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
+import { Vendors } from '../../api/vendor/Vendors';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const makeSchema = (allIngredients, allTags) => new SimpleSchema({
@@ -119,12 +121,13 @@ export default withTracker(({ match }) => {
   const sub3 = Meteor.subscribe(IngredientRecipe.userPublicationName);
   const sub4 = Meteor.subscribe(Tags.userPublicationName);
   const sub5 = Meteor.subscribe(TagRecipe.userPublicationName);
-  const ready = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready();
+  const sub6 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
+  const sub7 = Meteor.subscribe(Vendors.userPublicationName);
   // Get the document
   const doc = Recipes.collection.findOne(documentId);
   return {
     ingredients: Ingredients.collection.find().fetch(),
     doc,
-    ready,
+    ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready() && sub7.ready(),
   };
 })(EditRecipe);

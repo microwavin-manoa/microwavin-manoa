@@ -1,10 +1,6 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Meteor } from 'meteor/meteor';
-import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import EditPopup from './EditPopup';
 
 function formatPrice(price) {
@@ -31,11 +27,4 @@ StuffIngredientVendorPrice.propTypes = {
   vendorName: PropTypes.string.isRequired,
 };
 
-// Wrap this component in withRouter since we use the <Link> React Router element.
-export default withTracker(() => {
-  // Ensure that minimongo is populated with all collections prior to running render().
-  const sub1 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
-  return {
-    ready: sub1.ready(),
-  };
-})(StuffIngredientVendorPrice);
+export default StuffIngredientVendorPrice;
