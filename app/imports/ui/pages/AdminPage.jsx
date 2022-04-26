@@ -1,11 +1,12 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import PropTypes from 'prop-types';
 import { Container, Table, Header, Loader, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
-import { HashLink as Link } from 'react-router-hash-link';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import StuffRecipeAdmin from '../components/StuffRecipeAdmin';
 import StuffVendor from '../components/StuffVendor';
+import AdminSidebar from '../components/Sidebar';
 import { Recipes } from '../../api/recipe/Recipes';
 import { Vendors } from '../../api/vendor/Vendors';
 
@@ -19,41 +20,40 @@ class AdminPage extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     // define styles
-    const buttonStyle = { backgroundColor: '#4f583d', color: '#f5f0e6' };
+    const buttonStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
+    const tableHeadStyle = { backgroundColor: '#d4c8a1' };
     return (
       <div>
+        <AdminSidebar/>
         <Container>
-          <Header as="h2" textAlign="center">Admin Edit Page</Header>
-          <Header textAlign="center">Admin can edit the recipes of all users and profiles of vendors. Admin
-          can also add new vendors.</Header>
-          <Header as="h2" textAlign="center">All Recipes</Header>
+          <Header as="h2" textAlign="center" id="recipeHeader">All Recipes</Header>
           <Table celled>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Name</Table.HeaderCell>
-                <Table.HeaderCell>Image</Table.HeaderCell>
-                <Table.HeaderCell>Prep-Time</Table.HeaderCell>
-                <Table.HeaderCell>Serving Size</Table.HeaderCell>
-                <Table.HeaderCell>Ingredients</Table.HeaderCell>
-                <Table.HeaderCell>Tags</Table.HeaderCell>
-                <Table.HeaderCell>Description</Table.HeaderCell>
-                <Table.HeaderCell>Owner</Table.HeaderCell>
-                <Table.HeaderCell>Edit</Table.HeaderCell>
+            <Table.Header >
+              <Table.Row >
+                <Table.HeaderCell style={tableHeadStyle} >Name</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Image</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Prep-Time</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Serving Size</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Ingredients</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Tags</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Description</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Owner</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Edit</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
               {this.props.recipes.map((recipe) => <StuffRecipeAdmin key={recipe._id} recipe={recipe} />)}
             </Table.Body>
           </Table>
+          <Header as="h2" textAlign="center" id="vendorHeader">Vendor Profiles</Header>
           <Table celled>
-            <Header as="h2" textAlign="center" ><a id="vendorHeader">Vendor Profiles</a></Header>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Vendor Name</Table.HeaderCell>
-                <Table.HeaderCell>Image</Table.HeaderCell>
-                <Table.HeaderCell>Address</Table.HeaderCell>
-                <Table.HeaderCell>Hours</Table.HeaderCell>
-                <Table.HeaderCell>Edit Vendor</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Vendor Name</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Image</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Address</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Hours</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Edit Vendor</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -62,7 +62,7 @@ class AdminPage extends React.Component {
           </Table>
         </Container>
         <Container>
-          <Button as={Link} to='/addvendor' fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
+          <Button as={Link} to='/addvendor' id={'adminPageLink'} fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
         </Container>
 
       </div>
