@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Container, Table, Header, Loader, Button } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Button, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Link } from 'react-router-dom';
 import StuffRecipeAdmin from '../components/StuffRecipeAdmin';
@@ -25,8 +25,9 @@ class AdminPage extends React.Component {
     return (
       <div>
         <AdminSidebar/>
-        <Container>
+        <Container style={{ marginTop: '30px' }}>
           <Header as="h2" textAlign="center" id="recipeHeader">All Recipes</Header>
+          <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>,<br/>
           <Table celled>
             <Table.Header >
               <Table.Row >
@@ -46,6 +47,7 @@ class AdminPage extends React.Component {
             </Table.Body>
           </Table>
           <Header as="h2" textAlign="center" id="vendorHeader">Vendor Profiles</Header>
+          <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>
           <Table celled>
             <Table.Header>
               <Table.Row>

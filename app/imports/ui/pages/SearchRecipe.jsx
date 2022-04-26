@@ -2,7 +2,7 @@ import React from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import { Container, Header, Loader, Card, Segment } from 'semantic-ui-react';
+import { Container, Header, Loader, Card, Segment, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
@@ -86,6 +86,7 @@ class SearchRecipe extends React.Component {
     return (
       <Container style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center">Search Recipes</Header>
+        <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>,<br/>
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
           <Segment>
             <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>

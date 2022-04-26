@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader, Card } from 'semantic-ui-react';
+import { Container, Header, Loader, Card, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Vendors } from '../../api/vendor/Vendors';
@@ -16,9 +16,9 @@ class AllVendors extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container>
-        <br/>
+      <Container style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center">Vendors</Header>
+        <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>
         <br/>
         <Card.Group centered>
           {this.props.vendor.map((vendor, index) => <VendorCard key={index} vendor={vendor}/>)}

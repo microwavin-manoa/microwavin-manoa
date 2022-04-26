@@ -5,7 +5,7 @@ import { HashLink as Link } from 'react-router-hash-link';
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 class AdminSidebar extends React.Component {
   render() {
-    const sidebarStyle = { backgroundColor: '#F5EACF', color: '#f5f0e6', position: 'fixed', width: '150px' };
+    const sidebarStyle = { backgroundColor: '#F5EACF', color: '#f5f0e6', position: 'fixed', width: '150px', zIndex: '1' };
     return (
       <Segment
         as={Menu}

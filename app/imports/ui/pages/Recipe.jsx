@@ -57,12 +57,16 @@ class Recipe extends React.Component {
     const ingredientData = _.sortBy(_.filter(IngredientVendorPrice.collection.find().fetch(), ing => allIngredients.includes(ing.ingredient)), 'ingredient');
     const allTags = getTags(this.props.doc.name);
     const totalPrice = getTotalPrice(ingredientData);
+    const tableHeadStyle = { backgroundColor: '#85865F' };
     return (
       <Container>
         <Grid verticalAlign='middle' textAlign='center' padded>
           <Grid.Row stretched>
             <br/>
             <Header as="h1" textAlign="center">{this.props.doc.name}</Header>
+          </Grid.Row>
+          <Grid.Row>
+            <Image size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-20px' }}/>
           </Grid.Row>
           <Grid.Column width={5}>
             <Image size='large' rounded src={this.props.doc.imageURL}/><br/>
@@ -78,16 +82,19 @@ class Recipe extends React.Component {
             </div>
           </Grid.Column>
         </Grid>
-        <hr/>
+        <br/><hr/><br/>
         <Grid padded>
           <Grid.Row centered>
-            <Header as='h3' textAlign='center'>Ingredients Lookup</Header>
+            <div>
+              <Header as='h3' textAlign='center'>Ingredients Lookup</Header>
+              <Image size={'small'} src={'images/curl-divider.png'} style={{ marginTop: '-15px' }}/>
+            </div>
             <Table celled>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>Ingredient</Table.HeaderCell>
-                  <Table.HeaderCell>Vendor</Table.HeaderCell>
-                  <Table.HeaderCell>Price</Table.HeaderCell>
+                  <Table.HeaderCell style={tableHeadStyle}>Ingredient</Table.HeaderCell>
+                  <Table.HeaderCell style={tableHeadStyle}>Vendor</Table.HeaderCell>
+                  <Table.HeaderCell style={tableHeadStyle}>Price</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
