@@ -5,11 +5,22 @@ a:hover {
   color: #4F583D !important;
 }
 
+/*#addVendorButton {*/
+/*  color: #F5EACF !important;*/
+/*  background-color: #8FA6AC !important;*/
+/*}*/
+/*#addVendorButton:hover {*/
+/*  color: #4F583D !important;*/
+/*  background-color: #F5EACF !important;*/
+/*}*/
+
 .ui.signin.button {
   background-color: #a37f2a !important;
   color: #f5f0e6;
 }
-
+#adminPageLink {
+  color: #f5f0e6 !important;
+}
 #landingimage {
   background: url("images/food.jpg") no-repeat center center fixed;
   background-size: cover;

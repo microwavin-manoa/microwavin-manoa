@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Grid, Container, Loader, Header, Table } from 'semantic-ui-react';
+import { Image, Grid, Container, Loader, Header, Table, Icon } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -39,43 +39,44 @@ class VendorProfile extends React.Component {
     let vendorData = getVendorData(this.props.doc.name);
     vendorData = _.zip(vendorData.ingredient, vendorData.ingredientID, vendorData.price);
     vendorData = vendorData.map(item => makeObject(item));
+    const tableHeadStyle = { backgroundColor: '#85865F' };
     return (
       <Container>
         <Grid textAlign='center'>
+          <Grid.Row stretched>
+            <br/>
+            <Header centered as={'h1'}>{this.props.doc.name}</Header>
+          </Grid.Row>
           <Grid.Row>
-            <h1>{this.props.doc.name}</h1>
+            <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-30px' }}/>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column width={7}>
               <Image size='large' rounded src={this.props.doc.imageURL}/>
+              <br/>
               <Grid.Row>
-                <Grid.Column>
-                  <h3>Address</h3>
-                  <p>{this.props.doc.address}</p>
-                </Grid.Column>
-                <Grid.Column>
-                  <h3>Hours</h3>
-                  <p>{this.props.doc.hours}</p>
-                </Grid.Column>
+                <p style={{ textAlign: 'left' }}><Icon name={'map marker alternate'} size={'large'} style={{ color: '#4F583D' }}/>{this.props.doc.address}</p>
+                <p style={{ textAlign: 'left' }}><Icon name={'clock outline'} size={'large'} style={{ color: '#4F583D' }}/>{this.props.doc.hours}</p>
+                <br/>
+                <AddIngredientVendor vendorName={this.props.doc.name}/>
               </Grid.Row>
             </Grid.Column>
             <Grid.Column width={5}>
               <Header as="h3" textAlign="center">Stock</Header>
+              <Image centered size={'small'} src={'images/curl-divider.png'} style={{ marginTop: '-27px' }}/>
               <Table celled>
                 <Table.Header>
                   <Table.Row>
-                    <Table.HeaderCell>Ingredient</Table.HeaderCell>
-                    <Table.HeaderCell>Price</Table.HeaderCell>
+                    <Table.HeaderCell style={tableHeadStyle}>Ingredient</Table.HeaderCell>
+                    <Table.HeaderCell style={tableHeadStyle}>Price</Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
                   {_.map(vendorData, (ingredient, index) => <StuffIngredientVendorPrice key={index} ivp={ingredient} vendorName={this.props.doc.name}/>)}
                 </Table.Body>
               </Table>
-              <AddIngredientVendor vendorName={this.props.doc.name}/>
             </Grid.Column>
           </Grid.Row>
-
         </Grid>
       </Container>
     );

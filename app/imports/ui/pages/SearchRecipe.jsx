@@ -2,7 +2,7 @@ import React from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import { Container, Header, Loader, Card, Segment } from 'semantic-ui-react';
+import { Container, Header, Loader, Card, Segment, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
@@ -25,31 +25,35 @@ function getTags(recID) {
   return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
 
-/**
-function checkTags(tagObj) {
-   return _.filter(tagObj, function (item) {
-    return _.every(item.tags, function (tag) { return tag.contains(this.state.tags)}; );
-  });
-  // return this.state.tags.map((tag) => (_.filter(tagObj, function (obj) { obj.tags.contains(tag); })));
-  console.log(this.state.tags);
-  console.log(tagObj);
-  console.log(tagObj.tags);
-  if (_.every(this.state.tags, (tag) => (tagObj.tags.includes(tag)))) {
-    return tagObj.id;
-  }
-  return [];
-}
-*/
+// function checkTags(tagObj) {
+//    return _.filter(tagObj, function (item) {
+//     return _.every(item.tags, function (tag) { return tag.contains(this.state.tags)}; );
+//   });
+//   // return this.state.tags.map((tag) => (_.filter(tagObj, function (obj) { obj.tags.contains(tag); })));
+//   console.log(this.state.tags);
+//   console.log(tagObj);
+//   console.log(tagObj.tags);
+//   if (_.every(this.state.tags, (tag) => (tagObj.tags.includes(tag)))) {
+//     return tagObj.id;
+//   }
+//   return [];
+// }
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class SearchRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = { tags: [] };
+    this.isFiltered = false;
   }
 
   // Submit the tags
   submit(data) {
+    if (data.tags.length > 0) {
+      this.isFiltered = true;
+    } else {
+      this.isFiltered = false;
+    }
     this.setState({ tags: data.tags || [] });
   }
 
@@ -58,7 +62,6 @@ class SearchRecipe extends React.Component {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
-  // Render the page once subscriptions have been received.
   renderPage() {
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allTags);
@@ -78,10 +81,12 @@ class SearchRecipe extends React.Component {
       }
       return [];
     });
-    const recipeMap = _.flatten(testing.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
+    let recipeMap = _.flatten(testing.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
+    recipeMap = recipeMap.sort((a, b) => a.name.localeCompare(b.name));
     return (
-      <Container>
+      <Container style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center">Search Recipes</Header>
+        <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>,<br/>
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
           <Segment>
             <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
@@ -90,16 +95,17 @@ class SearchRecipe extends React.Component {
         </AutoForm>
         <br/><br/>
         <Card.Group centered>
-          {recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
+          {(this.isFiltered) ? recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>) : this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
         </Card.Group>
       </Container>
     );
   }
+
 }
 
 // Require an array of Stuff documents in the props.
 SearchRecipe.propTypes = {
-  recipe: PropTypes.array.isRequired,
+  recipes: PropTypes.array.isRequired,
   tagsCol: PropTypes.array.isRequired,
   tagRep: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
@@ -114,11 +120,12 @@ export default withTracker(() => {
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready();
   // Get the Stuff documents
-  const recipe = Recipes.collection.find({}).fetch();
+  let recipes = Recipes.collection.find().fetch();
+  recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
   const tagsCol = Tags.collection.find({}).fetch();
   const tagRep = TagRecipe.collection.find({}).fetch();
   return {
-    recipe,
+    recipes,
     tagsCol,
     tagRep,
     ready,

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader, Button } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { Container, Table, Header, Loader, Button, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import StuffRecipeAdmin from '../components/StuffRecipeAdmin';
 import StuffVendor from '../components/StuffVendor';
+import AdminSidebar from '../components/Sidebar';
 import { Recipes } from '../../api/recipe/Recipes';
 import { Vendors } from '../../api/vendor/Vendors';
 
@@ -18,41 +19,43 @@ class AdminPage extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
-    const buttonStyle = { backgroundColor: '#4f583d', color: '#f5f0e6' };
+    // define styles
+    const buttonStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
+    const tableHeadStyle = { backgroundColor: '#d4c8a1' };
     return (
       <div>
-        <Container>
-          <Header as="h2" textAlign="center">Admin Edit Page</Header>
-          <Header as="h4" textAlign="center">Admin can edit the recipes of all users and profiles of vendors. Admin
-          can also add new vendors.</Header>
-          <Header as="h2" textAlign="center">All Recipes</Header>
+        <AdminSidebar/>
+        <Container style={{ marginTop: '30px' }}>
+          <Header as="h2" textAlign="center" id="recipeHeader">All Recipes</Header>
+          <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>,<br/>
           <Table celled>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Name</Table.HeaderCell>
-                <Table.HeaderCell>Image</Table.HeaderCell>
-                <Table.HeaderCell>Prep-Time</Table.HeaderCell>
-                <Table.HeaderCell>Serving Size</Table.HeaderCell>
-                <Table.HeaderCell>Ingredients</Table.HeaderCell>
-                <Table.HeaderCell>Tags</Table.HeaderCell>
-                <Table.HeaderCell>Description</Table.HeaderCell>
-                <Table.HeaderCell>Owner</Table.HeaderCell>
-                <Table.HeaderCell>Edit</Table.HeaderCell>
+            <Table.Header >
+              <Table.Row >
+                <Table.HeaderCell style={tableHeadStyle} >Name</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Image</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Prep-Time</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Serving Size</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Ingredients</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Tags</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Description</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Owner</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Edit</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
               {this.props.recipes.map((recipe) => <StuffRecipeAdmin key={recipe._id} recipe={recipe} />)}
             </Table.Body>
           </Table>
-          <Header as="h2" textAlign="center">Vendor Profiles</Header>
+          <Header as="h2" textAlign="center" id="vendorHeader">Vendor Profiles</Header>
+          <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>
           <Table celled>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Vendor Name</Table.HeaderCell>
-                <Table.HeaderCell>Image</Table.HeaderCell>
-                <Table.HeaderCell>Address</Table.HeaderCell>
-                <Table.HeaderCell>Hours</Table.HeaderCell>
-                <Table.HeaderCell>Edit Vendor</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Vendor Name</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Image</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Address</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Hours</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Edit Vendor</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -61,10 +64,10 @@ class AdminPage extends React.Component {
           </Table>
         </Container>
         <Container>
-          <Button as={Link} to='/addvendor' fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
+          <Button as={Link} to='/addvendor' id={'adminPageLink'} fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
         </Container>
-      </div>
 
+      </div>
     );
   }
 }
@@ -78,14 +81,15 @@ AdminPage.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  // Get access to Stuff documents.
+  // Get access to Recipes and Vendors documents.
   const sub1 = Meteor.subscribe(Recipes.userPublicationName);
   const sub2 = Meteor.subscribe(Vendors.userPublicationName);
-  // Determine if the subscription is ready
+  // Determine if the subscriptions are ready
   const ready = sub1.ready() && sub2.ready();
   // Get the Stuff documents
-  const recipes = Recipes.collection.find({}).fetch();
-  const vendors = Vendors.collection.find({}).fetch();
+  let recipes = Recipes.collection.find().fetch();
+  recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
+  const vendors = Vendors.collection.find().fetch();
   return {
     recipes,
     vendors,

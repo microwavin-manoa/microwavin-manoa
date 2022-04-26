@@ -29,7 +29,6 @@ function getTags(name) {
 
 function getTotalPrice(ingredientData) {
   const groups = _.groupBy(ingredientData, 'ingredient');
-  console.log(groups);
   // _.mapObject doesn't seem to be defined in meteor so I had to use _.each
   // const lowestPrices = _.mapObject(groups, ing => _.min(_.pluck(ing, 'price')));
   const lowestPrices = {};
@@ -58,18 +57,23 @@ class Recipe extends React.Component {
     const ingredientData = _.sortBy(_.filter(IngredientVendorPrice.collection.find().fetch(), ing => allIngredients.includes(ing.ingredient)), 'ingredient');
     const allTags = getTags(this.props.doc.name);
     const totalPrice = getTotalPrice(ingredientData);
+    const tableHeadStyle = { backgroundColor: '#85865F' };
     return (
       <Container>
         <Grid verticalAlign='middle' textAlign='center' padded>
           <Grid.Row stretched>
+            <br/>
             <Header as="h1" textAlign="center">{this.props.doc.name}</Header>
+          </Grid.Row>
+          <Grid.Row>
+            <Image size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-20px' }}/>
           </Grid.Row>
           <Grid.Column width={5}>
             <Image size='large' rounded src={this.props.doc.imageURL}/><br/>
             <Grid.Row>{_.map(allTags, (tag, index) => <Label tag key={index} style={tagStyle}>{tag}</Label>)}</Grid.Row>
           </Grid.Column>
           <Grid.Column width={5}>
-            <div height={'0px'}>
+            <div>
               <Header as={'h3'}>Ingredients:</Header>
               <div>{_.map(allIngredients, (ing, index) => <Label style={ingStyle} key={index}>{ing}</Label>)}</div>
               <Header as={'h5'}>Lowest Calculated Cost: {formatPrice(totalPrice)}</Header>
@@ -78,16 +82,19 @@ class Recipe extends React.Component {
             </div>
           </Grid.Column>
         </Grid>
-        <hr/>
+        <br/><hr/><br/>
         <Grid padded>
           <Grid.Row centered>
-            <Header as='h3' textAlign='center'>Ingredients Lookup</Header>
+            <div>
+              <Header as='h3' textAlign='center'>Ingredients Lookup</Header>
+              <Image size={'small'} src={'images/curl-divider.png'} style={{ marginTop: '-15px' }}/>
+            </div>
             <Table celled>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>Ingredient</Table.HeaderCell>
-                  <Table.HeaderCell>Vendor</Table.HeaderCell>
-                  <Table.HeaderCell>Price</Table.HeaderCell>
+                  <Table.HeaderCell style={tableHeadStyle}>Ingredient</Table.HeaderCell>
+                  <Table.HeaderCell style={tableHeadStyle}>Vendor</Table.HeaderCell>
+                  <Table.HeaderCell style={tableHeadStyle}>Price</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
