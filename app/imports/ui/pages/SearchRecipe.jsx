@@ -86,7 +86,7 @@ class SearchRecipe extends React.Component {
     return (
       <Container style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center">Search Recipes</Header>
-        <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>,<br/>
+        <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
           <Segment>
             <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
