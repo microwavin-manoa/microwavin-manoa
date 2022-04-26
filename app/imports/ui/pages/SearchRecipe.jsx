@@ -51,15 +51,17 @@ class SearchRecipe extends React.Component {
 
   // Submit the tags
   submit(data) {
-    this.isFiltered = !this.isFiltered;
     this.setState({ tags: data.tags || [] });
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
-    if (this.props.ready && !this.isFiltered) {
-      return this.renderPage();
-    } if (this.props.ready && this.isFiltered) {
+    if (this.props.ready) {
+      if (!this.isFiltered) {
+        this.isFiltered = !this.isFiltered;
+        return this.renderPage();
+      }
+      this.isFiltered = !this.isFiltered;
       return this.renderFilteredPage();
     }
     return <Loader active>Getting data</Loader>;
