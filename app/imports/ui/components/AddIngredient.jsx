@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Accordion, Icon } from 'semantic-ui-react';
+import { Segment, Accordion, Icon, Form } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -69,8 +69,10 @@ class AddIngredient extends React.Component {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
             <Segment>
               <TextField name='name' size={'small'}/>
-              <SelectField name='vendor'/>
-              <NumField name='price' decimal={true}/>
+              <Form.Group widths={'equal'}>
+                <SelectField name='vendor'/>
+                <NumField name='price' decimal={true}/>
+              </Form.Group>
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>

@@ -25,21 +25,19 @@ function getTags(recID) {
   return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
 
-/**
-function checkTags(tagObj) {
-   return _.filter(tagObj, function (item) {
-    return _.every(item.tags, function (tag) { return tag.contains(this.state.tags)}; );
-  });
-  // return this.state.tags.map((tag) => (_.filter(tagObj, function (obj) { obj.tags.contains(tag); })));
-  console.log(this.state.tags);
-  console.log(tagObj);
-  console.log(tagObj.tags);
-  if (_.every(this.state.tags, (tag) => (tagObj.tags.includes(tag)))) {
-    return tagObj.id;
-  }
-  return [];
-}
-*/
+// function checkTags(tagObj) {
+//    return _.filter(tagObj, function (item) {
+//     return _.every(item.tags, function (tag) { return tag.contains(this.state.tags)}; );
+//   });
+//   // return this.state.tags.map((tag) => (_.filter(tagObj, function (obj) { obj.tags.contains(tag); })));
+//   console.log(this.state.tags);
+//   console.log(tagObj);
+//   console.log(tagObj.tags);
+//   if (_.every(this.state.tags, (tag) => (tagObj.tags.includes(tag)))) {
+//     return tagObj.id;
+//   }
+//   return [];
+// }
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class SearchRecipe extends React.Component {
@@ -51,20 +49,17 @@ class SearchRecipe extends React.Component {
 
   // Submit the tags
   submit(data) {
+    if (data.tags.length > 0) {
+      this.isFiltered = true;
+    } else {
+      this.isFiltered = false;
+    }
     this.setState({ tags: data.tags || [] });
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
-    if (this.props.ready) {
-      if (!this.isFiltered) {
-        this.isFiltered = !this.isFiltered;
-        return this.renderPage();
-      }
-      this.isFiltered = !this.isFiltered;
-      return this.renderFilteredPage();
-    }
-    return <Loader active>Getting data</Loader>;
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   renderPage() {
@@ -89,7 +84,7 @@ class SearchRecipe extends React.Component {
     let recipeMap = _.flatten(testing.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
     recipeMap = recipeMap.sort((a, b) => a.name.localeCompare(b.name));
     return (
-      <Container>
+      <Container style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center">Search Recipes</Header>
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
           <Segment>
@@ -99,45 +94,7 @@ class SearchRecipe extends React.Component {
         </AutoForm>
         <br/><br/>
         <Card.Group centered>
-          {this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
-        </Card.Group>
-      </Container>
-    );
-  }
-
-  renderFilteredPage() {
-    const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
-    const formSchema = makeSchema(allTags);
-    const bridge = new SimpleSchema2Bridge(formSchema);
-    // console.log(this.state.tags);
-    // vv all of tags' id's
-    const tagIDPluck = _.pluck(Tags.collection.find({ name: { $in: this.state.tags } }).fetch(), '_id');
-    // vv all of the recipe ids that have any of those tags
-    const tagPluck = _.uniq(_.pluck(TagRecipe.collection.find({ tagID: { $in: tagIDPluck } }).fetch(), 'recipeID'));
-    // const tagPluckTags = tagPluck.map((recId) => (getTags(recId))) // array of the tags for each recID
-    // const tagPluckObj = _.object(tagPluck, tagPluckTags); // object has recipeID: [array of tags]
-    // const checkTagPluckObj = checkTags(tagPluckObj);
-    const mapTagPluck = _.map(tagPluck, (rec) => ({ id: rec, tags: getTags(rec), stateTags: this.state.tags }));
-    const testing = _.map(mapTagPluck, function (rec) {
-      if (_.every(rec.stateTags, (tag) => (rec.tags.includes(tag)))) {
-        return rec.id;
-      }
-      return [];
-    });
-    let recipeMap = _.flatten(testing.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
-    recipeMap = recipeMap.sort((a, b) => a.name.localeCompare(b.name));
-    return (
-      <Container>
-        <Header as="h2" textAlign="center">Search Recipes</Header>
-        <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
-          <Segment>
-            <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
-            <SubmitField id='submit' value='Submit'/>
-          </Segment>
-        </AutoForm>
-        <br/><br/>
-        <Card.Group centered>
-          {recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
+          {(this.isFiltered) ? recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>) : this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
         </Card.Group>
       </Container>
     );

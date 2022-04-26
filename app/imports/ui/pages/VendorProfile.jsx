@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Grid, Container, Loader, Header, Table } from 'semantic-ui-react';
+import { Image, Grid, Container, Loader, Header, Table, Icon } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -43,20 +43,18 @@ class VendorProfile extends React.Component {
       <Container>
         <Grid textAlign='center'>
           <Grid.Row>
-            <h1>{this.props.doc.name}</h1>
+            <br/>
+            <Header as={'h1'}>{this.props.doc.name}</Header>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column width={7}>
               <Image size='large' rounded src={this.props.doc.imageURL}/>
+              <br/>
               <Grid.Row>
-                <Grid.Column>
-                  <h3>Address</h3>
-                  <p>{this.props.doc.address}</p>
-                </Grid.Column>
-                <Grid.Column>
-                  <h3>Hours</h3>
-                  <p>{this.props.doc.hours}</p>
-                </Grid.Column>
+                <p style={{ textAlign: 'left' }}><Icon name={'map marker alternate'} size={'large'}/>{this.props.doc.address}</p>
+                <p style={{ textAlign: 'left' }}><Icon name={'clock outline'} size={'large'}/>{this.props.doc.hours}</p>
+                <br/>
+                <AddIngredientVendor vendorName={this.props.doc.name}/>
               </Grid.Row>
             </Grid.Column>
             <Grid.Column width={5}>
@@ -72,10 +70,8 @@ class VendorProfile extends React.Component {
                   {_.map(vendorData, (ingredient, index) => <StuffIngredientVendorPrice key={index} ivp={ingredient} vendorName={this.props.doc.name}/>)}
                 </Table.Body>
               </Table>
-              <AddIngredientVendor vendorName={this.props.doc.name}/>
             </Grid.Column>
           </Grid.Row>
-
         </Grid>
       </Container>
     );

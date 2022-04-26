@@ -19,7 +19,7 @@ class NavBar extends React.Component {
     return (
       <Segment style={navbarColor}>
         <Menu inverted style={menuStyle} attached="top" borderless pointing secondary>
-          <Menu.Item as={NavLink} activeClassName="" exact to="/">
+          <Menu.Item as={NavLink} activeClassName="" exact to="/" style={{ height: '43px' }}>
             <Header as='h1' style={headerColor}>Microwavin Manoa</Header>
           </Menu.Item>
           {this.props.currentUser ? (

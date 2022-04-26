@@ -17,7 +17,9 @@ class AllVendors extends React.Component {
   renderPage() {
     return (
       <Container>
+        <br/>
         <Header as="h2" textAlign="center">Vendors</Header>
+        <br/>
         <Card.Group centered>
           {this.props.vendor.map((vendor, index) => <VendorCard key={index} vendor={vendor}/>)}
         </Card.Group>
