@@ -28,7 +28,7 @@ class SearchRecipe extends React.Component {
         <Dropdown placeholder='Filter by Tag' fluid multiple selection options={options} />
         <br/><br/>
         <Card.Group centered>
-          {this.props.recipe.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
+          {this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
         </Card.Group>
       </Container>
     );
@@ -37,7 +37,7 @@ class SearchRecipe extends React.Component {
 
 // Require an array of Stuff documents in the props.
 SearchRecipe.propTypes = {
-  recipe: PropTypes.array.isRequired,
+  recipes: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -48,9 +48,10 @@ export default withTracker(() => {
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents
-  const recipe = Recipes.collection.find({}).fetch();
+  let recipes = Recipes.collection.find().fetch();
+  recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
   return {
-    recipe,
+    recipes,
     ready,
   };
 })(SearchRecipe);

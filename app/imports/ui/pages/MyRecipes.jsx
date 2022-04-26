@@ -54,7 +54,8 @@ export default withTracker(() => {
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents
-  const recipes = Recipes.collection.find({}).fetch();
+  let recipes = Recipes.collection.find().fetch();
+  recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
   return {
     recipes,
     ready,
