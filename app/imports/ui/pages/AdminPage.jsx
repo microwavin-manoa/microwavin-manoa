@@ -2,7 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import PropTypes from 'prop-types';
 import StuffRecipeAdmin from '../components/StuffRecipeAdmin';
 import StuffVendor from '../components/StuffVendor';
@@ -18,12 +18,13 @@ class AdminPage extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
+    // define styles
     const buttonStyle = { backgroundColor: '#4f583d', color: '#f5f0e6' };
     return (
       <div>
         <Container>
           <Header as="h2" textAlign="center">Admin Edit Page</Header>
-          <Header as="h4" textAlign="center">Admin can edit the recipes of all users and profiles of vendors. Admin
+          <Header textAlign="center">Admin can edit the recipes of all users and profiles of vendors. Admin
           can also add new vendors.</Header>
           <Header as="h2" textAlign="center">All Recipes</Header>
           <Table celled>
@@ -44,8 +45,8 @@ class AdminPage extends React.Component {
               {this.props.recipes.map((recipe) => <StuffRecipeAdmin key={recipe._id} recipe={recipe} />)}
             </Table.Body>
           </Table>
-          <Header as="h2" textAlign="center">Vendor Profiles</Header>
           <Table celled>
+            <Header as="h2" textAlign="center" ><a id="vendorHeader">Vendor Profiles</a></Header>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Vendor Name</Table.HeaderCell>
@@ -63,8 +64,8 @@ class AdminPage extends React.Component {
         <Container>
           <Button id={'addVendorButton'} as={Link} to='/addvendor' fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
         </Container>
-      </div>
 
+      </div>
     );
   }
 }
@@ -78,14 +79,15 @@ AdminPage.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  // Get access to Stuff documents.
+  // Get access to Recipes and Vendors documents.
   const sub1 = Meteor.subscribe(Recipes.userPublicationName);
   const sub2 = Meteor.subscribe(Vendors.userPublicationName);
-  // Determine if the subscription is ready
+  // Determine if the subscriptions are ready
   const ready = sub1.ready() && sub2.ready();
   // Get the Stuff documents
-  const recipes = Recipes.collection.find({}).fetch();
-  const vendors = Vendors.collection.find({}).fetch();
+  let recipes = Recipes.collection.find().fetch();
+  recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
+  const vendors = Vendors.collection.find().fetch();
   return {
     recipes,
     vendors,
