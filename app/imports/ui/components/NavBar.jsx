@@ -50,7 +50,7 @@ class NavBar extends React.Component {
                 </Button>
               </Button.Group>
             ) : (
-              <Button id="navbar-current-user" animated='vertical' style={signinButton}>
+              <Button id="logout-button" animated='vertical' style={signinButton}>
                 <Button.Content style={font} inverted hidden as={NavLink} exact to="/signout">Sign Out</Button.Content>
                 <Button.Content visible>
                   <Icon name='sign-out'/>
