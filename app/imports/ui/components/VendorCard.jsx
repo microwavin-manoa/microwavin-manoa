@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 class Recipe extends React.Component {
   render() {
     return (
-      <Card href={`#/vendor/${this.props.vendor._id}`}>
+      <Card id={'vendor-card-click'} href={`#/vendor/${this.props.vendor._id}`}>
         <Image src={this.props.vendor.imageURL} wrapped ui={false}/>
         <Card.Content>
           <Card.Header>{this.props.vendor.name}</Card.Header>

@@ -23,10 +23,10 @@ class NavBar extends React.Component {
             <Header as='h1' style={headerColor}>Microwavin Manoa</Header>
           </Menu.Item>
           {this.props.currentUser ? (
-            [<Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/add" key='add'><Icon name='add'/>Add Recipe</Menu.Item>,
-              <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/search" key='search'><Icon name='search'/>Search Recipe</Menu.Item>,
-              <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/vendors" key='vendors'><Icon name='tags'/>Vendors</Menu.Item>,
-              <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/myrecipes" key='myrecipes'><Icon name='like'/>My Recipes</Menu.Item>,
+            [<Menu.Item id="add-recipe-button" as={NavLink} style={headerFont} activeClassName="active" exact to="/add" key='add'><Icon name='add'/>Add Recipe</Menu.Item>,
+              <Menu.Item id="search-recipe-button" as={NavLink} style={headerFont} activeClassName="active" exact to="/search" key='search'><Icon name='search'/>Search Recipe</Menu.Item>,
+              <Menu.Item id="vendors-page-button" as={NavLink} style={headerFont} activeClassName="active" exact to="/vendors" key='vendors'><Icon name='tags'/>Vendors</Menu.Item>,
+              <Menu.Item id="my-recipes-page-button" as={NavLink} style={headerFont} activeClassName="active" exact to="/myrecipes" key='myrecipes'><Icon name='like'/>My Recipes</Menu.Item>,
             ]
           ) : ''}
           {Roles.userIsInRole(Meteor.userId(), 'admin') ? (

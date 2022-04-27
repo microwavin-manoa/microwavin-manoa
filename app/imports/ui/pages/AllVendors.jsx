@@ -16,7 +16,7 @@ class AllVendors extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container style={{ marginTop: '30px' }}>
+      <Container id = "all-vendors-page" style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center">Vendors</Header>
         <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>
         <br/>

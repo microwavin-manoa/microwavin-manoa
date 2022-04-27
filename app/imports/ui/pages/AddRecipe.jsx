@@ -57,35 +57,35 @@ class AddRecipe extends React.Component {
     const formSchema = makeSchema(allIngredients, allTags);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
-      <Grid container centered style={{ marginTop: '10px' }}>
+      <Grid container centered style={{ marginTop: '10px' }} id={'add-recipe-page'}>
         <Grid.Column centered>
           <Header as="h2" textAlign="center" style={ color }>Add Recipe</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <Segment>
             <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
-              <Form.Field inline required style={ textStyle } value={'name'}>
+              <Form.Field id="addrecipe-form-name" inline required style={ textStyle } value={'name'}>
                 <label>Name</label>
                 <Input style={{ width: '1030px' }}/>
               </Form.Field>
-              <Form.Field inline required style={ textStyle } value={'imageURL'}>
+              <Form.Field id="addrecipe-form-imageURL" inline required style={ textStyle } value={'imageURL'}>
                 <label>ImageURL</label>
                 <Input style={{ width: '1000px' }}/>
               </Form.Field>
               <Form.Group widths={'equal'}>
-                <Form.Field inline required style={ textStyle } value={'prepTime'}>
+                <Form.Field id="addrecipe-form-prep" inline required style={ textStyle } value={'prepTime'}>
                   <label>Prep Time</label>
                   <Input placeholder='15 minutes' style={{ width: '540px' }}/>
                 </Form.Field>
-                <Form.Field inline required style={ textStyle } value={'servingSize'}>
+                <Form.Field id="addrecipe-form-serving" inline required style={ textStyle } value={'servingSize'}>
                   <label>Serving Size</label>
                   <Input style={{ width: '540px' }}/>
                 </Form.Field>
               </Form.Group>
-              <MultiSelectField style={ textStyle } name='ingredients' placeholder='Select ingredients'/>
-              <AddIngredient/><br/>
-              <MultiSelectField style={ textStyle } name='tags' placeholder='Select tags'/>
-              <LongTextField style={ textStyle } name='description'/>
-              <SubmitField style={ textStyle } value='Submit'/>
+              <MultiSelectField id="addrecipe-form-ingredients" style={ textStyle } name='ingredients' placeholder='Select ingredients'/>
+              <AddIngredient id="addrecipe-form-addIng"/><br/>
+              <MultiSelectField id="addrecipe-form-tags" style={ textStyle } name='tags' placeholder='Select tags'/>
+              <LongTextField id="addrecipe-form-description" style={ textStyle } name='description'/>
+              <SubmitField id="addrecipe-form-submit" style={ textStyle } value='Submit'/>
               <ErrorsField/>
             </AutoForm>
           </Segment>

@@ -21,7 +21,7 @@ class MyRecipes extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container>
+      <Container id="my-recipes-page">
         <br/>
         <Header as="h2" textAlign="center">My Recipes</Header>
         <Table celled>

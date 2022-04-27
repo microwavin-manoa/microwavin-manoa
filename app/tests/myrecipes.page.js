@@ -1,8 +1,8 @@
 import { Selector } from 'testcafe';
 
-class LandingPage {
+class MyRecipesPage {
   constructor() {
-    this.pageId = '#landing-page';
+    this.pageId = '#my-recipes-page';
     this.pageSelector = Selector(this.pageId);
   }
 
@@ -11,6 +11,10 @@ class LandingPage {
     // This is first test to be run. Wait 10 seconds to avoid timeouts with GitHub Actions.
     await testController.wait(10000).expect(this.pageSelector.exists).ok();
   }
+
+  async gotoEditRecipe(testController) {
+    await testController.click('#edit-myrecipes');
+  }
 }
 
-export const landingPage = new LandingPage();
+export const myRecipesPage = new MyRecipesPage();

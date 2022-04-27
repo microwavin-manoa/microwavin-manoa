@@ -86,15 +86,15 @@ class EditRecipe extends React.Component {
           <Header as="h2" textAlign="center">Edit Recipe</Header>
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>
             <Segment>
-              <TextField name='name'/>
-              <TextField name='imageURL'/>
-              <TextField name='prepTime' placeholder='5 minutes'/>
-              <TextField name='servingSize'/>
-              <MultiSelectField name='ingredients' placeholder='Select ingredients'/>
+              <TextField name='name' id='name'/>
+              <TextField name='imageURL' id='imageURL'/>
+              <TextField name='prepTime' placeholder='5 minutes' id='prepTime'/>
+              <TextField name='servingSize' id='servings'/>
+              <MultiSelectField name='ingredients' id='ingredients' placeholder='Select ingredients'/>
               <AddIngredient/><br/>
-              <MultiSelectField name='tags' placeholder='Select tags'/>
-              <LongTextField name='description'/>
-              <SubmitField value='Submit'/>
+              <MultiSelectField name='tags' id='tags' placeholder='Select tags'/>
+              <LongTextField contenteditable id='description' name='description' />
+              <SubmitField value='Submit' id='submit'/>
               <ErrorsField/>
             </Segment>
           </AutoForm>

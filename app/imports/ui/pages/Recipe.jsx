@@ -59,7 +59,7 @@ class Recipe extends React.Component {
     const totalPrice = getTotalPrice(ingredientData);
     const tableHeadStyle = { backgroundColor: '#85865F' };
     return (
-      <Container>
+      <Container id={'recipe-page'}>
         <Grid verticalAlign='middle' textAlign='center' padded>
           <Grid.Row stretched>
             <br/>
