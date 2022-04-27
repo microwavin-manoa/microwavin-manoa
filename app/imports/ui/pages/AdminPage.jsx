@@ -27,7 +27,7 @@ class AdminPage extends React.Component {
         <AdminSidebar/>
         <Container style={{ marginTop: '30px' }}>
           <Header as="h2" textAlign="center" id="recipeHeader">All Recipes</Header>
-          <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>,<br/>
+          <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <Table celled>
             <Table.Header >
               <Table.Row >

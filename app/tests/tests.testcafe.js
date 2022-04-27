@@ -17,6 +17,7 @@ import { vendorProfilePage } from './vendorprofile.page';
 /** Credentials for one of the sample users defined in settings.development.json. */
 const credentials = { username: 'john@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
+const addRecipe = { name: 'Egg', imageURL: '/egg.jpeg', prepTime: '2 minutes', serving: '5 servings', description: 'Boil egg.' };
 
 fixture('meteor-application-template-react localhost test with default db')
   .page('http://localhost:3000');
@@ -163,4 +164,11 @@ test('Test that MyRecipe Page shows up for admin', async (testController) => {
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoMyRecipesPage(testController);
   await myRecipesPage.isDisplayed(testController);
+});
+
+test.only('Test that Add Recipe works for admin', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await navBar.gotoAddRecipePage(testController);
+  await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
 });
