@@ -42,7 +42,6 @@ class NavBar {
     await testController.click('#my-recipes-page-button');
   }
 
-
   /** Check that the specified user is currently logged in.
   async isLoggedIn(testController, username) {
     const loggedInUser = Selector('#navbar-current-user').innerText;
