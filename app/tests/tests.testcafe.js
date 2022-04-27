@@ -3,6 +3,7 @@ import { signinPage } from './signin.page';
 import { signoutPage } from './signout.page';
 import { navBar } from './navbar.component';
 import { adminPage } from './adminpage.page';
+import { recipePage } from './recipe.page';
 import { editRecipe } from './editrecipe.page';
 import { addVendorPage } from './addvendor.page';
 import { editVendorPage } from './editvendor.page';
@@ -11,6 +12,7 @@ import { searchRecipePage } from './searchrecipe.page';
 import { allVendorsPage } from './allvendors.page';
 import { myRecipesPage } from './myrecipes.page';
 import { vendorProfilePage } from './vendorprofile.page';
+import { recipeCard } from './recipecard.component';
 
 /* global fixture:false, test:false */
 
@@ -41,15 +43,6 @@ test('Test that Admin Page shows up', async (testController) => {
   await adminPage.isDisplayed(testController);
 });
 
-test('Test that Edit Recipe in Admin shows up', async (testController) => {
-  await navBar.gotoSigninPage(testController);
-  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
-  await navBar.gotoAdminPage(testController);
-  await adminPage.isDisplayed(testController);
-  await adminPage.gotoEditRecipePage(testController);
-  await editRecipe.isDisplayed(testController);
-});
-
 test('Test that signin and signout work', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
@@ -71,6 +64,15 @@ test('Test that Edit Recipe in Admin shows up', async (testController) => {
   await navBar.gotoAdminPage(testController);
   await adminPage.isDisplayed(testController);
   await adminPage.gotoEditRecipePage(testController);
+  await editRecipe.isDisplayed(testController);
+});
+
+test('Test that Edit Recipe shows up for user', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoMyRecipesPage(testController);
+  await myRecipesPage.isDisplayed(testController);
+  await myRecipesPage.gotoEditRecipe(testController);
   await editRecipe.isDisplayed(testController);
 });
 
@@ -171,4 +173,20 @@ test.only('Test that Add Recipe works for admin', async (testController) => {
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoAddRecipePage(testController);
   await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
+});
+
+test('Test that Individual Recipe Page shows up from Search Recipes for users', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoSearchRecipePage(testController);
+  await recipeCard.gotoIndividualRecipePage(testController);
+  await recipePage.isDisplayed(testController);
+});
+
+test('Test that Individual Recipe Page from Search Recipes shows up for admin', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await navBar.gotoSearchRecipePage(testController);
+  await recipeCard.gotoIndividualRecipePage(testController);
+  await recipePage.isDisplayed(testController);
 });
