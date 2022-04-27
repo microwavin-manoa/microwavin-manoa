@@ -172,7 +172,7 @@ test('Test that Add Recipe works for admin', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoAddRecipePage(testController);
-  await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description );
+  await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
 });
 
 test('Test that Individual Recipe Page shows up from Search Recipes for users', async (testController) => {
@@ -191,12 +191,28 @@ test('Test that Individual Recipe Page from Search Recipes shows up for admin', 
   await recipePage.isDisplayed(testController);
 });
 
-// in progress
-// test('Test that Add Vendor works', async (testController) => {
-//   await navBar.gotoSigninPage(testController);
-//   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
-//   await navBar.gotoAdminPage(testController);
-//   await adminPage.isDisplayed(testController);
-//   // await navBar.gotoAddRecipePage(testController);
-//   // await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
-// });
+test('Test that Add Vendor works', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await navBar.gotoAdminPage(testController);
+  await adminPage.isDisplayed(testController);
+  await navBar.gotoAddRecipePage(testController);
+  await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
+});
+
+test('Test that filter for Search Recipes form works for admin', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await navBar.gotoSearchRecipePage(testController);
+  await searchRecipePage.isFiltering(testController);
+});
+
+test.only('Test that Edit Recipes form works for admin', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await navBar.gotoMyRecipesPage(testController);
+  await myRecipesPage.isDisplayed(testController);
+  await myRecipesPage.gotoEditRecipe(testController);
+  await editRecipe.isDisplayed(testController);
+  await editRecipe.editRecipeForm(testController);
+});

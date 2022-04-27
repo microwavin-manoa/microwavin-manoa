@@ -12,6 +12,15 @@ class SearchRecipePage {
     await testController.wait(30000).expect(this.pageSelector.exists).ok();
   }
 
+  async isFiltering(testController) {
+    await this.isDisplayed(testController);
+    const tagsSelection = Selector('#tags');
+    const glutenfreeOption = tagsSelection.find('#Gluten-Free');
+    await testController.click('#tags');
+    await testController.click(glutenfreeOption);
+    await testController.click('#tags');
+    await testController.click('#submit');
+  }
 }
 
 export const searchRecipePage = new SearchRecipePage();
