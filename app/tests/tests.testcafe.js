@@ -207,7 +207,7 @@ test('Test that filter for Search Recipes form works for admin', async (testCont
   await searchRecipePage.isFiltering(testController);
 });
 
-test.only('Test that Edit Recipes form works for admin', async (testController) => {
+test('Test that Edit Recipes form works for admin', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoMyRecipesPage(testController);
