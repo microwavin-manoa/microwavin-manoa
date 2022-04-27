@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Header, Form, Input, Segment, Image } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, LongTextField, SubmitField } from 'uniforms-semantic';
+import { Grid, Header, Form, Segment, Image } from 'semantic-ui-react';
+import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -63,30 +63,20 @@ class AddRecipe extends React.Component {
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <Segment>
             <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
-              <Form.Field id="addrecipe-form-name" inline required style={ textStyle } value={'name'}>
-                <label>Name</label>
-                <Input style={{ width: '1030px' }}/>
-              </Form.Field>
-              <Form.Field id="addrecipe-form-imageURL" inline required style={ textStyle } value={'imageURL'}>
-                <label>ImageURL</label>
-                <Input style={{ width: '1000px' }}/>
-              </Form.Field>
-              <Form.Group widths={'equal'}>
-                <Form.Field id="addrecipe-form-prep" inline required style={ textStyle } value={'prepTime'}>
-                  <label>Prep Time</label>
-                  <Input placeholder='15 minutes' style={{ width: '540px' }}/>
-                </Form.Field>
-                <Form.Field id="addrecipe-form-serving" inline required style={ textStyle } value={'servingSize'}>
-                  <label>Serving Size</label>
-                  <Input style={{ width: '540px' }}/>
-                </Form.Field>
-              </Form.Group>
-              <MultiSelectField id="addrecipe-form-ingredients" style={ textStyle } name='ingredients' placeholder='Select ingredients'/>
-              <AddIngredient id="addrecipe-form-addIng"/><br/>
-              <MultiSelectField id="addrecipe-form-tags" style={ textStyle } name='tags' placeholder='Select tags'/>
-              <LongTextField id="addrecipe-form-description" style={ textStyle } name='description'/>
-              <SubmitField id="addrecipe-form-submit" style={ textStyle } value='Submit'/>
-              <ErrorsField/>
+              <Segment>
+                <TextField name='name' id='addrecipe-form-name' style={textStyle}/>
+                <TextField name='imageURL' id='addrecipe-form-imageURL' style={textStyle}/>
+                <Form.Group widths={'equal'}>
+                  <TextField name='prepTime' id='addrecipe-form-prep' placeholder='5 minutes' style={textStyle}/>
+                  <TextField name='servingSize' id='addrecipe-form-serving' style={textStyle}/>
+                </Form.Group>
+                <MultiSelectField name='ingredients' id='addrecipe-form-ingredients' placeholder='Select ingredients' style={textStyle}/>
+                <AddIngredient/><br/>
+                <MultiSelectField name='tags' id='addrecipe-form-tags' placeholder='Select tags' style={textStyle}/>
+                <LongTextField name='description' id='addrecipe-form-description' style={textStyle}/>
+                <SubmitField value='Submit' id='addrecipe-form-submit' style={textStyle}/>
+                <ErrorsField/>
+              </Segment>
             </AutoForm>
           </Segment>
         </Grid.Column>
