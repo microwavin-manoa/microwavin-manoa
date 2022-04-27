@@ -33,6 +33,7 @@ class NavBar extends React.Component {
             <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/admin" key='admin'><Icon name='wrench'/>Admin</Menu.Item>
           ) : ''}
           <Menu.Item position="right">
+            <div id='navbar-current-user'>{this.props.currentUser}</div>
             {this.props.currentUser === '' ? (
               <Button.Group>
                 <Button animated='vertical' style={signupButton}>
