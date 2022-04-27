@@ -168,7 +168,7 @@ test('Test that MyRecipe Page shows up for admin', async (testController) => {
   await myRecipesPage.isDisplayed(testController);
 });
 
-test.only('Test that Add Recipe works for admin', async (testController) => {
+test('Test that Add Recipe works for admin', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoAddRecipePage(testController);
@@ -190,3 +190,13 @@ test('Test that Individual Recipe Page from Search Recipes shows up for admin', 
   await recipeCard.gotoIndividualRecipePage(testController);
   await recipePage.isDisplayed(testController);
 });
+
+// in progress
+// test('Test that Add Vendor works', async (testController) => {
+//   await navBar.gotoSigninPage(testController);
+//   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+//   await navBar.gotoAdminPage(testController);
+//   await adminPage.isDisplayed(testController);
+//   // await navBar.gotoAddRecipePage(testController);
+//   // await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
+// });
