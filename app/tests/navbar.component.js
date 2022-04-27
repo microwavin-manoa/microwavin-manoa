@@ -4,7 +4,7 @@ class NavBar {
 
   /** If someone is logged in, then log them out, otherwise do nothing. */
   async ensureLogout(testController) {
-    const loggedInUser = await Selector('#navbar-current-user').exists;
+    const loggedInUser = await Selector('#logout-button').exists;
     if (loggedInUser) {
       await testController.click('#logout-button');
       await testController.click('#logout-button');
@@ -25,9 +25,9 @@ class NavBar {
 
   /** Check that someone is logged in, then click items to logout. */
   async logout(testController) {
-    await testController.expect(Selector('#navbar-current-user').exists).ok();
-    await testController.click('#navbar-current-user');
-    await testController.click('#navbar-current-user');
+    await testController.expect(Selector('#logout-button').exists).ok();
+    await testController.click('#logout-button');
+    await testController.click('#logout-button');
   }
 
   /** Pull down login menu, go to sign up page. */
