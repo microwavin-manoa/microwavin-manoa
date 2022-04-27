@@ -69,25 +69,6 @@ class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                 />
-                <Form>
-                  <Form.Field>
-                    I am a... <b>{this.state.value}</b>
-                  </Form.Field>
-                  <Radio
-                    label='User'
-                    name='radioGroup'
-                    value='User'
-                    checked={this.state.value === 'User'}
-                    onChange={this.handleChange2}
-                  />
-                  <Radio
-                    label='Vendor'
-                    name='radioGroup'
-                    value='Vendor'
-                    checked={this.state.value === 'Vendor'}
-                    onChange={this.handleChange2}
-                  />
-                </Form>
                 <Form.Button id="signup-form-submit" content="Submit"/>
               </Segment>
             </Form>
