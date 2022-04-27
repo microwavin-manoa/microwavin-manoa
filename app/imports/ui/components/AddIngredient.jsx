@@ -68,12 +68,12 @@ class AddIngredient extends React.Component {
         <Accordion.Content active={activeIndex === -1}>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
             <Segment>
-              <TextField name='name' size={'small'}/>
+              <TextField id='addIng-form-name' name='name' size={'small'}/>
               <Form.Group widths={'equal'}>
                 <SelectField name='vendor'/>
-                <NumField name='price' decimal={true}/>
+                <NumField id='addIng-form-price' name='price' decimal={true}/>
               </Form.Group>
-              <SubmitField value='Submit'/>
+              <SubmitField id='addIng-form-submit' value='Submit'/>
               <ErrorsField/>
             </Segment>
           </AutoForm>

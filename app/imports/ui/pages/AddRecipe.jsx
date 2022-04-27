@@ -82,7 +82,7 @@ class AddRecipe extends React.Component {
                 </Form.Field>
               </Form.Group>
               <MultiSelectField id="addrecipe-form-ingredients" style={ textStyle } name='ingredients' placeholder='Select ingredients'/>
-              <AddIngredient id='addrecipe-form-addIng'/><br/>
+              <AddIngredient id="addrecipe-form-addIng"/><br/>
               <MultiSelectField id="addrecipe-form-tags" style={ textStyle } name='tags' placeholder='Select tags'/>
               <LongTextField id="addrecipe-form-description" style={ textStyle } name='description'/>
               <SubmitField id="addrecipe-form-submit" style={ textStyle } value='Submit'/>
