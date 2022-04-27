@@ -72,7 +72,7 @@ test('Test that Edit Recipe in Admin shows up', async (testController) => {
   await editRecipe.isDisplayed(testController);
 });
 
-test.only('Test that Add Vendor in Admin shows up', async (testController) => {
+test('Test that Add Vendor in Admin shows up', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoAdminPage(testController);
