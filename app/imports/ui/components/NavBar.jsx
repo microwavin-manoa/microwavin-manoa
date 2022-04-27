@@ -30,7 +30,7 @@ class NavBar extends React.Component {
             ]
           ) : ''}
           {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-            <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/admin" key='admin'><Icon name='wrench'/>Admin</Menu.Item>
+            <Menu.Item id={'admin-button'} as={NavLink} style={headerFont} activeClassName="active" exact to="/admin" key='admin'><Icon name='wrench'/>Admin</Menu.Item>
           ) : ''}
           <Menu.Item position="right">
             {this.props.currentUser === '' ? (
@@ -42,7 +42,7 @@ class NavBar extends React.Component {
                   </Button.Content>
                 </Button>
                 <ButtonOr/>
-                <Button animated='vertical' style={signinButton}>
+                <Button id="login-button" animated='vertical' style={signinButton}>
                   <Button.Content style={font} inverted hidden as={NavLink} exact to="/signin">Sign In!</Button.Content>
                   <Button.Content visible>
                     <Icon name='sign-in'/>
@@ -50,7 +50,7 @@ class NavBar extends React.Component {
                 </Button>
               </Button.Group>
             ) : (
-              <Button animated='vertical' style={signinButton}>
+              <Button id="logout-button" animated='vertical' style={signinButton}>
                 <Button.Content style={font} inverted hidden as={NavLink} exact to="/signout">Sign Out</Button.Content>
                 <Button.Content visible>
                   <Icon name='sign-out'/>

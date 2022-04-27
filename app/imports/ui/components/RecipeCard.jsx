@@ -12,16 +12,18 @@ function getTags(name) {
   const tagVal = _.pluck(TagRecipe.collection.find({ recipeID: recipeID }).fetch(), 'tagID');
   return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
+
 const tagStyle = { backgroundColor: '#85865f', color: '#f5f0e6', marginBottom: '5px', fontSize: '12px' };
+const cardImageStyle = { alignSelf: 'center', height: 300, width: 300, borderWidth: 1, borderRadius: 75 };
 
 class RecipeCard extends React.Component {
   render() {
     const tagData = getTags(this.props.recipe.name);
     return (
       <Card href={`#/recipe/${this.props.recipe._id}`}>
-        <Image src={this.props.recipe.imageURL} wrapped ui={false}/>
+        <Image style={cardImageStyle} src={this.props.recipe.imageURL} wrapped/>
         <Card.Content>
-          <Card.Header>{this.props.recipe.name}</Card.Header>
+          <Card.Header id="card-title">{this.props.recipe.name}</Card.Header>
           <Card.Meta>
             Serving size: {this.props.recipe.servingSize}
           </Card.Meta>

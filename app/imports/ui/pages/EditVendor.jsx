@@ -32,7 +32,7 @@ class EditVendor extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     return (
-      <Grid container centered>
+      <Grid id={'edit-vendor-page'} container centered>
         <Grid.Column>
           <Header as="h2" textAlign="center">Edit Vendor Profile</Header>
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
