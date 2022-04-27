@@ -23,7 +23,7 @@ class AdminPage extends React.Component {
     const buttonStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
     const tableHeadStyle = { backgroundColor: '#d4c8a1' };
     return (
-      <div>
+      <div id={'admin-page'}>
         <AdminSidebar/>
         <Container style={{ marginTop: '30px' }}>
           <Header as="h2" textAlign="center" id="recipeHeader">All Recipes</Header>

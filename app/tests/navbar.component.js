@@ -17,6 +17,11 @@ class NavBar {
     await testController.click('#login-button');
   }
 
+  async gotoAdminPage(testController) {
+    await this.ensureLogout(testController);
+    await testController.click('#admin-button');
+  }
+
   /** Check that the specified user is currently logged in.
   async isLoggedIn(testController, username) {
     const loggedInUser = Selector('#navbar-current-user').innerText;
