@@ -3,6 +3,7 @@ import { signinPage } from './signin.page';
 import { signoutPage } from './signout.page';
 import { navBar } from './navbar.component';
 import { adminPage } from './adminpage.page';
+import { recipePage } from './recipe.page';
 import { editRecipe } from './editrecipe.page';
 import { addVendorPage } from './addvendor.page';
 import { editVendorPage } from './editvendor.page';
@@ -11,6 +12,7 @@ import { searchRecipePage } from './searchrecipe.page';
 import { allVendorsPage } from './allvendors.page';
 import { myRecipesPage } from './myrecipes.page';
 import { vendorProfilePage } from './vendorprofile.page';
+import { recipeCard } from './recipecard.component';
 
 /* global fixture:false, test:false */
 
@@ -172,4 +174,20 @@ test('Test that MyRecipe Page shows up for admin', async (testController) => {
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoMyRecipesPage(testController);
   await myRecipesPage.isDisplayed(testController);
+});
+
+test('Test that Individual Recipe Page shows up for users', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoSearchRecipePage(testController);
+  await recipeCard.gotoIndividualRecipePage(testController);
+  await recipePage.isDisplayed(testController);
+});
+
+test('Test that Individual Recipe Page shows up for admin', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await navBar.gotoSearchRecipePage(testController);
+  await recipeCard.gotoIndividualRecipePage(testController);
+  await recipePage.isDisplayed(testController);
 });
