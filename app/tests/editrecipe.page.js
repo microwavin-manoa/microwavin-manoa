@@ -13,12 +13,13 @@ class EditRecipe {
   }
 
   async editRecipeForm(testController) {
-    const name = 'Toast';
-    const picture = 'https://www.collinsdictionary.com/images/full/toast_102709511.jpg';
-    const prepTime = '2 minutes';
-    const description = 'Put a piece of bread in the toaster. (Bonus: Have it with whatever you like!)';
+    const name = 'Avocado Sandwich';
+    const picture = 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2009/4/5/1/BW2D10_28652_s4x3.jpg.rend.hgtvcom.406.305.suffix/1431856622401.jpeg';
+    const prepTime = '10 minutes';
+    const description = ' Boil an egg and slice it when done. Add the sliced egg and lettuce to the sandwich. Enjoy!';
     const ingredients = Selector('#ingredients');
-    const avocadoOption = ingredients.find('#Avocado');
+    const eggOption = ingredients.find('#Egg');
+    const lettuceOption = ingredients.find('#Lettuce')
     await this.isDisplayed(testController);
     await testController.selectText('#name').pressKey('delete');
     await testController.typeText('#name', name);
@@ -26,10 +27,11 @@ class EditRecipe {
     await testController.typeText('#imageURL', picture);
     await testController.selectText('#prepTime').pressKey('delete');
     await testController.typeText('#prepTime', prepTime);
-    await testController.selectText('#description').pressKey('delete');
     await testController.typeText('#description', description);
-    await testController.click(ingredients);
-    await testController.click(avocadoOption);
+    await testController.click('#ingredients');
+    await testController.click(eggOption);
+    await testController.click(lettuceOption);
+    await testController.click('#ingredients');
     await testController.click('#submit');
   }
 

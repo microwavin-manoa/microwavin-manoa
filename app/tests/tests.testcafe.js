@@ -211,8 +211,6 @@ test.only('Test that Edit Recipes form works for admin', async (testController) 
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoMyRecipesPage(testController);
-  await myRecipesPage.isDisplayed(testController);
   await myRecipesPage.gotoEditRecipe(testController);
-  await editRecipe.isDisplayed(testController);
   await editRecipe.editRecipeForm(testController);
 });

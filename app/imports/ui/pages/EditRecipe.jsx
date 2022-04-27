@@ -90,7 +90,7 @@ class EditRecipe extends React.Component {
               <TextField name='imageURL' id='imageURL'/>
               <TextField name='prepTime' placeholder='5 minutes' id='prepTime'/>
               <TextField name='servingSize' id='servings'/>
-              <MultiSelectField name='ingredients' placeholder='Select ingredients'/>
+              <MultiSelectField name='ingredients' id='ingredients' placeholder='Select ingredients'/>
               <AddIngredient/><br/>
               <MultiSelectField name='tags' id='tags' placeholder='Select tags'/>
               <LongTextField contenteditable id='description' name='description' />
