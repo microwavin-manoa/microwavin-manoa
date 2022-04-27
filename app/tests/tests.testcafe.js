@@ -176,7 +176,7 @@ test('Test that MyRecipe Page shows up for admin', async (testController) => {
   await myRecipesPage.isDisplayed(testController);
 });
 
-test('Test that Individual Recipe Page shows up for users', async (testController) => {
+test('Test that Individual Recipe Page shows up from Search Recipes for users', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoSearchRecipePage(testController);
@@ -184,7 +184,7 @@ test('Test that Individual Recipe Page shows up for users', async (testControlle
   await recipePage.isDisplayed(testController);
 });
 
-test('Test that Individual Recipe Page shows up for admin', async (testController) => {
+test('Test that Individual Recipe Page from Search Recipes shows up for admin', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoSearchRecipePage(testController);
