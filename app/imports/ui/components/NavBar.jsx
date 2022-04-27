@@ -33,7 +33,6 @@ class NavBar extends React.Component {
             <Menu.Item as={NavLink} style={headerFont} activeClassName="active" exact to="/admin" key='admin'><Icon name='wrench'/>Admin</Menu.Item>
           ) : ''}
           <Menu.Item position="right">
-            <div id='navbar-current-user'>{this.props.currentUser}</div>
             {this.props.currentUser === '' ? (
               <Button.Group>
                 <Button animated='vertical' style={signupButton}>
@@ -51,7 +50,7 @@ class NavBar extends React.Component {
                 </Button>
               </Button.Group>
             ) : (
-              <Button id="logout-button" animated='vertical' style={signinButton}>
+              <Button id="navbar-current-user" animated='vertical' style={signinButton}>
                 <Button.Content style={font} inverted hidden as={NavLink} exact to="/signout">Sign Out</Button.Content>
                 <Button.Content visible>
                   <Icon name='sign-out'/>
