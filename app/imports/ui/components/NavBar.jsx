@@ -42,7 +42,7 @@ class NavBar extends React.Component {
                   </Button.Content>
                 </Button>
                 <ButtonOr/>
-                <Button animated='vertical' style={signinButton} id="login-button">
+                <Button id="login-button" animated='vertical' style={signinButton}>
                   <Button.Content style={font} inverted hidden as={NavLink} exact to="/signin">Sign In!</Button.Content>
                   <Button.Content visible>
                     <Icon name='sign-in'/>
