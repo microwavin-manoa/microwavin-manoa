@@ -41,7 +41,7 @@ class VendorProfile extends React.Component {
     vendorData = vendorData.map(item => makeObject(item));
     const tableHeadStyle = { backgroundColor: '#85865F' };
     return (
-      <Container>
+      <Container id={'vendor-profile-page'}>
         <Grid textAlign='center'>
           <Grid.Row stretched>
             <br/>

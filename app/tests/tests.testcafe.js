@@ -10,6 +10,7 @@ import { addRecipePage } from './addrecipe.page';
 import { searchRecipePage } from './searchrecipe.page';
 import { allVendorsPage } from './allvendors.page';
 import { myRecipesPage } from './myrecipes.page';
+import { vendorProfilePage } from './vendorprofile.page';
 
 /* global fixture:false, test:false */
 
@@ -109,6 +110,24 @@ test('Test that Vendors Page shows up for users', async (testController) => {
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoVendorsPage(testController);
   await allVendorsPage.isDisplayed(testController);
+});
+
+test('Test that Vendors Profile Page shows up for admin', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await navBar.gotoVendorsPage(testController);
+  await allVendorsPage.isDisplayed(testController);
+  await allVendorsPage.gotoIndivVendor(testController);
+  await vendorProfilePage.isDisplayed(testController);
+});
+
+test('Test that Vendors Profile Page shows up for users', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoVendorsPage(testController);
+  await allVendorsPage.isDisplayed(testController);
+  await allVendorsPage.gotoIndivVendor(testController);
+  await vendorProfilePage.isDisplayed(testController);
 });
 
 test('Test that MyRecipe Page shows up for users', async (testController) => {
