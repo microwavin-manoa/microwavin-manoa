@@ -15,7 +15,7 @@ class StuffVendor extends React.Component {
         <Table.Cell>{this.props.vendor.address}</Table.Cell>
         <Table.Cell>{this.props.vendor.hours}</Table.Cell>
         <Table.Cell>
-          <Link to={`/editvendor/${this.props.vendor._id}`}>Edit</Link>
+          <Link id={'edit-vendor-button'} to={`/editvendor/${this.props.vendor._id}`}>Edit</Link>
         </Table.Cell>
       </Table.Row>
     );

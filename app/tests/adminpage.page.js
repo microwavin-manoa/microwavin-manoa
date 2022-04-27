@@ -14,7 +14,17 @@ class AdminPage {
 
   /** Goes to Edit Recipe Page */
   async gotoEditRecipePage(testController) {
-    await testController.click('#login-button');
+    await testController.click('#edit-recipe-button-admin');
+  }
+
+  /** Goes to Add Vendor Page */
+  async gotoAddVendorPage(testController) {
+    await testController.click('#add-vendor-button');
+  }
+
+  /** Goes to Edit Vendor Page */
+  async gotoEditVendorPage(testController) {
+    await testController.click('#edit-vendor-button');
   }
 }
 

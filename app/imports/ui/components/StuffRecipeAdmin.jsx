@@ -48,7 +48,7 @@ class StuffRecipeAdmin extends React.Component {
         <Table.Cell>{this.props.recipe.description}</Table.Cell>
         <Table.Cell>{this.props.recipe.owner}</Table.Cell>
         <Table.Cell>
-          <Link to={`/editrecipe/${this.props.recipe._id}`}>Edit</Link>
+          <Link id={'edit-recipe-button-admin'} to={`/editrecipe/${this.props.recipe._id}`}>Edit</Link>
         </Table.Cell>
       </Table.Row>
     );

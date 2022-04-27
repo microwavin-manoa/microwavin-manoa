@@ -81,7 +81,7 @@ class EditRecipe extends React.Component {
     model.ingredients = getIngredients(this.props.doc.name);
     model.tags = getTags(this.props.doc.name);
     return (
-      <Grid container centered>
+      <Grid id={'edit-recipe-page'} container centered>
         <Grid.Column>
           <Header as="h2" textAlign="center">Edit Recipe</Header>
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>
