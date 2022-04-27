@@ -57,7 +57,7 @@ class AddRecipe extends React.Component {
     const formSchema = makeSchema(allIngredients, allTags);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
-      <Grid container centered style={{ marginTop: '10px' }}>
+      <Grid container centered style={{ marginTop: '10px' }} id={'add-recipe-page'}>
         <Grid.Column centered>
           <Header as="h2" textAlign="center" style={ color }>Add Recipe</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>,<br/>

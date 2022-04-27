@@ -84,7 +84,7 @@ class SearchRecipe extends React.Component {
     let recipeMap = _.flatten(testing.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
     recipeMap = recipeMap.sort((a, b) => a.name.localeCompare(b.name));
     return (
-      <Container style={{ marginTop: '30px' }}>
+      <Container id="search-recipe-page" style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center">Search Recipes</Header>
         <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>

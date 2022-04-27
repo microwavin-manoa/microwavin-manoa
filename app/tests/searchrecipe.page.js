@@ -1,8 +1,8 @@
 import { Selector } from 'testcafe';
 
-class LandingPage {
+class SearchRecipePage {
   constructor() {
-    this.pageId = '#landing-page';
+    this.pageId = '#search-recipe-page';
     this.pageSelector = Selector(this.pageId);
   }
 
@@ -13,4 +13,4 @@ class LandingPage {
   }
 }
 
-export const landingPage = new LandingPage();
+export const searchRecipePage = new SearchRecipePage();

@@ -22,6 +22,27 @@ class NavBar {
     await testController.click('#admin-button');
   }
 
+  async gotoAddRecipePage(testController) {
+    await this.ensureLogout(testController);
+    await testController.click('#add-recipe-button');
+  }
+
+  async gotoSearchRecipePage(testController) {
+    await this.ensureLogout(testController);
+    await testController.click('#search-recipe-button');
+  }
+
+  async gotoVendorsPage(testController) {
+    await this.ensureLogout(testController);
+    await testController.click('#vendors-page-button');
+  }
+
+  async gotoMyRecipesPage(testController) {
+    await this.ensureLogout(testController);
+    await testController.click('#my-recipes-page-button');
+  }
+
+
   /** Check that the specified user is currently logged in.
   async isLoggedIn(testController, username) {
     const loggedInUser = Selector('#navbar-current-user').innerText;
