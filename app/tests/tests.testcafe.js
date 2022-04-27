@@ -42,15 +42,6 @@ test('Test that Admin Page shows up', async (testController) => {
   await adminPage.isDisplayed(testController);
 });
 
-test('Test that Edit Recipe in Admin shows up', async (testController) => {
-  await navBar.gotoSigninPage(testController);
-  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
-  await navBar.gotoAdminPage(testController);
-  await adminPage.isDisplayed(testController);
-  await adminPage.gotoEditRecipePage(testController);
-  await editRecipe.isDisplayed(testController);
-});
-
 test('Test that signin and signout work', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
