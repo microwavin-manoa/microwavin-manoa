@@ -73,6 +73,15 @@ test('Test that Edit Recipe in Admin shows up', async (testController) => {
   await editRecipe.isDisplayed(testController);
 });
 
+test('Test that Edit Recipe shows up for user', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoMyRecipesPage(testController);
+  await myRecipesPage.isDisplayed(testController);
+  await myRecipesPage.gotoEditRecipe(testController);
+  await editRecipe.isDisplayed(testController);
+});
+
 test('Test that Add Vendor in Admin shows up', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
