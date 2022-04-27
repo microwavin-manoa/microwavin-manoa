@@ -172,7 +172,7 @@ test('Test that Add Recipe works for admin', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoAddRecipePage(testController);
-  await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
+  await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description );
 });
 
 test('Test that Individual Recipe Page shows up from Search Recipes for users', async (testController) => {
