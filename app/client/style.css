@@ -40,3 +40,7 @@ a:hover {
   font-size: 14px;
   margin-top: 50px;
 }
+
+#searchRecipeForm {
+  background-color: #CEB793;
+}
