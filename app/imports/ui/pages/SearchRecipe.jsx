@@ -25,20 +25,6 @@ function getTags(recID) {
   return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
 
-// function checkTags(tagObj) {
-//    return _.filter(tagObj, function (item) {
-//     return _.every(item.tags, function (tag) { return tag.contains(this.state.tags)}; );
-//   });
-//   // return this.state.tags.map((tag) => (_.filter(tagObj, function (obj) { obj.tags.contains(tag); })));
-//   console.log(this.state.tags);
-//   console.log(tagObj);
-//   console.log(tagObj.tags);
-//   if (_.every(this.state.tags, (tag) => (tagObj.tags.includes(tag)))) {
-//     return tagObj.id;
-//   }
-//   return [];
-// }
-
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class SearchRecipe extends React.Component {
   constructor(props) {
@@ -86,8 +72,8 @@ class SearchRecipe extends React.Component {
     return (
       <Container style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center">Search Recipes</Header>
-        <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>,<br/>
-        <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
+        <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
+        <AutoForm size = 'massive' id='searchRecipeForm' schema={bridge} onSubmit={data => this.submit(data)}>
           <Segment>
             <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
             <SubmitField id='submit' value='Submit'/>
