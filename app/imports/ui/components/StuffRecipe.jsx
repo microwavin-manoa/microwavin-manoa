@@ -32,7 +32,6 @@ class StuffRecipe extends React.Component {
     const tagData = getTags(this.props.recipe.name);
     const ingredientData = getIngredients(this.props.recipe.name);
 
-
     return (
       <Table.Row id="table-text-style">
         <Table.Cell id="columnStyle">{this.props.recipe.name}</Table.Cell>

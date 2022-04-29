@@ -47,7 +47,7 @@ class AddRecipe extends React.Component {
   }
 
   render() {
-    const color = { color: '#4f583d' };
+    // const color = { color: '#4f583d' };
     const textStyle = { color: '#4f583d', fontSize: '16px' };
     let fRef = null;
     // get all ingredients and tags to choose from
