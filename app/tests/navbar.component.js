@@ -12,33 +12,27 @@ class NavBar {
   }
 
   async gotoSigninPage(testController) {
-    await this.ensureLogout(testController);
     await testController.click('#login-button');
     await testController.click('#login-button');
   }
 
   async gotoAdminPage(testController) {
-    await this.ensureLogout(testController);
     await testController.click('#admin-button');
   }
 
   async gotoAddRecipePage(testController) {
-    await this.ensureLogout(testController);
     await testController.click('#add-recipe-button');
   }
 
   async gotoSearchRecipePage(testController) {
-    await this.ensureLogout(testController);
     await testController.click('#search-recipe-button');
   }
 
   async gotoVendorsPage(testController) {
-    await this.ensureLogout(testController);
     await testController.click('#vendors-page-button');
   }
 
   async gotoMyRecipesPage(testController) {
-    await this.ensureLogout(testController);
     await testController.click('#my-recipes-page-button');
   }
 
@@ -57,7 +51,6 @@ class NavBar {
 
   /** Pull down login menu, go to sign up page. */
   async gotoSignupPage(testController) {
-    await this.ensureLogout(testController);
     await testController.click('#login-dropdown');
   }
 }
