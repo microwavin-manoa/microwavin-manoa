@@ -6,19 +6,22 @@ a {
 a:hover {
   color: #4F583D !important;
 }
+#navbar a, #navbar a:hover {
+  color: #f5f0e6 !important;
+}
+
+#navbar {
+ background-color: #ceb793;
+}
+
+h1, h2, h3 {
+  color: #4f583d !important;
+}
 
 #card-title {
   font-family: "Akshar", monospace !important;
   font-size: 25px;
 }
-/*#addVendorButton {*/
-/*  color: #F5EACF !important;*/
-/*  background-color: #8FA6AC !important;*/
-/*}*/
-/*#addVendorButton:hover {*/
-/*  color: #4F583D !important;*/
-/*  background-color: #F5EACF !important;*/
-/*}*/
 
 .ui.signin.button {
   background-color: #a37f2a !important;

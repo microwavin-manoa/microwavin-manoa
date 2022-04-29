@@ -15,9 +15,8 @@ class NavBar extends React.Component {
     const signupButton = { backgroundColor: '#4f583d', color: '#f5f0e6' };
     const font = { color: '#f5f0e6' };
     const headerColor = { color: '#4f583d' };
-    const navbarColor = { backgroundColor: '#ceb793' };
     return (
-      <Segment style={navbarColor}>
+      <Segment id={'navbar'}>
         <Menu inverted style={menuStyle} attached="top" borderless pointing secondary>
           <Menu.Item as={NavLink} activeClassName="" exact to="/" style={{ height: '43px' }}>
             <Header as='h1' style={headerColor}>Microwavin Manoa</Header>
@@ -36,16 +35,16 @@ class NavBar extends React.Component {
             {this.props.currentUser === '' ? (
               <Button.Group>
                 <Button animated='vertical' style={signupButton}>
-                  <Button.Content style={font} hidden as={NavLink} exact to="/signup">Sign Up!</Button.Content>
+                  <Button.Content style={font} hidden as={NavLink} exact to="/signup"><Icon name='signup'/></Button.Content>
                   <Button.Content visible>
-                    <Icon name='signup'/>
+                    Sign Up!
                   </Button.Content>
                 </Button>
                 <ButtonOr/>
                 <Button id="login-button" animated='vertical' style={signinButton}>
-                  <Button.Content style={font} inverted hidden as={NavLink} exact to="/signin">Sign In!</Button.Content>
+                  <Button.Content style={font} inverted hidden as={NavLink} exact to="/signin"><Icon name='sign-in'/></Button.Content>
                   <Button.Content visible>
-                    <Icon name='sign-in'/>
+                    Sign In!
                   </Button.Content>
                 </Button>
               </Button.Group>

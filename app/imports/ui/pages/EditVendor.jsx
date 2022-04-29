@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Image } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
@@ -42,9 +42,10 @@ class EditVendor extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     return (
-      <Grid id={'edit-vendor-page'} container centered>
+      <Grid id={'edit-vendor-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>
           <Header as="h2" textAlign="center">Edit Vendor Profile</Header>
+          <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
             <Segment>
               <TextField name='name'/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Image } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
@@ -81,9 +81,10 @@ class EditRecipe extends React.Component {
     model.ingredients = getIngredients(this.props.doc.name);
     model.tags = getTags(this.props.doc.name);
     return (
-      <Grid id={'edit-recipe-page'} container centered>
+      <Grid id={'edit-recipe-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>
-          <Header as="h2" textAlign="center">Edit Recipe</Header>
+          <Header as="h2" textAlign="center" style={{ color: '#4f583d' }}>Edit Recipe</Header>
+          <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>
             <Segment>
               <TextField name='name' id='name'/>

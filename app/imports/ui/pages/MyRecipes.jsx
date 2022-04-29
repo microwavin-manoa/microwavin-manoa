@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Recipes } from '../../api/recipe/Recipes';
@@ -24,6 +24,7 @@ class MyRecipes extends React.Component {
       <Container id="my-recipes-page">
         <br/>
         <Header as="h2" textAlign="center">My Recipes</Header>
+        <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
         <Table celled>
           <Table.Header>
             <Table.Row>

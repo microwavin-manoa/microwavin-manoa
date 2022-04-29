@@ -7,7 +7,7 @@ class NotFound extends React.Component {
     return (
       <Header as="h1" textAlign="center">
         <br/><br/>
-        <p style={{ color: '#4F583D' }}>Page not found</p>
+        <p>Page not found</p>
       </Header>
     );
   }
