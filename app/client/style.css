@@ -14,6 +14,7 @@ a:hover {
 }
 
 h1, h2, h3 {
+  font-family: 'Libre Bodoni' !important;
   color: #4f583d !important;
 }
 
