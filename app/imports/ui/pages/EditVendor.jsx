@@ -7,21 +7,31 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Vendors } from '../../api/vendor/Vendors';
+import { updateVendorMethod } from '../../startup/both/Methods';
+import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
+import { Ingredients } from '../../api/ingredient/Ingredient';
 
 const bridge = new SimpleSchema2Bridge(Vendors.schema);
 
 /** Renders the Page for editing a single document. */
 class EditVendor extends React.Component {
+
   // On successful submit, insert the data.
-  // STILL NEED TO UPDATE VENDOR NAME IN INGREDIENTVENDORPRICE COLLECTION IF NEEDED
   submit(data) {
+    let newData = data;
     let { name } = data;
-    const { address, hours, imageURL, _id } = data;
+    const { address, hours, imageURL } = data;
     name = name.toLowerCase();
     name = name[0].toUpperCase() + name.slice(1);
-    Vendors.collection.update(_id, { $set: { name, address, hours, imageURL } }, (error) => (error ?
-      swal('Error', error.message, 'error') :
-      swal('Success', 'Vendor updated successfully', 'success')));
+    newData = { name, address, hours, imageURL };
+    newData.oldName = this.props.doc.name;
+    Meteor.call(updateVendorMethod, newData, (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        swal('Success', 'Vendor updated successfully', 'success');
+      }
+    });
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -63,9 +73,11 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Vendors.userPublicationName);
+  const sub1 = Meteor.subscribe(Vendors.userPublicationName);
+  const sub2 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
+  const sub3 = Meteor.subscribe(Ingredients.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = sub1.ready() && sub2.ready() && sub3.ready();
   // Get the document
   const doc = Vendors.collection.findOne(documentId);
   return {

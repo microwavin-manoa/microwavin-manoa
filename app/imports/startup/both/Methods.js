@@ -6,6 +6,7 @@ import { TagRecipe } from '../../api/tag/TagRecipe';
 import { Recipes } from '../../api/recipe/Recipes';
 import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
 import { Tags } from '../../api/tag/Tags';
+import { Vendors } from '../../api/vendor/Vendors';
 
 /**
  * In Bowfolios, insecure mode is enabled, so it is possible to update the server's Mongo database by making
@@ -114,4 +115,23 @@ Meteor.methods({
   },
 });
 
-export { addIngredientMethod, addRecipeMethod, updateRecipeMethod, updateIngredientMethod };
+const updateVendorMethod = 'Vendors.update';
+
+/** Updates Recipe data in Recipes collection along with IngredientRecipe and TagRecipe. */
+Meteor.methods({
+  'Vendors.update'({ name, oldName, address, hours, imageURL }) {
+    // update Vendors collection
+    Vendors.collection.update({ name: oldName }, { $set: { name, address, hours, imageURL } });
+    // update IngredientVendorPrice collection if vendor name changed
+    if (name !== oldName) {
+      const allIVP = IngredientVendorPrice.collection.find({ vendor: oldName }).fetch();
+      for (let i = 0; i < allIVP.length; i++) {
+        const { ingredient, ingredientId, price } = allIVP[i];
+        console.log(ingredient, ingredientId, price);
+        IngredientVendorPrice.collection.update({ vendor: oldName }, { $set: { ingredient, ingredientId, vendor: name, price } });
+      }
+    }
+  },
+});
+
+export { addIngredientMethod, addRecipeMethod, updateRecipeMethod, updateIngredientMethod, updateVendorMethod };
