@@ -16,8 +16,8 @@ function getTags(name) {
   return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
 
-const tagStyle = { backgroundColor: '#85865f', color: '#f5f0e6', marginBottom: '5px', fontSize: '10px' };
-const ingStyle = { backgroundColor: '#4f583d', color: '#f5f0e6', marginBottom: '5px', fontSize: '12px' };
+const tagStyle = { backgroundColor: '#85865f', color: '#f5f0e6', marginBottom: '5px', fontSize: '14.5px' };
+const ingStyle = { backgroundColor: '#4f583d', color: '#f5f0e6', marginBottom: '5px', fontSize: '15px' };
 
 // returns an array of ingredients for this recipe
 function getIngredients(name) {
@@ -31,9 +31,11 @@ class StuffRecipe extends React.Component {
   render() {
     const tagData = getTags(this.props.recipe.name);
     const ingredientData = getIngredients(this.props.recipe.name);
+
+
     return (
-      <Table.Row>
-        <Table.Cell>{this.props.recipe.name}</Table.Cell>
+      <Table.Row id="table-text-style">
+        <Table.Cell id="columnStyle">{this.props.recipe.name}</Table.Cell>
         <Table.Cell><Image size = 'small' src={this.props.recipe.imageURL}/></Table.Cell>
         <Table.Cell>{this.props.recipe.prepTime}</Table.Cell>
         <Table.Cell>{this.props.recipe.servingSize}</Table.Cell>
