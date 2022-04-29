@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Akshar');
-
-a {
+@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@0;1&family=Roboto:wght@300;400&display=swap');a {
   color: #85865F !important;
 }
 a:hover {
@@ -21,6 +20,28 @@ h1, h2, h3 {
 #card-title {
   font-family: "Akshar", monospace !important;
   font-size: 25px;
+}
+
+#page-header-style {
+  font-family: 'Libre Bodoni';
+  font-size: 35px;
+}
+
+#table-header-style {
+  font-family: 'Libre Bodoni';
+  font-size: 20px;
+  background-color: #c9c9a9;
+}
+
+#table-text-style {
+  font-family: 'Roboto';
+  font-size: 16px;
+}
+
+#columnStyle {
+  background-color: #ebede4;
+  font-family: "Akshar", monospace;
+  font-size: 23px;
 }
 
 .ui.signin.button {

@@ -10,6 +10,21 @@ import { TagRecipe } from '../../api/tag/TagRecipe';
 import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
 import { Ingredients } from '../../api/ingredient/Ingredient';
 
+// let rowNumber = 1;
+// function backgroundColor() {
+//   let color;
+//   if (rowNumber % 2 === 0) {
+//     color = tableColor1;
+//   } else {
+//     color = tableColor2;
+//   }
+//   rowNumber++;
+//   return backgroundColor;
+// }
+
+// const tableColor1 = { backgroundColor: '#ffffff' };
+// const tableColor2 = { backgroundColor: '#e6fade' };
+
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class MyRecipes extends React.Component {
 
@@ -20,25 +35,26 @@ class MyRecipes extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
+    const tableStyle = { backgroundColor: '#ffffff' };
     return (
       <Container id="my-recipes-page">
         <br/>
-        <Header as="h2" textAlign="center">My Recipes</Header>
+        <Header as="h2" textAlign="center" id="page-header-style">My Recipes</Header>
         <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-        <Table celled>
+        <Table celled striped>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Name</Table.HeaderCell>
-              <Table.HeaderCell>Image</Table.HeaderCell>
-              <Table.HeaderCell>Prep-Time</Table.HeaderCell>
-              <Table.HeaderCell>Serving Size</Table.HeaderCell>
-              <Table.HeaderCell>Ingredients</Table.HeaderCell>
-              <Table.HeaderCell>Tags</Table.HeaderCell>
-              <Table.HeaderCell>Description</Table.HeaderCell>
-              <Table.HeaderCell>Edit</Table.HeaderCell>
+              <Table.HeaderCell id="table-header-style">Name</Table.HeaderCell>
+              <Table.HeaderCell id="table-header-style">Image</Table.HeaderCell>
+              <Table.HeaderCell id="table-header-style">Prep-Time</Table.HeaderCell>
+              <Table.HeaderCell id="table-header-style">Serving Size</Table.HeaderCell>
+              <Table.HeaderCell id="table-header-style">Ingredients</Table.HeaderCell>
+              <Table.HeaderCell id="table-header-style">Tags</Table.HeaderCell>
+              <Table.HeaderCell id="table-header-style">Description</Table.HeaderCell>
+              <Table.HeaderCell id="table-header-style">Edit</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>
+          <Table.Body style = {tableStyle}>
             {this.props.recipes.map((recipe) => <StuffRecipe key={recipe._id} recipe={recipe} />)}
           </Table.Body>
         </Table>
