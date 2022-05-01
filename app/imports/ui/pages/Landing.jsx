@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Segment, Container, Header, Image } from 'semantic-ui-react';
+import { Grid, Header, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Roles } from 'meteor/alanning:roles';
@@ -9,15 +9,17 @@ import { withRouter } from 'react-router-dom';
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
   render() {
+    const textStyle1 = { color: 'white', fontFamily: 'Merienda', fontSize: 'revert' };
     return (
-      <div id="landing-page" style={{ marginBottom: '-50px' }}>
+      <div id="landing-page" style={{ marginBottom: '-50px', marginTop: '-14px' }}>
+        <div className='green-background'></div>
         <div id='landing-image'>
           <Grid container centered stackable columns={2} verticalAlign='middle' className='landing-content1'>
-            <Grid.Column textAlign='center'>
-              <Header as='h1' style={{ fontSize: '70px' }}>Microwavin<br/>Manoa</Header>
+            <Grid.Column textAlign='center' style={{ paddingTop: '120px' }}>
+              <Header as='h1'>Microwavin<br/>Manoa</Header>
             </Grid.Column>
-            <Grid.Column textAlign='center'>
-              <Header as='h1'>About Us</Header>
+            <Grid.Column textAlign='center' style={{ paddingTop: '120px' }}>
+              <Header as='h1' style={textStyle1}>About Us</Header>
               <Header as='h2'>
                 Create and discover recipes made tailor-made for UH Manoa students (on-campus or off)! We focus on recipes that can be made using minimal kitchen facilities (like a microwave!), and ingredients available within walking distance of UH
               </Header>
@@ -71,9 +73,9 @@ class Landing extends React.Component {
         </div>
         <div className='green-background'></div>
         <div id='landing-image2'>
-          <Grid container centered stackable columns={2} verticalAlign='middle' className='landing-content3'>
+          <Grid container centered stackable columns={2} verticalAlign='middle' className='landing-content1'>
             <Grid.Column textAlign='center'>
-              <Header as='h2' style={{ fontSize: '40px' }}>Search and<br/>filter recipes</Header>
+              <Header as='h1' style={{ fontSize: '45px' }}>Search and<br/>filter recipes</Header>
             </Grid.Column>
             <Grid.Column textAlign='center'>
               <Image src='images/register.png'/>

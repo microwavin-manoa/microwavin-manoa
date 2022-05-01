@@ -11,14 +11,13 @@ a:hover {
 #navbar a, #navbar a:hover {
   color: #f5f0e6 !important;
 }
-
 #navbar {
  background-color: #ceb793;
 }
 
-h1, h2, h3 {
-  font-family: 'Libre Bodoni' !important;
-  color: #4f583d !important;
+h2.ui.header {
+  font-family: 'Libre Bodoni';
+  color: #4f583d;
 }
 
 #landing-image {
@@ -41,35 +40,20 @@ h1, h2, h3 {
   background-color: #f5f0e6;
   height: 400px;
 }
-.landing-content1 {
-  padding-top: 100px !important;
+.landing-content1 h1.ui.header {
+  color: white;
+  font-family: 'Merienda';
+  font-size: 70px;
 }
-.landing-content2 {
-  padding-top: 10px !important;
+.landing-content1 h2.ui.header {
+  color: white;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 30px;
 }
-.landing-content1 h1 {
-  color: white !important;
-  font-family: 'Merienda' !important;
-}
-.landing-content1 h2 {
-  color: white !important;
-  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
-  font-size: 20px !important;
-  line-height: 30px !important;
-}
-.landing-content2 h2 {
-  color: #4f583d !important;
-  font-family: 'Merienda' !important;
-}
-.landing-content2 h3 {
-  color: #4f583d !important;
-  font-family: 'Merienda' !important;
-  font-size: 15px;
-}
-.landing-content3 h2 {
-  color: white !important;
-  font-family: 'Merienda' !important;
-  font-size: 50px !important;
+.landing-content2 h2.ui.header, .landing-content2 h3.ui.header{
+  color: #4f583d;
+  font-family: 'Merienda';
 }
 
 #card-title {
