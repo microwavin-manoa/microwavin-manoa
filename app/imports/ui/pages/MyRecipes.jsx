@@ -76,7 +76,7 @@ export default withTracker(() => {
   const sub3 = Meteor.subscribe(TagRecipe.userPublicationName);
   const sub4 = Meteor.subscribe(IngredientRecipe.userPublicationName);
   const sub5 = Meteor.subscribe(Ingredients.userPublicationName);
-  let recipes = Recipes.collection.find().fetch();
+  let recipes = Recipes.collection.find({ owner: Meteor.user().username }).fetch();
   recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
   const ready = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready();
 
