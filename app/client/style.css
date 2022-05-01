@@ -37,7 +37,8 @@ h1, h2, h3 {
   background-color: #85865f;
   height: 30px;
 }
-.white-background {
+.plain-background {
+  background-color: #f5f0e6;
   height: 400px;
 }
 .landing-content1 {

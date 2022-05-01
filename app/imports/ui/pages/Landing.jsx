@@ -25,20 +25,36 @@ class Landing extends React.Component {
           </Grid>
         </div>
         <div className='green-background'></div>
-        <div className='white-background'>
-          <Grid container centered stackable columns={2} verticalAlign='middle' className='landing-content2'>
-            <Grid.Column textAlign='center'>
-              <Image src='images/register.png'/>
-            </Grid.Column>
-            <Grid.Column textAlign='center'>
-              <Header as='h2' style={{ fontSize: '40px' }}>Create an account<br/>and log in</Header>
-              <br/>
-              <Image src='images/leafy-divide.png' size='medium' floated='right'/>
-            </Grid.Column>
-          </Grid>
-        </div>
+        {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+          <div className='plain-background'>
+            <Grid container centered stackable columns={2} verticalAlign='middle' className='landing-content2'>
+              <Grid.Column textAlign='center'>
+                <Image src='images/register.png'/>
+              </Grid.Column>
+              <Grid.Column textAlign='center'>
+                <Header as='h2' style={{ fontSize: '40px' }}>ADMIN STUFF</Header>
+                <br/>
+                <Image src='images/leafy-divide.png' size='medium' floated='right'/>
+              </Grid.Column>
+            </Grid>
+          </div>
+        ) : ''}
+        {Meteor.userId() === null ? (
+          <div className='plain-background'>
+            <Grid container centered stackable columns={2} verticalAlign='middle' className='landing-content2'>
+              <Grid.Column textAlign='center'>
+                <Image src='images/register.png'/>
+              </Grid.Column>
+              <Grid.Column textAlign='center'>
+                <Header as='h2' style={{ fontSize: '40px' }}>Create an account<br/>and log in</Header>
+                <br/>
+                <Image src='images/leafy-divide.png' size='medium' floated='right'/>
+              </Grid.Column>
+            </Grid>
+          </div>
+        ) : ''}
         <div className='green-background'></div>
-        <div className='white-background' style={{ height: '460px', backgroundColor: '#f5f0e6' }}>
+        <div className='plain-background' style={{ height: '460px' }}>
           <Grid container centered stackable columns='equal' verticalAlign='middle' className='landing-content2'>
             <Grid.Row>
               <Header as='h2' style={{ paddingTop: '10px' }}>Create recipes, view and edit your own recipes</Header>
@@ -63,7 +79,7 @@ class Landing extends React.Component {
           </Grid>
         </div>
         <div className='green-background'></div>
-        <div className='white-background' style={{ height: '500px', backgroundColor: '#f5f0e6' }}>
+        <div className='plain-background' style={{ height: '500px' }}>
           <Grid container centered stackable columns='equal' verticalAlign='middle' className='landing-content2'>
             <Grid.Row>
               <Header as='h2' style={{ paddingTop: '10px' }}>View recipes and vendor information</Header>
