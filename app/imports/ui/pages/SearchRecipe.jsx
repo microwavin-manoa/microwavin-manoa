@@ -2,7 +2,7 @@ import React from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import { Container, Header, Loader, Card, Segment, Image } from 'semantic-ui-react';
+import { Container, Header, Loader, Card, Segment, Image, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
@@ -29,18 +29,17 @@ function getTags(recID) {
 class SearchRecipe extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tags: [] };
-    this.isFiltered = false;
+    this.state = { tags: [], isFiltered: false };
   }
 
   // Submit the tags
-  submit(data) {
+  submit(data, formRef) {
     if (data.tags.length > 0) {
-      this.isFiltered = true;
+      this.setState({ tags: data.tags || [], isFiltered: true });
     } else {
-      this.isFiltered = false;
+      this.setState({ tags: data.tags || [], isFiltered: false });
+      formRef.reset();
     }
-    this.setState({ tags: data.tags || [] });
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -49,6 +48,7 @@ class SearchRecipe extends React.Component {
   }
 
   renderPage() {
+    let fRef = null;
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allTags);
     const bridge = new SimpleSchema2Bridge(formSchema);
@@ -73,15 +73,16 @@ class SearchRecipe extends React.Component {
       <Container id="search-recipe-page" style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center">Search Recipes</Header>
         <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-        <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
+        <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
           <Segment>
             <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
             <SubmitField id='submit' value='Submit'/>
+            <Button basic style={{ marginLeft: '20px' }} onClick={() => this.submit({ tags: [] }, fRef)}>Display all</Button>
           </Segment>
         </AutoForm>
         <br/><br/>
         <Card.Group centered>
-          {(this.isFiltered) ? recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>) : this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
+          {(this.state.isFiltered) ? recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>) : this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
         </Card.Group>
       </Container>
     );
