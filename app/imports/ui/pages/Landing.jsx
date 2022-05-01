@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 class Landing extends React.Component {
   render() {
     return (
-      <div id="landing-page">
+      <div id="landing-page" style={{ marginBottom: '-50px' }}>
         <div id='landing-image'>
           <Grid container centered stackable columns={2} verticalAlign='middle' className='landing-content1'>
             <Grid.Column textAlign='center'>
@@ -32,7 +32,9 @@ class Landing extends React.Component {
                 <Image src='images/register.png'/>
               </Grid.Column>
               <Grid.Column textAlign='center'>
-                <Header as='h2' style={{ fontSize: '40px' }}>ADMIN STUFF</Header>
+                <Header as='h2' style={{ fontSize: '40px' }}>Admins!</Header>
+                <Header as='h3'>Edit all recipes and ingredients in the system</Header>
+                <Header as='h3'>Add and edit vendors</Header>
                 <br/>
                 <Image src='images/leafy-divide.png' size='medium' floated='right'/>
               </Grid.Column>

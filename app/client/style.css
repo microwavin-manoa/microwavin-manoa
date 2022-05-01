@@ -61,6 +61,11 @@ h1, h2, h3 {
   color: #4f583d !important;
   font-family: 'Merienda' !important;
 }
+.landing-content2 h3 {
+  color: #4f583d !important;
+  font-family: 'Merienda' !important;
+  font-size: 15px;
+}
 .landing-content3 h2 {
   color: white !important;
   font-family: 'Merienda' !important;
