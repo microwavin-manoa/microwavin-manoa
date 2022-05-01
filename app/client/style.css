@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Akshar');
-@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@0;1&family=Roboto:wght@300;400&display=swap');a {
+@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@0;1&family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
+
+a {
   color: #85865F !important;
 }
 a:hover {
@@ -16,6 +19,51 @@ a:hover {
 h1, h2, h3 {
   font-family: 'Libre Bodoni' !important;
   color: #4f583d !important;
+}
+
+#landing-image {
+  background: url("images/image1.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 450px;
+  box-shadow: inset 0 0 0 50vw rgba(79, 88, 61, .6);
+}
+#landing-image2 {
+  background: url("images/image2.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 400px;
+  box-shadow: inset 0 0 0 50vw rgba(79, 88, 61, .4);
+}
+.green-background {
+  background-color: #85865f;
+  height: 30px;
+}
+.white-background {
+  height: 400px;
+}
+.landing-content1 {
+  padding-top: 100px !important;
+}
+.landing-content2 {
+  padding-top: 10px !important;
+}
+.landing-content1 h1 {
+  color: white !important;
+  font-family: 'Merienda' !important;
+}
+.landing-content1 h2 {
+  color: white !important;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+  font-size: 20px !important;
+  line-height: 30px !important;
+}
+.landing-content2 h2 {
+  color: #4f583d !important;
+  font-family: 'Merienda' !important;
+}
+.landing-content3 h2 {
+  color: white !important;
+  font-family: 'Merienda' !important;
+  font-size: 50px !important;
 }
 
 #card-title {
@@ -51,11 +99,6 @@ h1, h2, h3 {
 }
 #add-vendor-button {
   color: #f5f0e6 !important;
-}
-#landingimage {
-  background: url("images/food.jpg") no-repeat center center fixed;
-  background-size: cover;
-  box-shadow: inset 0 0 0 50vw rgba(0, 0, 0, .5);
 }
 
 .footer {
