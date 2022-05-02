@@ -8,6 +8,7 @@ import { TagRecipe } from '../../api/tag/TagRecipe';
 import { Tags } from '../../api/tag/Tags';
 import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
 import { Ingredients } from '../../api/ingredient/Ingredient';
+import DeleteRecipeModal from './DeleteRecipeModal';
 
 // returns an array of tags for this recipe
 function getTags(name) {
@@ -28,6 +29,7 @@ function getIngredients(name) {
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class StuffRecipe extends React.Component {
+
   render() {
     const tagData = getTags(this.props.recipe.name);
     const ingredientData = getIngredients(this.props.recipe.name);
@@ -39,7 +41,7 @@ class StuffRecipe extends React.Component {
         <Table.Cell>{this.props.recipe.prepTime}</Table.Cell>
         <Table.Cell>{this.props.recipe.servingSize}</Table.Cell>
         <Table.Cell>
-          {_.map(ingredientData, (ing, index) => <Label style={ingStyle}key={index}>{ing}</Label>)}
+          {_.map(ingredientData, (ing, index) => <Label style={ingStyle} key={index}>{ing}</Label>)}
         </Table.Cell>
         <Table.Cell>
           {_.map(tagData, (tag, index) => <Label style={tagStyle} tag key={index}>{tag}</Label>)}
@@ -47,6 +49,9 @@ class StuffRecipe extends React.Component {
         <Table.Cell>{this.props.recipe.description}</Table.Cell>
         <Table.Cell>
           <Link id={'edit-myrecipes'} to={`/editrecipe/${this.props.recipe._id}`}>Edit</Link>
+        </Table.Cell>
+        <Table.Cell>
+          <DeleteRecipeModal recipe={this.props.recipe}/>
         </Table.Cell>
       </Table.Row>
     );

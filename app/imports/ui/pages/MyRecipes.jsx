@@ -52,6 +52,7 @@ class MyRecipes extends React.Component {
               <Table.HeaderCell id="table-header-style">Tags</Table.HeaderCell>
               <Table.HeaderCell id="table-header-style">Description</Table.HeaderCell>
               <Table.HeaderCell id="table-header-style">Edit</Table.HeaderCell>
+              <Table.HeaderCell id="table-header-style">Delete</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body style = {tableStyle}>
