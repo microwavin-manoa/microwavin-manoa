@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Container, Table, Header, Loader, Button, Image } from 'semantic-ui-react';
+import { Table, Header, Loader, Button, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Link } from 'react-router-dom';
 import StuffRecipeAdmin from '../components/StuffRecipeAdmin';
@@ -26,53 +26,57 @@ class AdminPage extends React.Component {
   renderPage() {
     // define styles
     const buttonStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
-    const tableHeadStyle = { backgroundColor: '#d4c8a1' };
+    const margins = { marginLeft: 25, marginRight: 25 };
+    const pageHeader = {
+      fontFamily: 'Libre Bodoni',
+      fontSize: 35
+    }
     return (
-      <div id={'admin-page'}>
+      <div id={'admin-page'} style={margins}>
         <AdminSidebar/>
-        <Container style={{ marginTop: '30px' }}>
-          <Header as="h2" textAlign="center" id="recipeHeader">All Recipes</Header>
+        <div style={{ marginTop: '30px' }}>
+          <Header as="h2" textAlign="center" id='recipeHeader' style={pageHeader}>All Recipes</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <Table celled>
             <Table.Header >
               <Table.Row >
-                <Table.HeaderCell style={tableHeadStyle} >Name</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Image</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Prep-Time</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Serving Size</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Ingredients</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Tags</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Description</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Owner</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Edit</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Delete</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" >Name</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Image</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Prep-Time</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Serving Size</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Ingredients</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Tags</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Description</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Owner</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Edit</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Delete</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
               {this.props.recipes.map((recipe) => <StuffRecipeAdmin key={recipe._id} recipe={recipe} />)}
             </Table.Body>
           </Table>
-          <Header as="h2" textAlign="center" id="vendorHeader">Vendor Profiles</Header>
+          <Header as="h2" textAlign="center"id='vendorHeader' style={pageHeader}>Vendor Profiles</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>
           <Table celled>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell style={tableHeadStyle}>Vendor Name</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Image</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Address</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Hours</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Edit Vendor</Table.HeaderCell>
-                <Table.HeaderCell style={tableHeadStyle}>Delete</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" >Vendor Name</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" >Image</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" >Address</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" >Hours</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" >Edit Vendor</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" >Delete</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
               {this.props.vendors.map((vendor) => <StuffVendor key={vendor._id} vendor={vendor} />)}
             </Table.Body>
           </Table>
-        </Container>
-        <Container>
+        </div>
+        <div>
           <Button as={Link} to='/addvendor' id={'add-vendor-button'} fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
-        </Container>
+        </div>
 
       </div>
     );

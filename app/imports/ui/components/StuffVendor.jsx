@@ -7,8 +7,8 @@ import DeleteVendorModal from './DeleteVendorModal';
 class StuffVendor extends React.Component {
   render() {
     return (
-      <Table.Row>
-        <Table.Cell>{this.props.vendor.name}</Table.Cell>
+      <Table.Row id="table-text-style">
+        <Table.Cell id="columnStyle">{this.props.vendor.name}</Table.Cell>
         <Table.Cell><Image size = 'small' src={this.props.vendor.imageURL}/></Table.Cell>
         <Table.Cell>{this.props.vendor.address}</Table.Cell>
         <Table.Cell>{this.props.vendor.hours}</Table.Cell>
