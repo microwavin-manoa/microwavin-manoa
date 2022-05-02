@@ -13,6 +13,7 @@ import { Tags } from '../../api/tag/Tags';
 import { TagRecipe } from '../../api/tag/TagRecipe';
 import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
 import { Ingredients } from '../../api/ingredient/Ingredient';
+import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class AdminPage extends React.Component {
@@ -94,8 +95,9 @@ export default withTracker(() => {
   const sub4 = Meteor.subscribe(TagRecipe.userPublicationName);
   const sub5 = Meteor.subscribe(IngredientRecipe.userPublicationName);
   const sub6 = Meteor.subscribe(Ingredients.userPublicationName);
+  const sub7 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
   // Determine if the subscriptions are ready
-  const ready = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready();
+  const ready = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready() && sub7.ready();
   // Get the Stuff documents
   let recipes = Recipes.collection.find().fetch();
   recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));

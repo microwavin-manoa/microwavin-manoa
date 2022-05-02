@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import DeleteVendorModal from './DeleteVendorModal';
 
 class StuffVendor extends React.Component {
   render() {
@@ -13,6 +14,9 @@ class StuffVendor extends React.Component {
         <Table.Cell>{this.props.vendor.hours}</Table.Cell>
         <Table.Cell>
           <Link id={'edit-vendor-button'} to={`/editvendor/${this.props.vendor._id}`}>Edit</Link>
+        </Table.Cell>
+        <Table.Cell>
+          <DeleteVendorModal vendor={this.props.vendor}/>
         </Table.Cell>
       </Table.Row>
     );
