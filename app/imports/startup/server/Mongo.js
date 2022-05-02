@@ -24,7 +24,6 @@ function addContact(data) {
 
 // to be changed
 function addIngredient({ name, vendor, price }) {
-  console.log(`  Defining ingredient: ${name}`);
   Ingredients.collection.insert({ name: name });
   const nameId = Ingredients.collection.findOne({ name: name })._id;
   IngredientVendorPrice.collection.insert({ ingredient: name, ingredientId: nameId, vendor: vendor, price: price });
@@ -32,7 +31,6 @@ function addIngredient({ name, vendor, price }) {
 
 // to be changed
 function addRecipe({ name, imageURL, prepTime, servingSize, ingredients, owner, description, tags }) {
-  console.log(`  Adding: ${name}`);
   Recipes.collection.insert({ name: name, imageURL: imageURL, prepTime: prepTime, servingSize: servingSize, owner: owner, description: description });
   const recipeId = Recipes.collection.findOne({ name: name })._id;
   ingredients.map(ingredient => IngredientRecipe.collection.insert({
@@ -43,10 +41,6 @@ function addRecipe({ name, imageURL, prepTime, servingSize, ingredients, owner, 
     tagID: Tags.collection.findOne({ name: tag })._id,
     recipeID: recipeId,
   }));
-  // delete later vvv
-  for (let i = 0; i < tags.length; i++) {
-    console.log(Tags.collection.findOne({ name: tags[i] }));
-  }
 }
 
 function addVendor(data) {
