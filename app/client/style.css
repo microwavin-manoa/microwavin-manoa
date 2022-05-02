@@ -63,24 +63,24 @@ h2.ui.header {
 
 #page-header-style {
   font-family: 'Libre Bodoni';
-  font-size: 35px;
+  font-size: 28px;
 }
 
 #table-header-style {
   font-family: 'Libre Bodoni';
-  font-size: 20px;
+  font-size: 18px;
   background-color: #c9c9a9;
 }
 
 #table-text-style {
   font-family: 'Roboto';
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #columnStyle {
   background-color: #ebede4;
   font-family: "Akshar", monospace;
-  font-size: 23px;
+  font-size: 20px;
 }
 
 .ui.signin.button {

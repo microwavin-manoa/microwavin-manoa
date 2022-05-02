@@ -13,8 +13,8 @@ function getTags(name) {
   return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
 
-const tagStyle = { backgroundColor: '#85865f', color: '#f5f0e6', marginBottom: '5px', fontSize: '12px' };
-const cardImageStyle = { alignSelf: 'center', height: 300, width: 300, borderWidth: 1, borderRadius: 75 };
+const tagStyle = { backgroundColor: '#85865f', color: '#f5f0e6', marginBottom: '5px', fontSize: '10px' };
+const cardImageStyle = { alignSelf: 'center', height: 260, width: 300, borderWidth: 1, borderRadius: 75 };
 
 class RecipeCard extends React.Component {
   render() {
@@ -23,16 +23,17 @@ class RecipeCard extends React.Component {
       <Card id="individual-recipe-page-button" href={`#/recipe/${this.props.recipe._id}`}>
         <Image style={cardImageStyle} src={this.props.recipe.imageURL} wrapped/>
         <Card.Content>
-          <Card.Header id="card-title">{this.props.recipe.name}</Card.Header>
+          <Card.Header id="card-title" style={{ fontSize: '25px' }}>{this.props.recipe.name}</Card.Header>
           <Card.Meta>
             Serving size: {this.props.recipe.servingSize}
           </Card.Meta>
           <Card.Meta>
             Prep time: {this.props.recipe.prepTime}
           </Card.Meta>
-        </Card.Content>
-        <Card.Content extra>
-          {_.map(tagData, (tag, index) => <Label tag key={index} style={tagStyle}>{tag}</Label>)}
+          <Card.Meta>
+            <br/>
+            {_.map(tagData, (tag, index) => <Label key={index} style={tagStyle}>{tag}</Label>)}
+          </Card.Meta>
         </Card.Content>
       </Card>
     );

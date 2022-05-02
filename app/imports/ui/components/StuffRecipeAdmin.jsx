@@ -17,8 +17,8 @@ function getTags(name) {
   return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
 
-const tagStyle = { backgroundColor: '#85865f', color: '#f5f0e6', marginBottom: '5px', fontSize: '14.5px' };
-const ingStyle = { backgroundColor: '#4f583d', color: '#f5f0e6', marginBottom: '5px', fontSize: '15px' };
+const tagStyle = { backgroundColor: '#85865f', color: '#f5f0e6', marginBottom: '5px', fontSize: '12.5px' };
+const ingStyle = { backgroundColor: '#4f583d', color: '#f5f0e6', marginBottom: '5px', fontSize: '12px' };
 
 // returns an array of ingredients for this recipe
 function getIngredients(name) {
@@ -44,7 +44,6 @@ class StuffRecipeAdmin extends React.Component {
         <Table.Cell>
           {_.map(tagData, (tag, index) => <Label style={tagStyle} tag key={index}>{tag}</Label>)}
         </Table.Cell>
-        <Table.Cell>{this.props.recipe.description}</Table.Cell>
         <Table.Cell>{this.props.recipe.owner}</Table.Cell>
         <Table.Cell>
           <Link id={'edit-recipe-button-admin'} to={`/editrecipe/${this.props.recipe._id}`}>Edit</Link>

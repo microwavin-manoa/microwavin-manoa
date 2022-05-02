@@ -27,7 +27,7 @@ class AdminPage extends React.Component {
     // define styles
     const buttonStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
     const margins = { marginLeft: 25, marginRight: 25 };
-    const pageHeader = { fontFamily: 'Libre Bodoni', fontSize: 35 };
+    const pageHeader = { fontFamily: 'Libre Bodoni', fontSize: 28 };
     return (
       <div id={'admin-page'} style={margins}>
         <AdminSidebar/>
@@ -43,7 +43,6 @@ class AdminPage extends React.Component {
                 <Table.HeaderCell id="table-header-style">Serving Size</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style">Ingredients</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style">Tags</Table.HeaderCell>
-                <Table.HeaderCell id="table-header-style">Description</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style">Owner</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style">Edit</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style">Delete</Table.HeaderCell>
