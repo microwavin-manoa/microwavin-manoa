@@ -1,6 +1,4 @@
 import React from 'react';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Meteor } from 'meteor/meteor';
 import { Table, Image, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -10,6 +8,7 @@ import { TagRecipe } from '../../api/tag/TagRecipe';
 import { Tags } from '../../api/tag/Tags';
 import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
 import { Ingredients } from '../../api/ingredient/Ingredient';
+import DeleteRecipeModal from './DeleteRecipeModal';
 
 // returns an array of tags for this recipe
 function getTags(name) {
@@ -40,7 +39,7 @@ class StuffRecipeAdmin extends React.Component {
         <Table.Cell>{this.props.recipe.prepTime}</Table.Cell>
         <Table.Cell>{this.props.recipe.servingSize}</Table.Cell>
         <Table.Cell>
-          {_.map(ingredientData, (ing, index) => <Label style={ingStyle}key={index}>{ing}</Label>)}
+          {_.map(ingredientData, (ing, index) => <Label style={ingStyle} key={index}>{ing}</Label>)}
         </Table.Cell>
         <Table.Cell>
           {_.map(tagData, (tag, index) => <Label style={tagStyle} tag key={index}>{tag}</Label>)}
@@ -49,6 +48,9 @@ class StuffRecipeAdmin extends React.Component {
         <Table.Cell>{this.props.recipe.owner}</Table.Cell>
         <Table.Cell>
           <Link id={'edit-recipe-button-admin'} to={`/editrecipe/${this.props.recipe._id}`}>Edit</Link>
+        </Table.Cell>
+        <Table.Cell>
+          <DeleteRecipeModal recipe={this.props.recipe}/>
         </Table.Cell>
       </Table.Row>
     );
@@ -60,14 +62,4 @@ StuffRecipeAdmin.propTypes = {
   recipe: PropTypes.object.isRequired,
 };
 
-export default withTracker(() => {
-  const sub1 = Meteor.subscribe(Recipes.userPublicationName);
-  const sub2 = Meteor.subscribe(Tags.userPublicationName);
-  const sub3 = Meteor.subscribe(TagRecipe.userPublicationName);
-  const sub4 = Meteor.subscribe(IngredientRecipe.userPublicationName);
-  const sub5 = Meteor.subscribe(Ingredients.userPublicationName);
-  const ready = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready();
-  return {
-    ready,
-  };
-})(StuffRecipeAdmin);
+export default StuffRecipeAdmin;

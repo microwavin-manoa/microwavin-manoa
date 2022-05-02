@@ -9,6 +9,10 @@ import StuffVendor from '../components/StuffVendor';
 import AdminSidebar from '../components/Sidebar';
 import { Recipes } from '../../api/recipe/Recipes';
 import { Vendors } from '../../api/vendor/Vendors';
+import { Tags } from '../../api/tag/Tags';
+import { TagRecipe } from '../../api/tag/TagRecipe';
+import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
+import { Ingredients } from '../../api/ingredient/Ingredient';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class AdminPage extends React.Component {
@@ -40,6 +44,7 @@ class AdminPage extends React.Component {
                 <Table.HeaderCell style={tableHeadStyle}>Description</Table.HeaderCell>
                 <Table.HeaderCell style={tableHeadStyle}>Owner</Table.HeaderCell>
                 <Table.HeaderCell style={tableHeadStyle}>Edit</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Delete</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -56,6 +61,7 @@ class AdminPage extends React.Component {
                 <Table.HeaderCell style={tableHeadStyle}>Address</Table.HeaderCell>
                 <Table.HeaderCell style={tableHeadStyle}>Hours</Table.HeaderCell>
                 <Table.HeaderCell style={tableHeadStyle}>Edit Vendor</Table.HeaderCell>
+                <Table.HeaderCell style={tableHeadStyle}>Delete</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -84,8 +90,12 @@ export default withTracker(() => {
   // Get access to Recipes and Vendors documents.
   const sub1 = Meteor.subscribe(Recipes.userPublicationName);
   const sub2 = Meteor.subscribe(Vendors.userPublicationName);
+  const sub3 = Meteor.subscribe(Tags.userPublicationName);
+  const sub4 = Meteor.subscribe(TagRecipe.userPublicationName);
+  const sub5 = Meteor.subscribe(IngredientRecipe.userPublicationName);
+  const sub6 = Meteor.subscribe(Ingredients.userPublicationName);
   // Determine if the subscriptions are ready
-  const ready = sub1.ready() && sub2.ready();
+  const ready = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready();
   // Get the Stuff documents
   let recipes = Recipes.collection.find().fetch();
   recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
