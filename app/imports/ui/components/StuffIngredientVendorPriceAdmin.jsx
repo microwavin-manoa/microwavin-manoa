@@ -13,25 +13,28 @@ function formatPrice(price) {
 
 function getVendor(name) {
   const ingID = Ingredients.collection.findOne({ name })._id;
-  const ingredientVal = _.pluck(IngredientVendorPrice.collection.find({ ingID: ingID }).fetch(), 'ingredientID');
-  return _.flatten(ingredientVal.map(vendorID => _.pluck(Vendors.collection.find({ _id: vendorID }).fetch(), 'name')));
+  const vendorData = IngredientVendorPrice.collection.findOne({ ingredientId: ingID });
+  return vendorData.vendor;
 }
 
 class StuffIngredientVendorPrice extends React.Component {
   render() {
-    const vendorData = getVendor(this.props.ivp.ingredient);
+    console.log(this.props.ivp.ingredient);
+    const vendorName = getVendor(this.props.ivp.ingredient);
+    console.log(vendorName);
     return (
       <Table.Row>
         <Table.Cell>
           {this.props.ivp.ingredient}
-          <EditPopup ing={this.props.ivp.ingredient} vendorName={this.props.vendorName}/>
         </Table.Cell>
         <Table.Cell>
           {formatPrice(this.props.ivp.price)}
-          <EditPopup ing={this.props.ivp} vendorName={this.props.vendorName}/>
         </Table.Cell>
         <Table.Cell>
-          {_.map(vendorData, (vendor, index) => <Label key={index}>{vendor}</Label>)}
+          {vendorName}
+        </Table.Cell>
+        <Table.Cell>
+          
         </Table.Cell>
       </Table.Row>
     );
