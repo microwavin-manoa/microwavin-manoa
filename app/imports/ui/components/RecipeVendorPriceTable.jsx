@@ -15,9 +15,11 @@ function getVendorID(name) {
 class RecipeVendorPriceTable extends React.Component {
 
   render() {
+    const colStyle = { backgroundColor: '#ebede4' };
+    const tableStyle = { fontSize: 15 };
     return (
-      <Table.Row>
-        <Table.Cell>{this.props.name}</Table.Cell>
+      <Table.Row style={tableStyle}>
+        <Table.Cell style={colStyle} width="4">{this.props.name}</Table.Cell>
         <Table.Cell>
           <Link to={`/vendor/${getVendorID(this.props.vendor)}`}>{this.props.vendor}</Link>
         </Table.Cell>
