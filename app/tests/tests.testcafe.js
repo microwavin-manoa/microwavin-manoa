@@ -79,12 +79,10 @@ test('Test that all pages show up for Admin', async (testController) => {
   await editRecipe.isDisplayed(testController);
   // Check if AddVendorPage is displayed from Admin page
   await navBar.gotoAdminPage(testController);
-  await adminPage.isDisplayed(testController);
   await adminPage.gotoAddVendorPage(testController);
   await addVendorPage.isDisplayed(testController);
   // Check if EditVendorPage is displayed from Admin page
   await navBar.gotoAdminPage(testController);
-  await adminPage.isDisplayed(testController);
   await adminPage.gotoEditVendorPage(testController);
   await editVendorPage.isDisplayed(testController);
   // Check if AllVendorsPage is displayed
@@ -111,7 +109,6 @@ test('Test that all pages show up for Admin', async (testController) => {
 test('Test that Add Vendor works for admin', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
-  await navBar.gotoAdminPage(testController);
   await navBar.gotoAddRecipePage(testController);
   await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
   await navBar.ensureLogout(testController);
@@ -125,19 +122,11 @@ test('Test that filter for Search Recipes form works for admin', async (testCont
   await navBar.ensureLogout(testController);
 });
 
-test('Test that Edit Recipes form works for admin', async (testController) => {
+test.only('Test that Edit Recipes form works for admin', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoMyRecipesPage(testController);
   await myRecipesPage.gotoEditRecipe(testController);
   await editRecipe.editRecipeForm(testController);
-  await navBar.ensureLogout(testController);
-});
-
-test('Test that Add Recipe works for admin', async (testController) => {
-  await navBar.gotoSigninPage(testController);
-  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
-  await navBar.gotoAddRecipePage(testController);
-  await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
   await navBar.ensureLogout(testController);
 });

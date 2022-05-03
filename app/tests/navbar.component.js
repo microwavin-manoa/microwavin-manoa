@@ -12,6 +12,8 @@ class NavBar {
   }
 
   async gotoSigninPage(testController) {
+    await testController.hover('#login-button');
+    await testController.click('#login-button');
     await testController.click('#login-button');
     await testController.click('#login-button');
   }
