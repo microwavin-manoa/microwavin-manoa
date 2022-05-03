@@ -14,12 +14,12 @@ class NavBar extends React.Component {
     const signinButton = { backgroundColor: '#85865f', color: '#f5f0e6' };
     const signupButton = { backgroundColor: '#4f583d', color: '#f5f0e6' };
     const font = { color: '#f5f0e6' };
-    const headerColor = { color: '#4f583d' };
+    // const headerColor = { color: '#4f583d' };
     return (
       <Segment id={'navbar'}>
         <Menu inverted style={menuStyle} attached="top" borderless pointing secondary>
           <Menu.Item as={NavLink} activeClassName="" exact to="/" style={{ height: '43px' }}>
-            <Header as='h1' style={headerColor}>Microwavin Manoa</Header>
+            <Header as='h1'>Microwavin Manoa</Header>
           </Menu.Item>
           {this.props.currentUser ? (
             [<Menu.Item id="add-recipe-button" as={NavLink} style={headerFont} activeClassName="active" exact to="/add" key='add'><Icon name='add'/>Add Recipe</Menu.Item>,

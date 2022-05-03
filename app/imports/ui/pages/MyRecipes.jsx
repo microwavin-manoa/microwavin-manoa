@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Table, Header, Loader, Image } from 'semantic-ui-react';
+import { Table, Header, Loader, Image, Container } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Recipes } from '../../api/recipe/Recipes';
@@ -27,24 +27,29 @@ class MyRecipes extends React.Component {
         <br/>
         <Header as="h2" textAlign="center" id="page-header-style">My Recipes</Header>
         <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-        <Table celled striped>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell id="table-header-style">Name</Table.HeaderCell>
-              <Table.HeaderCell id="table-header-style">Image</Table.HeaderCell>
-              <Table.HeaderCell id="table-header-style">Prep-Time</Table.HeaderCell>
-              <Table.HeaderCell id="table-header-style">Serving Size</Table.HeaderCell>
-              <Table.HeaderCell id="table-header-style">Ingredients</Table.HeaderCell>
-              <Table.HeaderCell id="table-header-style">Tags</Table.HeaderCell>
-              <Table.HeaderCell id="table-header-style">Description</Table.HeaderCell>
-              <Table.HeaderCell id="table-header-style">Edit</Table.HeaderCell>
-              <Table.HeaderCell id="table-header-style">Delete</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body style = {tableStyle}>
-            {this.props.recipes.map((recipe) => <StuffRecipe key={recipe._id} recipe={recipe} />)}
-          </Table.Body>
-        </Table>
+        {(this.props.recipes.length > 0) ?
+          <Table celled striped>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell id="table-header-style">Name</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Image</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Prep-Time</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Serving Size</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Ingredients</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Tags</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Description</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Edit</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style">Delete</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body style = {tableStyle}>
+              {this.props.recipes.map((recipe) => <StuffRecipe key={recipe._id} recipe={recipe} />)}
+            </Table.Body>
+          </Table> : ''}
+        {(this.props.recipes.length === 0) ?
+          <Container>
+            <Header as='h4'>You haven&apos;t made any recipes yet!</Header>
+          </Container> : ''}
       </div>
     );
   }

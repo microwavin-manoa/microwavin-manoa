@@ -27,12 +27,14 @@ class AdminPage extends React.Component {
     // define styles
     const buttonStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
     const margins = { marginLeft: 25, marginRight: 25 };
-    const pageHeader = { fontFamily: 'Libre Bodoni', fontSize: 28 };
+    // this style is already in css as #page-header-style so I commented it out
+    // and replaced the id so it's easier to edit later where pageHeader is used
+    // const pageHeader = { fontFamily: 'Libre Bodoni', fontSize: 28 };
     return (
       <div id={'admin-page'} style={margins}>
         <AdminSidebar/>
         <div style={{ marginTop: '30px' }}>
-          <Header as="h2" textAlign="center" id='recipeHeader' style={pageHeader}>All Recipes</Header>
+          <Header as="h2" textAlign="center" id='page-header-style'>All Recipes</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <Table celled>
             <Table.Header >
@@ -52,7 +54,7 @@ class AdminPage extends React.Component {
               {this.props.recipes.map((recipe) => <StuffRecipeAdmin key={recipe._id} recipe={recipe} />)}
             </Table.Body>
           </Table>
-          <Header as="h2" textAlign="center" id='vendorHeader' style={pageHeader}>Vendor Profiles</Header>
+          <Header as="h2" textAlign="center" id='page-header-style'>Vendor Profiles</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>
           <Table celled>
             <Table.Header>
