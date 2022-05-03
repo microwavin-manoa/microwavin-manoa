@@ -17,7 +17,7 @@ class AllVendors extends React.Component {
   renderPage() {
     return (
       <Container id = "all-vendors-page" style={{ marginTop: '30px' }}>
-        <Header as="h2" textAlign="center">Vendors</Header>
+        <Header as="h2" textAlign="center" id='page-header-style'>Vendors</Header>
         <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>
         <br/>
         <Card.Group centered>

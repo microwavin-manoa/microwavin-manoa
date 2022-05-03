@@ -71,12 +71,12 @@ class SearchRecipe extends React.Component {
     recipeMap = recipeMap.sort((a, b) => a.name.localeCompare(b.name));
     return (
       <Container id="search-recipe-page" style={{ marginTop: '30px' }}>
-        <Header as="h2" textAlign="center">Search Recipes</Header>
+        <Header as="h2" textAlign="center" id='page-header-style'>Search Recipes</Header>
         <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
         <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
           <Segment>
             <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
-            <SubmitField id='submit' value='Submit'/>
+            <SubmitField id='submit' value='Filter'/>
             <Button basic style={{ marginLeft: '20px' }} onClick={() => this.submit({ tags: [] }, fRef)}>Display all</Button>
           </Segment>
         </AutoForm>

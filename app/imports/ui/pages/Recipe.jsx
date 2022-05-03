@@ -63,7 +63,7 @@ class Recipe extends React.Component {
         <Grid verticalAlign='middle' textAlign='center' padded>
           <Grid.Row stretched>
             <br/>
-            <Header as="h1" textAlign="center">{this.props.doc.name}</Header>
+            <Header as="h1" textAlign="center" id='page-header-style'>{this.props.doc.name}</Header>
           </Grid.Row>
           <Grid.Row>
             <Image size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-20px' }}/>

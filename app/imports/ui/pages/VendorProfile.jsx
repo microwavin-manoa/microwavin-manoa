@@ -45,7 +45,7 @@ class VendorProfile extends React.Component {
         <Grid textAlign='center'>
           <Grid.Row stretched>
             <br/>
-            <Header centered as={'h1'}>{this.props.doc.name}</Header>
+            <Header centered as='h1' id='page-header-style'>{this.props.doc.name}</Header>
           </Grid.Row>
           <Grid.Row>
             <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-30px' }}/>
