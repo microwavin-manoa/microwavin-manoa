@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Image, Grid, Table, Container, Loader, Label } from 'semantic-ui-react';
+import { Header, Image, Grid, Table, Container, Loader, Label, Icon } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -73,6 +73,9 @@ class Recipe extends React.Component {
           <Grid.Column width={5}>
             <Image size='large' rounded src={this.props.doc.imageURL}/><br/>
             <Grid.Row>{_.map(allTags, (tag, index) => <Label tag key={index} style={tagStyle}>{tag}</Label>)}</Grid.Row>
+            <br/>
+            <Grid.Row><Icon name={'food'} style={{ color: '#4F583D' }}/><b>Serving Size:</b> {this.props.doc.servingSize}</Grid.Row>
+            <Grid.Row><Icon name={'clock outline'} style={{ color: '#4F583D' }}/><b>Prep Time:</b> {this.props.doc.prepTime}</Grid.Row>
           </Grid.Column>
           <Grid.Column width={5}>
             <div>
