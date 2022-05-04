@@ -1,9 +1,9 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Button, Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Ingredients } from '../../api/ingredient/Ingredient';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
-import { Link } from 'react-router-dom';
 
 function formatPrice(price) {
   return `$${(Math.round(price * 100) / 100).toFixed(2)}`;
@@ -19,7 +19,7 @@ class StuffIngredientVendorPrice extends React.Component {
   render() {
     const vendorName = getVendor(this.props.ivp.ingredient);
     return (
-      <Table.Row>
+      <Table.Row id="table-text-style">
         <Table.Cell>
           {this.props.ivp.ingredient}
         </Table.Cell>
@@ -30,7 +30,7 @@ class StuffIngredientVendorPrice extends React.Component {
           {vendorName}
         </Table.Cell>
         <Table.Cell>
-          <Link id={'edit-ingredient-button-admin'} to={`/editingredient/${this.props.ivp.ingredientId}`}>Edit</Link>
+          <Link id='edit-ingredient-button-admin' to={`/editingredient/${this.props.ivp.ingredientId}`}><Button size='big' icon='edit' id='edit-button-style'/></Link>
         </Table.Cell>
       </Table.Row>
     );

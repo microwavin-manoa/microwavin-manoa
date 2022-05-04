@@ -56,7 +56,7 @@ class AdminPage extends React.Component {
           </Table>
           <Header as="h2" textAlign="center" id='vendorHeader'>Vendor Profiles</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>
-          <Table celled textAlign='center'>
+          <Table celled attached textAlign='center'>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell id="table-header-style" >Vendor Name</Table.HeaderCell>
@@ -71,9 +71,7 @@ class AdminPage extends React.Component {
               {this.props.vendors.map((vendor) => <StuffVendor key={vendor._id} vendor={vendor} />)}
             </Table.Body>
           </Table>
-          <div>
-            <Button as={Link} to='/addvendor' id={'add-vendor-button'} fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
-          </div>
+          <Button as={Link} to='/addvendor' id={'add-vendor-button'} fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
           <Header as="h2" textAlign="center" id='ingredientHeader'>Ingredients</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>
           <Table celled>
@@ -82,7 +80,7 @@ class AdminPage extends React.Component {
                 <Table.HeaderCell id="table-header-style" >Ingredient</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style" >Price</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style" >Vendor</Table.HeaderCell>
-                <Table.HeaderCell id="table-header-style" >Edit</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" > </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -123,7 +121,8 @@ export default withTracker(() => {
   let recipes = Recipes.collection.find().fetch();
   recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
   const vendors = Vendors.collection.find().fetch();
-  const ingredients = IngredientVendorPrice.collection.find().fetch();
+  let ingredients = IngredientVendorPrice.collection.find().fetch();
+  ingredients = ingredients.sort((a, b) => a.ingredient.localeCompare(b.ingredient));
   return {
     recipes,
     vendors,

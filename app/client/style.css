@@ -71,7 +71,7 @@ h2.ui.header {
   font-size: 25px;
 }
 
-#page-header-style, #recipeHeader, #vendorHeader {
+#page-header-style, #recipeHeader, #vendorHeader, #ingredientHeader {
   font-family: 'Libre Bodoni', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 28px;
   color: #4F583D;
