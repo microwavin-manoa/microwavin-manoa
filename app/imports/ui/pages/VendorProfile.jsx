@@ -39,7 +39,8 @@ class VendorProfile extends React.Component {
     let vendorData = getVendorData(this.props.doc.name);
     vendorData = _.zip(vendorData.ingredient, vendorData.ingredientID, vendorData.price);
     vendorData = vendorData.map(item => makeObject(item));
-    const tableHeadStyle = { backgroundColor: '#85865F' };
+    const tableHeadStyle = { backgroundColor: '#c9c9a9', fontFamily: 'Libre Bodoni' };
+    const textStyle = { fontFamily: 'Libre Bodoni' };
     return (
       <Container id={'vendor-profile-page'}>
         <Grid textAlign='center'>
@@ -62,7 +63,7 @@ class VendorProfile extends React.Component {
               </Grid.Row>
             </Grid.Column>
             <Grid.Column width={5}>
-              <Header as="h3" textAlign="center">Stock</Header>
+              <Header as="h3" textAlign="center" style={textStyle}>Stock</Header>
               <Image centered size={'small'} src={'images/curl-divider.png'} style={{ marginTop: '-27px' }}/>
               <Table celled>
                 <Table.Header>
