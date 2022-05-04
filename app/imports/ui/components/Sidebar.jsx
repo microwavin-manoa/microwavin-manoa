@@ -23,7 +23,7 @@ class AdminSidebar extends React.Component {
             List of Vendors
         </Menu.Item>
         <Menu.Item as={Link} to={'/admin#ingredientHeader'}>
-          <Icon name='stock' />
+          <Icon name='shopping basket' />
           List of Ingredients
         </Menu.Item>
       </Segment>

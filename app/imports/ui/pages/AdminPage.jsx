@@ -82,6 +82,7 @@ class AdminPage extends React.Component {
                 <Table.HeaderCell id="table-header-style" >Ingredient</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style" >Price</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style" >Vendor</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" >Edit</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
