@@ -3,7 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import { Table, Header, Loader, Button, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
+// import { Link } from 'react-router-dom';
 import StuffRecipeAdmin from '../components/StuffRecipeAdmin';
 import StuffVendor from '../components/StuffVendor';
 import AdminSidebar from '../components/Sidebar';
@@ -28,13 +29,13 @@ class AdminPage extends React.Component {
     const buttonStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
     const margins = { marginLeft: 25, marginRight: 25 };
     return (
-      <div id={'admin-page'} style={margins}>
+      <div id='admin-page' style={margins}>
         <AdminSidebar/>
         <div style={{ marginTop: '30px' }}>
           <Header as="h2" textAlign="center" id='recipeHeader'>All Recipes</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-          <Table celled>
-            <Table.Header >
+          <Table celled style={{ textAlign: 'center' }}>
+            <Table.Header>
               <Table.Row >
                 <Table.HeaderCell id="table-header-style" >Name</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style">Image</Table.HeaderCell>
@@ -43,8 +44,8 @@ class AdminPage extends React.Component {
                 <Table.HeaderCell id="table-header-style">Ingredients</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style">Tags</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style">Owner</Table.HeaderCell>
-                <Table.HeaderCell id="table-header-style">Edit</Table.HeaderCell>
-                <Table.HeaderCell id="table-header-style">Delete</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style"> </Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style"> </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -53,15 +54,15 @@ class AdminPage extends React.Component {
           </Table>
           <Header as="h2" textAlign="center" id='vendorHeader'>Vendor Profiles</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>
-          <Table celled>
+          <Table celled textAlign='center'>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell id="table-header-style" >Vendor Name</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style" >Image</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style" >Address</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style" >Hours</Table.HeaderCell>
-                <Table.HeaderCell id="table-header-style" >Edit Vendor</Table.HeaderCell>
-                <Table.HeaderCell id="table-header-style" >Delete</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" > </Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" > </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -72,7 +73,7 @@ class AdminPage extends React.Component {
         <div>
           <Button as={Link} to='/addvendor' id={'add-vendor-button'} fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
         </div>
-
+        <Button as={Link} to='/admin#admin-page' icon='arrow up' circular id='to-top-button' size='big'/>
       </div>
     );
   }

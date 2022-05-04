@@ -1,7 +1,8 @@
 import React from 'react';
-import { Grid, Segment, Header, Image } from 'semantic-ui-react';
+import { Grid, Segment, Header, Image, Button } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
+import { Link } from 'react-router-dom';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Vendors } from '../../api/vendor/Vendors';
@@ -42,6 +43,7 @@ class AddVendor extends React.Component {
     return (
       <Grid id={'add-vendor-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>
+          <Link to='/admin'><Button id='back-button-style' content='Back to admin' icon='left arrow' labelPosition='left'/></Link>
           <Header as="h2" textAlign="center">Add Vendor</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >

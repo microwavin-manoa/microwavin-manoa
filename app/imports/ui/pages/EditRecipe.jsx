@@ -1,11 +1,13 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment, Image } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Image, Button } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Link } from 'react-router-dom';
 import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
+import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Recipes } from '../../api/recipe/Recipes';
@@ -83,6 +85,12 @@ class EditRecipe extends React.Component {
     return (
       <Grid id={'edit-recipe-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>
+          {Roles.userIsInRole(Meteor.userId(), 'admin') ?
+            <Link to='/admin'><Button id='back-button-style' content='Go to admin page' icon='left arrow' labelPosition='left'/></Link>
+            : ''}
+          {!(Roles.userIsInRole(Meteor.userId(), 'admin')) ?
+            <Link to='/myrecipes'><Button id='back-button-style' content='Back to my recipes' icon='left arrow' labelPosition='left'/></Link>
+            : ''}
           <Header as="h2" textAlign="center" style={{ color: '#4f583d' }}>Edit Recipe</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>

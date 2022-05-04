@@ -27,7 +27,7 @@ class DeleteVendorModal extends React.Component {
         onOpen={() => this.setState({ open: true })}
         open={this.state.open}
         size='small'
-        trigger={<Button icon='trash'/>}
+        trigger={<Button size='big' icon='trash' id='edit-button-style'/>}
       >
         <Header icon size='large'>
           <Icon name='trash' />

@@ -5,6 +5,7 @@ import SimpleSchema from 'simpl-schema';
 import { Container, Header, Loader, Card, Segment, Image, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { HashLink as Link } from 'react-router-hash-link';
 import { _ } from 'meteor/underscore';
 import { AutoForm, SubmitField } from 'uniforms-semantic';
 import { Recipes } from '../../api/recipe/Recipes';
@@ -84,6 +85,7 @@ class SearchRecipe extends React.Component {
         <Card.Group centered itemsPerRow={5}>
           {(this.state.isFiltered) ? recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>) : this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
         </Card.Group>
+        <Button as={Link} to='/search#search-recipe-page' icon='arrow up' circular id='to-top-button' size='big'/>
       </Container>
     );
   }
