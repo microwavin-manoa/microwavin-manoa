@@ -38,6 +38,6 @@
     "start": "meteor --no-release-check --exclude-archs web.browser.legacy,web.cordova --settings ../config/settings.development.json",
     "lint": "eslint --quiet --fix --ext .jsx --ext .js ./imports",
     "testcafe-development": "testcafe chrome tests/*.testcafe.js",
-    "testcafe": "testcafe chrome:headless tests/*.testcafe.js -q --app \"meteor npm run start\" --cache"
+    "testcafe": "testcafe chrome:headless tests/*.testcafe.js -q --app \"meteor npm run start\" --page-request-timeout 70000"
   }
 }
