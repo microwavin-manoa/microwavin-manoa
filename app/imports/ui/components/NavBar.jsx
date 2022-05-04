@@ -34,26 +34,17 @@ class NavBar extends React.Component {
           <Menu.Item position="right">
             {this.props.currentUser === '' ? (
               <Button.Group>
-                <Button animated='vertical' style={signupButton}>
-                  <Button.Content style={font} hidden as={NavLink} exact to="/signup"><Icon name='signup'/></Button.Content>
-                  <Button.Content visible>
-                    Sign Up!
-                  </Button.Content>
+                <Button style={signupButton}>
+                  <Button.Content style={font} visible as={NavLink} exact to="/signup"><Icon name='signup'/></Button.Content>
                 </Button>
                 <ButtonOr/>
-                <Button id="login-button" animated='vertical' style={signinButton}>
-                  <Button.Content style={font} inverted hidden as={NavLink} exact to="/signin"><Icon name='sign-in'/></Button.Content>
-                  <Button.Content visible>
-                    Sign In!
-                  </Button.Content>
+                <Button id="login-button" style={signinButton}>
+                  <Button.Content style={font} inverted visible as={NavLink} exact to="/signin"><Icon name='sign-in'/></Button.Content>
                 </Button>
               </Button.Group>
             ) : (
-              <Button id="logout-button" animated='vertical' style={signinButton}>
-                <Button.Content style={font} inverted hidden as={NavLink} exact to="/signout">Sign Out</Button.Content>
-                <Button.Content visible>
-                  <Icon name='sign-out'/>
-                </Button.Content>
+              <Button id="logout-button" style={signinButton}>
+                <Button.Content style={font} inverted visible as={NavLink} exact to="/signout">Sign Out</Button.Content>
               </Button>
             )}
           </Menu.Item>
