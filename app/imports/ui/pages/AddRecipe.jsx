@@ -60,7 +60,7 @@ class AddRecipe extends React.Component {
     return (
       <Grid container centered style={{ marginTop: '10px' }} id={'add-recipe-page'}>
         <Grid.Column centered>
-          <Header as="h2" textAlign="center">Add Recipe</Header>
+          <Header as="h2" textAlign="center" id='page-header-style'>Add Recipe</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <Segment style={submitStyle}>
             <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>

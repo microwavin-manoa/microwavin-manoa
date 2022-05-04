@@ -2,6 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@0;1&family=Roboto:wght@300;400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
 
+/*changes the background color*/
+body {
+  background-color: #f5f0e6 !important;
+}
+
 a {
   color: #85865F !important;
 }
@@ -16,7 +21,7 @@ a:hover {
 }
 
 h2.ui.header {
-  font-family: 'Libre Bodoni';
+  font-family: 'Libre Bodoni', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   color: #4f583d;
 }
 
@@ -42,7 +47,7 @@ h2.ui.header {
 }
 .landing-content1 h1.ui.header {
   color: white;
-  font-family: 'Merienda';
+  font-family: 'Merienda', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 70px;
 }
 .landing-content1 h2.ui.header {
@@ -53,7 +58,12 @@ h2.ui.header {
 }
 .landing-content2 h2.ui.header, .landing-content2 h3.ui.header{
   color: #4f583d;
-  font-family: 'Merienda';
+  font-family: 'Merienda', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+#navbar h1.ui.header {
+  font-family: "Merienda", 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  color: #4F583D;
 }
 
 #card-title {
@@ -61,20 +71,26 @@ h2.ui.header {
   font-size: 25px;
 }
 
-#page-header-style {
-  font-family: 'Libre Bodoni';
+#page-header-style, #recipeHeader, #vendorHeader {
+  font-family: 'Libre Bodoni', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 28px;
+  color: #4F583D;
+}
+
+#table-background {
+  background-color: #fcfaf4;
 }
 
 #table-header-style {
-  font-family: 'Libre Bodoni';
+  font-family: 'Libre Bodoni', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 18px;
   background-color: #c9c9a9;
 }
 
 #table-text-style {
-  font-family: 'Roboto';
+  font-family: 'Roboto', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 14px;
+  background-color: #fcfaf4;
 }
 
 #columnStyle {
@@ -82,7 +98,6 @@ h2.ui.header {
   font-family: "Akshar", monospace;
   font-size: 20px;
 }
-
 .ui.signin.button {
   background-color: #a37f2a !important;
   color: #f5f0e6;
@@ -94,7 +109,7 @@ h2.ui.header {
 .footer {
   background-Color: #ceb793;
   color: #f5f0e6;
-  padding: 11px 0px;
+  padding: 11px 0;
   font-size: 14px;
   margin-top: 50px;
 }

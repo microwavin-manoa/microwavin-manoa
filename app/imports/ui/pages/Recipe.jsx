@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Image, Grid, Table, Container, Loader, Label } from 'semantic-ui-react';
+import { Header, Image, Grid, Table, Container, Loader, Label, Icon } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -57,13 +57,15 @@ class Recipe extends React.Component {
     const ingredientData = _.sortBy(_.filter(IngredientVendorPrice.collection.find().fetch(), ing => allIngredients.includes(ing.ingredient)), 'ingredient');
     const allTags = getTags(this.props.doc.name);
     const totalPrice = getTotalPrice(ingredientData);
-    const tableHeadStyle = { backgroundColor: '#85865F' };
+    const tableHeadStyle = { backgroundColor: '#c9c9a9', fontFamily: 'Libre Bodoni', fontSize: 16 };
+    const headerStyle = { fontFamily: 'Libre Bodoni', fontSize: 20 };
+    const topHeaderStyle = { fontFamily: 'Libre Bodoni', fontSize: 25 };
     return (
       <Container id={'recipe-page'}>
         <Grid verticalAlign='middle' textAlign='center' padded>
           <Grid.Row stretched>
             <br/>
-            <Header as="h1" textAlign="center">{this.props.doc.name}</Header>
+            <Header as="h1" textAlign="center" style={topHeaderStyle}>{this.props.doc.name}</Header>
           </Grid.Row>
           <Grid.Row>
             <Image size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-20px' }}/>
@@ -71,6 +73,9 @@ class Recipe extends React.Component {
           <Grid.Column width={5}>
             <Image size='large' rounded src={this.props.doc.imageURL}/><br/>
             <Grid.Row>{_.map(allTags, (tag, index) => <Label tag key={index} style={tagStyle}>{tag}</Label>)}</Grid.Row>
+            <br/>
+            <Grid.Row><Icon name={'food'} style={{ color: '#4F583D' }}/><b>Serving Size:</b> {this.props.doc.servingSize}</Grid.Row>
+            <Grid.Row><Icon name={'clock outline'} style={{ color: '#4F583D' }}/><b>Prep Time:</b> {this.props.doc.prepTime}</Grid.Row>
           </Grid.Column>
           <Grid.Column width={5}>
             <div>
@@ -86,7 +91,7 @@ class Recipe extends React.Component {
         <Grid padded>
           <Grid.Row centered>
             <div>
-              <Header as='h3' textAlign='center'>Ingredients Lookup</Header>
+              <Header as='h3' textAlign='center' style={headerStyle}>Ingredients Lookup</Header>
               <Image size={'small'} src={'images/curl-divider.png'} style={{ marginTop: '-15px' }}/>
             </div>
             <Table celled>

@@ -31,6 +31,7 @@ function addIngredient({ name, vendor, price }) {
 
 // to be changed
 function addRecipe({ name, imageURL, prepTime, servingSize, ingredients, owner, description, tags }) {
+  console.log(`  Adding: ${name}`);
   Recipes.collection.insert({ name: name, imageURL: imageURL, prepTime: prepTime, servingSize: servingSize, owner: owner, description: description });
   const recipeId = Recipes.collection.findOne({ name: name })._id;
   ingredients.map(ingredient => IngredientRecipe.collection.insert({
