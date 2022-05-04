@@ -81,7 +81,7 @@ class SearchRecipe extends React.Component {
           </Segment>
         </AutoForm>
         <br/><br/>
-        <Card.Group centered itemsPerRow={4}>
+        <Card.Group centered itemsPerRow={5}>
           {(this.state.isFiltered) ? recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>) : this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
         </Card.Group>
       </Container>

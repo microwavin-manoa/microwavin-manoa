@@ -14,7 +14,7 @@ function getTags(name) {
 }
 
 const tagStyle = { backgroundColor: '#85865f', color: '#f5f0e6', marginBottom: '5px', fontSize: '10px' };
-const cardImageStyle = { alignSelf: 'center', height: 260, width: 300, borderWidth: 1, borderRadius: 75 };
+// const cardImageStyle = { alignSelf: 'center', height: 260, width: 300, borderWidth: 1, borderRadius: 75 };
 
 class RecipeCard extends React.Component {
   render() {
@@ -22,7 +22,7 @@ class RecipeCard extends React.Component {
     return (
       <Card id="individual-recipe-page-button" href={`#/recipe/${this.props.recipe._id}`}>
         <Card.Content>
-          <Image style={cardImageStyle} src={this.props.recipe.imageURL} wrapped/>
+          <Image fluid src={this.props.recipe.imageURL} wrapped/>
         </Card.Content>
         <Card.Content>
           <Card.Header id="card-title" style={{ fontSize: '25px' }}>{this.props.recipe.name}</Card.Header>

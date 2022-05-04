@@ -46,6 +46,7 @@ class VendorProfile extends React.Component {
     let vendorData = getVendorData(this.props.doc.name);
     vendorData = _.zip(vendorData.ingredient, vendorData.ingredientID, vendorData.price);
     vendorData = vendorData.map(item => makeObject(item));
+    vendorData = vendorData.sort((a, b) => a.ingredient.localeCompare(b.ingredient));
     const tableHeadStyle = { backgroundColor: '#c9c9a9', fontFamily: 'Libre Bodoni' };
     const mapStyle = { border: 0, opacity: '0.7' };
     const textStyle = { fontFamily: 'Libre Bodoni' };
@@ -69,7 +70,7 @@ class VendorProfile extends React.Component {
                 <br/>
                 <AddIngredientVendor vendorName={this.props.doc.name}/>
                 <br/>
-                <Header as='h4'>Map</Header>
+                <Header as='h4' style={textStyle}>Map</Header>
                 {(isNewVendor(this.props.doc.name)) ?
                   <iframe
                     /* eslint-disable-next-line max-len */
