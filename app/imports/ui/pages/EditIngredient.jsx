@@ -20,11 +20,13 @@ const makeSchema = () => new SimpleSchema({
   vendor: String,
 });
 
+/**
 function getIngredient(name) {
   const ingID = Ingredients.collection.findOne({ name })._id;
   const ingredientData = IngredientVendorPrice.collection.findOne({ ingredientId: ingID });
   return ingredientData.ingredients;
 }
+*/
 
 function getPrice(name) {
   const ingID = Ingredients.collection.findOne({ name })._id;

@@ -48,8 +48,7 @@ class NavBar {
   /** Check that someone is logged in, then click items to logout. */
   async logout(testController) {
     await testController.expect(Selector('#logout-button').exists).ok();
-    await testController.click('#logout-button');
-    await testController.click('#logout-button');
+    await testController.hover('#logout-button');
     await testController.click('#logout-button');
   }
 
