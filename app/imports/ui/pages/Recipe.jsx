@@ -1,9 +1,10 @@
 import React from 'react';
-import { Header, Image, Grid, Table, Container, Loader, Label, Icon } from 'semantic-ui-react';
+import { Header, Image, Grid, Table, Container, Loader, Label, Icon, Button } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
+import { Link } from 'react-router-dom';
 import { Recipes } from '../../api/recipe/Recipes';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import RecipeVendorPriceTable from '../components/RecipeVendorPriceTable';
@@ -65,6 +66,7 @@ class Recipe extends React.Component {
         <Grid verticalAlign='middle' textAlign='center' padded>
           <Grid.Row stretched>
             <br/>
+            <Link to='/search'><Button id='back-button-style' content='See all recipes' icon='left arrow' labelPosition='left'/></Link>
             <Header as="h1" textAlign="center" style={topHeaderStyle}>{this.props.doc.name}</Header>
           </Grid.Row>
           <Grid.Row>
@@ -74,7 +76,7 @@ class Recipe extends React.Component {
             <Image size='large' rounded src={this.props.doc.imageURL}/><br/>
             <Grid.Row>{_.map(allTags, (tag, index) => <Label tag key={index} style={tagStyle}>{tag}</Label>)}</Grid.Row>
             <br/>
-            <Grid.Row><Icon name={'food'} style={{ color: '#4F583D' }}/><b>Serving Size:</b> {this.props.doc.servingSize}</Grid.Row>
+            <Grid.Row><Icon name={'food'} style={{ color: '#4F583D', marginBottom: '10px' }}/><b>Serving Size:</b> {this.props.doc.servingSize}</Grid.Row>
             <Grid.Row><Icon name={'clock outline'} style={{ color: '#4F583D' }}/><b>Prep Time:</b> {this.props.doc.prepTime}</Grid.Row>
           </Grid.Column>
           <Grid.Column width={5}>

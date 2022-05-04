@@ -117,3 +117,44 @@ h2.ui.header {
 #searchRecipeForm {
   background-color: #CEB793;
 }
+
+#back-button-style {
+  background-color: #b2c1b7;
+  color: #4f583d;
+  position: absolute;
+  /*left: 157px;*/
+  /*left: 120px;*/
+  left: 0;
+  top: 35px;
+}
+#back-button-style:hover {
+  background-color: #98b7a2;
+}
+
+#edit-button-style {
+  background-color: #fcfaf4;
+  color: #c9c9a9;
+  padding: 8px;
+  margin-left: 0;
+}
+#edit-button-style:hover {
+  background-color: #f5e9cf;
+  /*color: #4f583d;*/
+  color: #85865F;
+}
+
+#to-top-button {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #ceb793;
+  color: #f5f0e6 !important;
+  z-index: 1;
+}
+#to-top-button:hover {
+  background-color: #bca37e;
+  z-index: 1;
+}
+#individual-recipe-page-button:hover {
+  z-index: 0;
+}

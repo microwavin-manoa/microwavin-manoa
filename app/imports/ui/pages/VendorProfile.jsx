@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, Grid, Container, Loader, Header, Table, Icon } from 'semantic-ui-react';
+import { Image, Grid, Container, Loader, Header, Table, Icon, Button } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { _ } from 'meteor/underscore';
 import { Vendors } from '../../api/vendor/Vendors';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
@@ -53,8 +54,9 @@ class VendorProfile extends React.Component {
     return (
       <Container id={'vendor-profile-page'}>
         <Grid textAlign='center'>
-          <Grid.Row stretched>
+          <Grid.Row>
             <br/>
+            <Link to='/vendors'><Button id='back-button-style' content='See all vendors' icon='left arrow' labelPosition='left'/></Link>
             <Header centered as='h1' id='page-header-style'>{this.props.doc.name}</Header>
           </Grid.Row>
           <Grid.Row>
@@ -118,17 +120,22 @@ class VendorProfile extends React.Component {
             <Grid.Column width={5}>
               <Header as="h3" textAlign="center" style={textStyle}>Stock</Header>
               <Image centered size={'small'} src={'images/curl-divider.png'} style={{ marginTop: '-27px' }}/>
-              <Table celled>
-                <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell style={tableHeadStyle}>Ingredient</Table.HeaderCell>
-                    <Table.HeaderCell style={tableHeadStyle}>Price</Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  {_.map(vendorData, (ingredient, index) => <StuffIngredientVendorPrice key={index} ivp={ingredient} vendorName={this.props.doc.name}/>)}
-                </Table.Body>
-              </Table>
+              {(vendorData.length === 0) ?
+                <Container>
+                  <Header as='h4' style={{ marginTop: '20px' }}>There isn&apos;t any ingredient<br/>info for this vendor yet!</Header>
+                </Container> : ''}
+              {(vendorData.length > 0) ?
+                <Table celled>
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.HeaderCell style={tableHeadStyle}>Ingredient</Table.HeaderCell>
+                      <Table.HeaderCell style={tableHeadStyle}>Price</Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                  <Table.Body>
+                    {_.map(vendorData, (ingredient, index) => <StuffIngredientVendorPrice key={index} ivp={ingredient} vendorName={this.props.doc.name}/>)}
+                  </Table.Body>
+                </Table> : ''}
             </Grid.Column>
           </Grid.Row>
         </Grid>

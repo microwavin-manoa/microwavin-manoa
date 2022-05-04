@@ -13,13 +13,10 @@ class DeleteRecipeModal extends React.Component {
 
   removeItem(docID) {
     this.setState({ open: false });
-    console.log(`item removed: ${docID}`);
     Recipes.collection.remove(docID);
     let toRemove = IngredientRecipe.collection.find({ recipeID: docID }).fetch();
-    console.log(toRemove);
     toRemove.map((item) => IngredientRecipe.collection.remove(item._id));
     toRemove = TagRecipe.collection.find({ recipeID: docID }).fetch();
-    console.log(toRemove);
     toRemove.map((item) => TagRecipe.collection.remove(item._id));
   }
 
@@ -32,7 +29,7 @@ class DeleteRecipeModal extends React.Component {
         onOpen={() => this.setState({ open: true })}
         open={this.state.open}
         size='small'
-        trigger={<Button icon='trash'/>}
+        trigger={<Button size='big' icon='trash' id='edit-button-style'/>}
       >
         <Header icon size='large'>
           <Icon name='trash' />

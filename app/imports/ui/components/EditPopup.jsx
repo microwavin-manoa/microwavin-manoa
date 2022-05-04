@@ -9,7 +9,6 @@ class EditPopup extends React.Component {
   handleClick = () => this.setState((prevState) => ({ active: !prevState.active }));
 
   render() {
-    const { active } = this.state;
 
     return (
       <Popup onOpen={this.handleClick} onClose={this.handleClick}
@@ -18,7 +17,7 @@ class EditPopup extends React.Component {
         }
         on='click'
         position={'bottom center'}
-        trigger={<Button floated={'right'} size={'tiny'} compact toggle active={active}>Edit</Button>}
+        trigger={<Button size='small' icon='edit' id='edit-button-style' style={{ padding: '4px', float: 'right' }}/>}
       />
     );
   }
