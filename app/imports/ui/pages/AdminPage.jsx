@@ -5,8 +5,10 @@ import { Table, Header, Loader, Button, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { HashLink as Link } from 'react-router-hash-link';
 // import { Link } from 'react-router-dom';
+import AddIngredient from '../components/AddIngredient';
 import StuffRecipeAdmin from '../components/StuffRecipeAdmin';
 import StuffVendor from '../components/StuffVendor';
+import StuffIngredientVendorPriceAdmin from '../components/StuffIngredientVendorPriceAdmin';
 import AdminSidebar from '../components/Sidebar';
 import { Recipes } from '../../api/recipe/Recipes';
 import { Vendors } from '../../api/vendor/Vendors';
@@ -69,9 +71,27 @@ class AdminPage extends React.Component {
               {this.props.vendors.map((vendor) => <StuffVendor key={vendor._id} vendor={vendor} />)}
             </Table.Body>
           </Table>
-        </div>
-        <div>
-          <Button as={Link} to='/addvendor' id={'add-vendor-button'} fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
+          <div>
+            <Button as={Link} to='/addvendor' id={'add-vendor-button'} fluid style={buttonStyle} attached={'bottom'}>Add Vendor</Button>
+          </div>
+          <Header as="h2" textAlign="center" id='ingredientHeader'>Ingredients</Header>
+          <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/>
+          <Table celled>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell id="table-header-style" >Ingredient</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" >Price</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" >Vendor</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" >Edit</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {this.props.ingredients.map((ingredient) => <StuffIngredientVendorPriceAdmin key={ingredient._id} ivp={ingredient} vendorName={ingredient}/>)}
+            </Table.Body>
+          </Table>
+          <div>
+            <AddIngredient id='add-ingredient' fluid style={buttonStyle}/>
+          </div>
         </div>
         <Button as={Link} to='/admin#admin-page' icon='arrow up' circular id='to-top-button' size='big'/>
       </div>
@@ -84,6 +104,7 @@ AdminPage.propTypes = {
   ready: PropTypes.bool.isRequired,
   recipes: PropTypes.array.isRequired,
   vendors: PropTypes.array.isRequired,
+  ingredients: PropTypes.array.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -102,9 +123,11 @@ export default withTracker(() => {
   let recipes = Recipes.collection.find().fetch();
   recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
   const vendors = Vendors.collection.find().fetch();
+  const ingredients = IngredientVendorPrice.collection.find().fetch();
   return {
     recipes,
     vendors,
+    ingredients,
     ready,
   };
 })(AdminPage);

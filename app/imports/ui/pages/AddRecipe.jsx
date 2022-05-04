@@ -49,6 +49,7 @@ class AddRecipe extends React.Component {
   render() {
     // const color = { color: '#4f583d' };
     const textStyle = { color: '#4f583d', fontSize: '16px' };
+    const submitStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
     let fRef = null;
     // get all ingredients and tags to choose from
     const allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'name');
@@ -61,7 +62,7 @@ class AddRecipe extends React.Component {
         <Grid.Column centered>
           <Header as="h2" textAlign="center" id='page-header-style'>Add Recipe</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-          <Segment>
+          <Segment style={submitStyle}>
             <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
               <Segment>
                 <TextField name='name' id='addrecipe-form-name' style={textStyle}/>
@@ -74,7 +75,7 @@ class AddRecipe extends React.Component {
                 <AddIngredient/><br/>
                 <MultiSelectField name='tags' id='addrecipe-form-tags' placeholder='Select tags' style={textStyle}/>
                 <LongTextField name='description' id='addrecipe-form-description' style={textStyle}/>
-                <SubmitField value='Submit' id='addrecipe-form-submit' style={textStyle}/>
+                <SubmitField value='Submit' id='addrecipe-form-submit' style={submitStyle}/>
                 <ErrorsField/>
               </Segment>
             </AutoForm>
