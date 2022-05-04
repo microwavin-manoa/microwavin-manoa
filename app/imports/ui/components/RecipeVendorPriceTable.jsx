@@ -18,7 +18,7 @@ class RecipeVendorPriceTable extends React.Component {
     const colStyle = { backgroundColor: '#ebede4' };
     const tableStyle = { fontSize: 15 };
     return (
-      <Table.Row style={tableStyle}>
+      <Table.Row id='table-background' style={tableStyle}>
         <Table.Cell style={colStyle} width="4">{this.props.name}</Table.Cell>
         <Table.Cell>
           <Link to={`/vendor/${getVendorID(this.props.vendor)}`}>{this.props.vendor}</Link>

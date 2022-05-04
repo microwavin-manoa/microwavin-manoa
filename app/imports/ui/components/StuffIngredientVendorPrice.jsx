@@ -10,7 +10,7 @@ function formatPrice(price) {
 class StuffIngredientVendorPrice extends React.Component {
   render() {
     return (
-      <Table.Row>
+      <Table.Row id='table-background'>
         <Table.Cell>{this.props.ivp.ingredient}</Table.Cell>
         <Table.Cell>
           {formatPrice(this.props.ivp.price)}

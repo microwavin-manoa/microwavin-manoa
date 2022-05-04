@@ -59,7 +59,7 @@ class Recipe extends React.Component {
     const totalPrice = getTotalPrice(ingredientData);
     const tableHeadStyle = { backgroundColor: '#c9c9a9', fontFamily: 'Libre Bodoni', fontSize: 16 };
     const headerStyle = { fontFamily: 'Libre Bodoni', fontSize: 20 };
-    const topHeaderStyle = { fontFamily: 'Libre Bodoni', fontSize: 25};
+    const topHeaderStyle = { fontFamily: 'Libre Bodoni', fontSize: 25 };
     return (
       <Container id={'recipe-page'}>
         <Grid verticalAlign='middle' textAlign='center' padded>

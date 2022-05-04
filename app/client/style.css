@@ -3,9 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
 
 /*changes the background color*/
-/*body {*/
-/*  background-color: #f5f0e6 !important;*/
-/*}*/
+body {
+  background-color: #f5f0e6 !important;
+}
 
 a {
   color: #85865F !important;
@@ -71,10 +71,14 @@ h2.ui.header {
   font-size: 25px;
 }
 
-#page-header-style {
+#page-header-style, #recipeHeader, #vendorHeader {
   font-family: 'Libre Bodoni', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 28px;
   color: #4F583D;
+}
+
+#table-background {
+  background-color: #fcfaf4;
 }
 
 #table-header-style {
@@ -86,6 +90,7 @@ h2.ui.header {
 #table-text-style {
   font-family: 'Roboto', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 14px;
+  background-color: #fcfaf4;
 }
 
 #columnStyle {

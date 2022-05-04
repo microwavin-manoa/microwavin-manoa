@@ -21,7 +21,9 @@ class RecipeCard extends React.Component {
     const tagData = getTags(this.props.recipe.name);
     return (
       <Card id="individual-recipe-page-button" href={`#/recipe/${this.props.recipe._id}`}>
-        <Image style={cardImageStyle} src={this.props.recipe.imageURL} wrapped/>
+        <Card.Content>
+          <Image style={cardImageStyle} src={this.props.recipe.imageURL} wrapped/>
+        </Card.Content>
         <Card.Content>
           <Card.Header id="card-title" style={{ fontSize: '25px' }}>{this.props.recipe.name}</Card.Header>
           <Card.Meta>
