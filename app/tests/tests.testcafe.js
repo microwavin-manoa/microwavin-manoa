@@ -61,7 +61,7 @@ test('Test that All Pages shows up for users', async (testController) => {
   await allVendorsPage.gotoIndivVendor(testController);
   await vendorProfilePage.isDisplayed(testController);
   // Check if Log out works
-  await navBar.ensureLogout(testController);
+  await navBar.logout(testController);
 });
 
 // Testing pages for Admin
@@ -102,7 +102,7 @@ test('Test that all pages show up for Admin', async (testController) => {
   // Check if MyRecipePage is displayed
   await navBar.gotoMyRecipesPage(testController);
   await myRecipesPage.isDisplayed(testController);
-  await navBar.ensureLogout(testController);
+  await navBar.logout(testController);
 });
 
 // Testing functionality of forms
@@ -111,7 +111,7 @@ test('Test that Add Vendor works for admin', async (testController) => {
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoAddRecipePage(testController);
   await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
-  await navBar.ensureLogout(testController);
+  await navBar.logout(testController);
 });
 
 test('Test that filter for Search Recipes form works for admin', async (testController) => {
@@ -119,7 +119,7 @@ test('Test that filter for Search Recipes form works for admin', async (testCont
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoSearchRecipePage(testController);
   await searchRecipePage.isFiltering(testController);
-  await navBar.ensureLogout(testController);
+  await navBar.logout(testController);
 });
 
 test('Test that Edit Recipes form works for admin', async (testController) => {
@@ -128,5 +128,5 @@ test('Test that Edit Recipes form works for admin', async (testController) => {
   await navBar.gotoMyRecipesPage(testController);
   await myRecipesPage.gotoEditRecipe(testController);
   await editRecipe.editRecipeForm(testController);
-  await navBar.ensureLogout(testController);
+  await navBar.logout(testController);
 });
