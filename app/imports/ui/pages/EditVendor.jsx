@@ -6,11 +6,11 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import { Link } from 'react-router-dom';
 import { Vendors } from '../../api/vendor/Vendors';
 import { updateVendorMethod } from '../../startup/both/Methods';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import { Ingredients } from '../../api/ingredient/Ingredient';
-import { Link } from 'react-router-dom';
 
 const bridge = new SimpleSchema2Bridge(Vendors.schema);
 
