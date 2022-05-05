@@ -49,6 +49,7 @@ class SearchRecipe extends React.Component {
   }
 
   renderPage() {
+    const filterButtonStyle = { backgroundColor: '#85865F', color: 'white' };
     let fRef = null;
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allTags);
@@ -74,13 +75,15 @@ class SearchRecipe extends React.Component {
       <Container id="search-recipe-page" style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center" id='page-header-style'>Search Recipes</Header>
         <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-        <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
-          <Segment>
-            <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
-            <SubmitField id='submit' value='Filter'/>
-            <Button basic style={{ marginLeft: '20px' }} onClick={() => this.submit({ tags: [] }, fRef)}>Display all</Button>
-          </Segment>
-        </AutoForm>
+        <Segment className='form-style'>
+          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
+            <Segment>
+              <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
+              <SubmitField id='submit' value='Filter' style={filterButtonStyle}/>
+              <Button id='display-button-style' onClick={() => this.submit({ tags: [] }, fRef)}>Display all</Button>
+            </Segment>
+          </AutoForm>
+        </Segment>
         <br/><br/>
         <Card.Group centered itemsPerRow={5}>
           {(this.state.isFiltered) ? recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>) : this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}

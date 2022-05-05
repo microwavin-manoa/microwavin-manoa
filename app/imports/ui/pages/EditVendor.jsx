@@ -42,22 +42,25 @@ class EditVendor extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
+    const submitStyle = { backgroundColor: '#85865F', color: 'white' };
     return (
       <Grid id={'edit-vendor-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>
           <Link to='/admin'><Button id='back-button-style' content='Back to admin' icon='left arrow' labelPosition='left'/></Link>
-          <Header as="h2" textAlign="center">Edit Vendor Profile</Header>
+          <Header as="h2" textAlign="center" id='page-header-style'>Edit Vendor Profile</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-          <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
-            <Segment>
-              <TextField name='name'/>
-              <TextField name='address'/>
-              <TextField name='hours'/>
-              <TextField name='imageURL'/>
-              <SubmitField value='Submit'/>
-              <ErrorsField/>
-            </Segment>
-          </AutoForm>
+          <Segment className='form-style'>
+            <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
+              <Segment>
+                <TextField name='name'/>
+                <TextField name='address'/>
+                <TextField name='hours'/>
+                <TextField name='imageURL'/>
+                <SubmitField value='Submit' style={submitStyle}/>
+                <ErrorsField/>
+              </Segment>
+            </AutoForm>
+          </Segment>
         </Grid.Column>
       </Grid>
     );

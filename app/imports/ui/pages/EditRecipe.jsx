@@ -72,8 +72,10 @@ class EditRecipe extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
+    const submitStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
     // get all ingredients and tags to choose from
-    const allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'name');
+    let allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'name');
+    allIngredients = allIngredients.sort();
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
     // create the form schema
     const formSchema = makeSchema(allIngredients, allTags);
@@ -91,22 +93,24 @@ class EditRecipe extends React.Component {
           {!(Roles.userIsInRole(Meteor.userId(), 'admin')) ?
             <Link to='/myrecipes'><Button id='back-button-style' content='Back to my recipes' icon='left arrow' labelPosition='left'/></Link>
             : ''}
-          <Header as="h2" textAlign="center" style={{ color: '#4f583d' }}>Edit Recipe</Header>
+          <Header as="h2" textAlign="center" id='page-header-style'>Edit Recipe</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-          <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>
-            <Segment>
-              <TextField name='name' id='name'/>
-              <TextField name='imageURL' id='imageURL'/>
-              <TextField name='prepTime' placeholder='5 minutes' id='prepTime'/>
-              <TextField name='servingSize' id='servings'/>
-              <MultiSelectField name='ingredients' id='ingredients' placeholder='Select ingredients'/>
-              <AddIngredient/><br/>
-              <MultiSelectField name='tags' id='tags' placeholder='Select tags'/>
-              <LongTextField contenteditable id='description' name='description' />
-              <SubmitField value='Submit' id='submit'/>
-              <ErrorsField/>
-            </Segment>
-          </AutoForm>
+          <Segment style={submitStyle}>
+            <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>
+              <Segment>
+                <TextField name='name' id='name'/>
+                <TextField name='imageURL' id='imageURL'/>
+                <TextField name='prepTime' placeholder='5 minutes' id='prepTime'/>
+                <TextField name='servingSize' id='servings'/>
+                <MultiSelectField name='ingredients' id='ingredients' placeholder='Select ingredients'/>
+                <AddIngredient/><br/>
+                <MultiSelectField name='tags' id='tags' placeholder='Select tags'/>
+                <LongTextField contenteditable id='description' name='description'/>
+                <SubmitField value='Submit' id='submit' style={submitStyle}/>
+                <ErrorsField/>
+              </Segment>
+            </AutoForm>
+          </Segment>
         </Grid.Column>
       </Grid>
     );
