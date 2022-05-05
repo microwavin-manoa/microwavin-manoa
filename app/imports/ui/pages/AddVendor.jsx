@@ -40,22 +40,25 @@ class AddVendor extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   render() {
     let fRef = null;
+    const submitStyle = { backgroundColor: '#85865F', color: 'white' };
     return (
       <Grid id={'add-vendor-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>
           <Link to='/admin'><Button id='back-button-style' content='Back to admin' icon='left arrow' labelPosition='left'/></Link>
           <Header as="h2" textAlign="center">Add Vendor</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
-            <Segment>
-              <TextField name='name'/>
-              <TextField name='address'/>
-              <TextField name='hours'/>
-              <TextField name='imageURL'/>
-              <SubmitField value='Submit'/>
-              <ErrorsField/>
-            </Segment>
-          </AutoForm>
+          <Segment className='form-style'>
+            <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
+              <Segment>
+                <TextField name='name'/>
+                <TextField name='address'/>
+                <TextField name='hours'/>
+                <TextField name='imageURL'/>
+                <SubmitField value='Submit' style={submitStyle}/>
+                <ErrorsField/>
+              </Segment>
+            </AutoForm>
+          </Segment>
         </Grid.Column>
       </Grid>
     );

@@ -52,7 +52,8 @@ class AddRecipe extends React.Component {
     const submitStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
     let fRef = null;
     // get all ingredients and tags to choose from
-    const allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'name');
+    let allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'name');
+    allIngredients = allIngredients.sort();
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
     // create the form schema
     const formSchema = makeSchema(allIngredients, allTags);

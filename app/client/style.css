@@ -147,14 +147,26 @@ h2.ui.header {
   position: fixed;
   bottom: 40px;
   right: 40px;
-  background-color: #ceb793;
+  background-color: #bca37e;
   color: #f5f0e6 !important;
   z-index: 1;
 }
 #to-top-button:hover {
-  background-color: #bca37e;
+  background-color: #9e835d;
   z-index: 1;
 }
 #individual-recipe-page-button:hover {
   z-index: 0;
+}
+
+.ui.segment.form-style, .accordion.ui.styled.form-style {
+  background-color: #c9c9a9;
+  color: #f5f0e6;
+  border-width: 0;
+}
+
+#display-button-style {
+  background-color: #bca37e;
+  color: white;
+  margin-left: 20px;
 }
