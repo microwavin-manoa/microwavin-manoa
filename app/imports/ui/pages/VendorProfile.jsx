@@ -118,7 +118,7 @@ class VendorProfile extends React.Component {
                   : ''}
               </Grid.Row>
             </Grid.Column>
-            <Grid.Column width={6}>
+            <Grid.Column width={5}>
               <Header as="h3" textAlign="center" style={textStyle}>Stock</Header>
               <Image centered size={'small'} src={'images/curl-divider.png'} style={{ marginTop: '-27px' }}/>
               {(vendorData.length === 0) ?
