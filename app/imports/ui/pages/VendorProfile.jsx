@@ -51,6 +51,7 @@ class VendorProfile extends React.Component {
     const tableHeadStyle = { backgroundColor: '#c9c9a9', fontFamily: 'Libre Bodoni' };
     const mapStyle = { border: 0, opacity: '0.7' };
     const textStyle = { fontFamily: 'Libre Bodoni' };
+    const tableStyle = { width: 340 };
     return (
       <Container id={'vendor-profile-page'}>
         <Grid textAlign='center'>
@@ -117,7 +118,7 @@ class VendorProfile extends React.Component {
                   : ''}
               </Grid.Row>
             </Grid.Column>
-            <Grid.Column width={5}>
+            <Grid.Column width={6}>
               <Header as="h3" textAlign="center" style={textStyle}>Stock</Header>
               <Image centered size={'small'} src={'images/curl-divider.png'} style={{ marginTop: '-27px' }}/>
               {(vendorData.length === 0) ?
@@ -125,17 +126,24 @@ class VendorProfile extends React.Component {
                   <Header as='h4' style={{ marginTop: '20px' }}>There isn&apos;t any ingredient<br/>info for this vendor yet!</Header>
                 </Container> : ''}
               {(vendorData.length > 0) ?
-                <Table celled>
+                <Table celled style={tableStyle}>
                   <Table.Header>
                     <Table.Row>
-                      <Table.HeaderCell style={tableHeadStyle}>Ingredient</Table.HeaderCell>
-                      <Table.HeaderCell style={tableHeadStyle}>Price</Table.HeaderCell>
+                      <Table.Cell style={tableHeadStyle}><Grid>
+                        <Grid.Column style={ { width: 160 } }>
+                          Ingredeint
+                        </Grid.Column>
+                        <Grid.Column>
+                          Price
+                        </Grid.Column>
+                      </Grid></Table.Cell>
                     </Table.Row>
                   </Table.Header>
-                  <Table.Body>
+                  <Table.Body id={'table-style'}>
                     {_.map(vendorData, (ingredient, index) => <StuffIngredientVendorPrice key={index} ivp={ingredient} vendorName={this.props.doc.name}/>)}
                   </Table.Body>
                 </Table> : ''}
+
             </Grid.Column>
           </Grid.Row>
         </Grid>

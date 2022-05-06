@@ -170,3 +170,20 @@ h2.ui.header {
   color: white;
   margin-left: 20px;
 }
+
+#table-style {
+  display: block;
+  height: 525px;
+  overflow: scroll;
+}
+
+
+#table-style tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+
+
+
