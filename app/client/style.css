@@ -173,7 +173,7 @@ h2.ui.header {
 
 #table-style {
   display: block;
-  height: 525px;
+  max-height: 525px;
   overflow-y: scroll;
 }
 
