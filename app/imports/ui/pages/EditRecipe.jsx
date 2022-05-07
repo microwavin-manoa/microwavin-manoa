@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 import { Roles } from 'meteor/alanning:roles';
@@ -67,6 +67,10 @@ class EditRecipe extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
+    // if user tries to access a recipe that is not theirs, they get redirected
+    if (this.props.doc === undefined) {
+      return <Redirect to='/'/>;
+    }
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
@@ -129,8 +133,8 @@ EditRecipe.propTypes = {
 export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
-  const sub1 = Meteor.subscribe(Ingredients.userPublicationName);
-  const sub2 = Meteor.subscribe(Recipes.userPublicationName);
+  const sub1 = (Roles.userIsInRole(Meteor.userId(), 'admin')) ? Meteor.subscribe(Recipes.adminPublicationName) : Meteor.subscribe(Recipes.userPublicationName);
+  const sub2 = Meteor.subscribe(Ingredients.userPublicationName);
   const sub3 = Meteor.subscribe(IngredientRecipe.userPublicationName);
   const sub4 = Meteor.subscribe(Tags.userPublicationName);
   const sub5 = Meteor.subscribe(TagRecipe.userPublicationName);

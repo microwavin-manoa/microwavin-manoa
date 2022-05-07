@@ -106,7 +106,7 @@ SearchRecipe.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Recipes.userPublicationName);
+  const subscription = Meteor.subscribe(Recipes.adminPublicationName);
   const subscription2 = Meteor.subscribe(Tags.userPublicationName);
   const subscription3 = Meteor.subscribe(TagRecipe.userPublicationName);
   // Determine if the subscription is ready

@@ -96,15 +96,15 @@ AddRecipe.propTypes = {
 
 export default withTracker(() => {
   // Ensure that minimongo is populated with all collections prior to running render().
+  // I realized some of these might be meaningless but im too scared to touch it now
   const sub1 = Meteor.subscribe(Ingredients.userPublicationName);
-  const sub2 = Meteor.subscribe(Recipes.userPublicationName);
   const sub3 = Meteor.subscribe(IngredientRecipe.userPublicationName);
   const sub4 = Meteor.subscribe(Tags.userPublicationName);
   const sub5 = Meteor.subscribe(TagRecipe.userPublicationName);
   const sub6 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
   const sub7 = Meteor.subscribe(Vendors.userPublicationName);
   return {
-    ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready() && sub7.ready(),
+    ready: sub1.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready() && sub7.ready(),
     ingredients: Ingredients.collection.find().fetch(),
   };
 })(AddRecipe);

@@ -108,7 +108,7 @@ AdminPage.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Recipes and Vendors documents.
-  const sub1 = Meteor.subscribe(Recipes.userPublicationName);
+  const sub1 = Meteor.subscribe(Recipes.adminPublicationName);
   const sub2 = Meteor.subscribe(Vendors.userPublicationName);
   const sub3 = Meteor.subscribe(Tags.userPublicationName);
   const sub4 = Meteor.subscribe(TagRecipe.userPublicationName);
