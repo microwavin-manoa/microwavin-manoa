@@ -10,7 +10,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Ingredients } from '../../api/ingredient/Ingredient';
-import { Recipes } from '../../api/recipe/Recipes';
+// import { Recipes } from '../../api/recipe/Recipes';
 import { IngredientRecipe } from '../../api/ingredient/IngredientRecipe';
 import { TagRecipe } from '../../api/tag/TagRecipe';
 import { Tags } from '../../api/tag/Tags';
