@@ -88,7 +88,7 @@ class EditRecipe extends React.Component {
       <Grid id={'edit-recipe-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>
           {Roles.userIsInRole(Meteor.userId(), 'admin') ?
-            <Link to='/admin'><Button id='back-button-style' content='Go to admin page' icon='left arrow' labelPosition='left'/></Link>
+            <Link to='/admin#recipeHeader'><Button id='back-button-style' content='Go to admin page' icon='left arrow' labelPosition='left'/></Link>
             : ''}
           {!(Roles.userIsInRole(Meteor.userId(), 'admin')) ?
             <Link to='/myrecipes'><Button id='back-button-style' content='Back to my recipes' icon='left arrow' labelPosition='left'/></Link>

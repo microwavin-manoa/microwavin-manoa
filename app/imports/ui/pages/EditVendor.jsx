@@ -46,7 +46,7 @@ class EditVendor extends React.Component {
     return (
       <Grid id={'edit-vendor-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>
-          <Link to='/admin'><Button id='back-button-style' content='Back to admin' icon='left arrow' labelPosition='left'/></Link>
+          <Link to='/admin#vendorHeader'><Button id='back-button-style' content='Back to admin' icon='left arrow' labelPosition='left'/></Link>
           <Header as="h2" textAlign="center" id='page-header-style'>Edit Vendor Profile</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <Segment className='form-style'>
