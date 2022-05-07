@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Vendors } from '../../api/vendor/Vendors';
-import { updateIngredientMethod } from '../../startup/both/Methods';
+import { updateEditIngredientsMethod } from '../../startup/both/Methods';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import { Ingredients } from '../../api/ingredient/Ingredient';
 
@@ -36,7 +36,7 @@ function getPrice(name) {
 
 function getVendor(name) {
   const ingID = Ingredients.collection.findOne({ name })._id;
-  const vendorData = IngredientVendorPrice.collection.findOne({ ingredientId: ingID });
+  const vendorData = this.props.ivp.collection.findOne({ ingredientId: ingID });
   return vendorData.vendor;
 }
 
@@ -46,7 +46,7 @@ class EditIngredient extends React.Component {
   submit(data) {
     const newData = data;
     newData.oldName = this.props.doc.ingredientId;
-    Meteor.call(updateIngredientMethod, newData, (error) => {
+    Meteor.call(updateEditIngredientsMethod, newData, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
       } else {
@@ -62,26 +62,25 @@ class EditIngredient extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
-    const allIngredients = _.pluck(IngredientVendorPrice.collection.find().fetch(), 'ingredient');
+    const allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'ingredient');
     const allPrices = _.pluck(IngredientVendorPrice.collection.find().fetch(), 'price');
-    const allVendors = _.pluck(IngredientVendorPrice.collection.find().fetch(), 'vendor');
+    const allVendors = _.pluck(Vendors.collection.find().fetch(), 'vendor');
     const formSchema = makeSchema(allIngredients, allPrices, allVendors);
     const bridge = new SimpleSchema2Bridge(formSchema);
-    const model = _.extend({}, this.props.doc);
-    model.ingredient = this.props.doc.ingredient;
-    model.price = getPrice(this.props.doc.price);
-    model.vendor = getVendor(this.props.doc.vendor);
+    const price = getPrice(this.props.ivp.ingredient);
+    const vendor = getVendor(this.props.ivp.ingredient);
+    const model = _.extend({}, this.props.ivp.ingredient, price, vendor);
     return (
       <Grid id={'edit-ingredient-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>
           <Header as="h2" textAlign="center">Edit Ingredient</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-          <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
+          <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>
             <Segment>
               <TextField name='ingredient'/>
               <NumField name='price' decimal={true}/>
               <TextField name='vendor'/>
-              <SubmitField value='Submit'/>
+              <SubmitField value='Update'/>
               <ErrorsField/>
             </Segment>
           </AutoForm>
@@ -93,6 +92,7 @@ class EditIngredient extends React.Component {
 
 // Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
 EditIngredient.propTypes = {
+  ivp: PropTypes.object,
   doc: PropTypes.object,
   model: PropTypes.object,
   ready: PropTypes.bool.isRequired,
@@ -110,6 +110,7 @@ export default withTracker(({ match }) => {
   const ready = sub1.ready() && sub2.ready() && sub3.ready();
   // Get the document
   const doc = Ingredients.collection.findOne(documentId);
+  const ivp = IngredientVendorPrice.collection.find().fetch();
   return {
     doc,
     ready,

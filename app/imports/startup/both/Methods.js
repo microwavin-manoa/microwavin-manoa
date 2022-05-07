@@ -134,4 +134,21 @@ Meteor.methods({
   },
 });
 
-export { addIngredientMethod, addRecipeMethod, updateRecipeMethod, updateIngredientMethod, updateVendorMethod };
+const updateEditIngredientsMethod = 'EditIngredient.update';
+/** Updates Ingredient data in IngredientVendorPrice collection along with IngredientRecipe */
+Meteor.methods({
+  'EditIngredient.update'({ data, oldData, ingredient, }) {
+    // update IngredientVendorPrice collection
+    IngredientVendorPrice.collection.update({ name: oldName }, { $set: { name, address, hours, imageURL } });
+    // update IngredientVendorPrice collection if vendor name changed
+    if (name !== oldName) {
+      const allIVP = IngredientVendorPrice.collection.find({ vendor: oldName }).fetch();
+      for (let i = 0; i < allIVP.length; i++) {
+        const { ingredient, ingredientId, price } = allIVP[i];
+        console.log(ingredient, ingredientId, price);
+        IngredientVendorPrice.collection.update({ vendor: oldName }, { $set: { ingredient, ingredientId, vendor: name, price } });
+      }
+    }
+  },
+});
+export { addIngredientMethod, addRecipeMethod, updateRecipeMethod, updateIngredientMethod, updateVendorMethod, updateEditIngredientsMethod };
