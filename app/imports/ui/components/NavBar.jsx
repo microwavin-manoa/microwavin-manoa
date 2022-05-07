@@ -34,17 +34,17 @@ class NavBar extends React.Component {
           <Menu.Item position="right">
             {this.props.currentUser === '' ? (
               <Button.Group>
-                <Button style={signupButton}>
-                  <Button.Content style={font} visible as={NavLink} exact to="/signup"><Icon name='signup'/></Button.Content>
+                <Button style={signupButton} to="/signup" as={NavLink}>
+                  <Button.Content style={font} visible exact><Icon name='signup'/></Button.Content>
                 </Button>
                 <ButtonOr/>
-                <Button id="login-button" style={signinButton}>
-                  <Button.Content style={font} inverted visible as={NavLink} exact to="/signin"><Icon name='sign-in'/></Button.Content>
+                <Button id="login-button" style={signinButton} to="/signin" as={NavLink}>
+                  <Button.Content style={font} inverted visible exact><Icon name='sign-in'/></Button.Content>
                 </Button>
               </Button.Group>
             ) : (
-              <Button id="logout-button" style={signinButton}>
-                <Button.Content style={font} inverted visible as={NavLink} exact to="/signout">Sign Out</Button.Content>
+              <Button id="logout-button" style={signinButton} to="/signout" as={NavLink}>
+                <Button.Content style={font} inverted visible exact>Sign Out</Button.Content>
               </Button>
             )}
           </Menu.Item>

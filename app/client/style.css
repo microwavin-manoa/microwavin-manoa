@@ -171,6 +171,11 @@ h2.ui.header {
   margin-left: 20px;
 }
 
+#random-button {
+  background-color: #4f583d;
+  color: white;
+}
+
 #table-style {
   display: block;
   max-height: 525px;
