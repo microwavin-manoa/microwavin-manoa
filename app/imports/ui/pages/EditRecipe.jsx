@@ -1,11 +1,13 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment, Image } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Image, Button } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Link, Redirect } from 'react-router-dom';
 import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
+import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Recipes } from '../../api/recipe/Recipes';
@@ -65,13 +67,19 @@ class EditRecipe extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
+    // if user tries to access a recipe that is not theirs, they get redirected
+    if (this.props.doc === undefined) {
+      return <Redirect to='/'/>;
+    }
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
+    const submitStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
     // get all ingredients and tags to choose from
-    const allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'name');
+    let allIngredients = _.pluck(Ingredients.collection.find().fetch(), 'name');
+    allIngredients = allIngredients.sort();
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
     // create the form schema
     const formSchema = makeSchema(allIngredients, allTags);
@@ -83,22 +91,30 @@ class EditRecipe extends React.Component {
     return (
       <Grid id={'edit-recipe-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>
-          <Header as="h2" textAlign="center" style={{ color: '#4f583d' }}>Edit Recipe</Header>
+          {Roles.userIsInRole(Meteor.userId(), 'admin') ?
+            <Link to='/admin#recipeHeader'><Button id='back-button-style' content='Go to admin page' icon='left arrow' labelPosition='left'/></Link>
+            : ''}
+          {!(Roles.userIsInRole(Meteor.userId(), 'admin')) ?
+            <Link to='/myrecipes'><Button id='back-button-style' content='Back to my recipes' icon='left arrow' labelPosition='left'/></Link>
+            : ''}
+          <Header as="h2" textAlign="center" id='page-header-style'>Edit Recipe</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-          <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>
-            <Segment>
-              <TextField name='name' id='name'/>
-              <TextField name='imageURL' id='imageURL'/>
-              <TextField name='prepTime' placeholder='5 minutes' id='prepTime'/>
-              <TextField name='servingSize' id='servings'/>
-              <MultiSelectField name='ingredients' id='ingredients' placeholder='Select ingredients'/>
-              <AddIngredient/><br/>
-              <MultiSelectField name='tags' id='tags' placeholder='Select tags'/>
-              <LongTextField contenteditable id='description' name='description' />
-              <SubmitField value='Submit' id='submit'/>
-              <ErrorsField/>
-            </Segment>
-          </AutoForm>
+          <Segment style={submitStyle}>
+            <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>
+              <Segment>
+                <TextField name='name' id='name'/>
+                <TextField name='imageURL' id='imageURL'/>
+                <TextField name='prepTime' placeholder='5 minutes' id='prepTime'/>
+                <TextField name='servingSize' id='servings'/>
+                <MultiSelectField name='ingredients' id='ingredients' placeholder='Select ingredients'/>
+                <AddIngredient/><br/>
+                <MultiSelectField name='tags' id='tags' placeholder='Select tags'/>
+                <LongTextField contenteditable id='description' name='description'/>
+                <SubmitField value='Submit' id='submit' style={submitStyle}/>
+                <ErrorsField/>
+              </Segment>
+            </AutoForm>
+          </Segment>
         </Grid.Column>
       </Grid>
     );
@@ -117,8 +133,8 @@ EditRecipe.propTypes = {
 export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
-  const sub1 = Meteor.subscribe(Ingredients.userPublicationName);
-  const sub2 = Meteor.subscribe(Recipes.userPublicationName);
+  const sub1 = (Roles.userIsInRole(Meteor.userId(), 'admin')) ? Meteor.subscribe(Recipes.adminPublicationName) : Meteor.subscribe(Recipes.userPublicationName);
+  const sub2 = Meteor.subscribe(Ingredients.userPublicationName);
   const sub3 = Meteor.subscribe(IngredientRecipe.userPublicationName);
   const sub4 = Meteor.subscribe(Tags.userPublicationName);
   const sub5 = Meteor.subscribe(TagRecipe.userPublicationName);

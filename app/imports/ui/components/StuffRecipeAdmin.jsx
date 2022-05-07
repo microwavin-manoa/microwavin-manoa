@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Image, Label } from 'semantic-ui-react';
+import { Table, Image, Label, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { _ } from 'meteor/underscore';
@@ -46,7 +46,7 @@ class StuffRecipeAdmin extends React.Component {
         </Table.Cell>
         <Table.Cell>{this.props.recipe.owner}</Table.Cell>
         <Table.Cell>
-          <Link id={'edit-recipe-button-admin'} to={`/editrecipe/${this.props.recipe._id}`}>Edit</Link>
+          <Link id='edit-recipe-button-admin' to={`/editrecipe/${this.props.recipe._id}`}><Button size='big' icon='edit' id='edit-button-style'/></Link>
         </Table.Cell>
         <Table.Cell>
           <DeleteRecipeModal recipe={this.props.recipe}/>

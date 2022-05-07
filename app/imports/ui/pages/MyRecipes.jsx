@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Table, Header, Loader, Image, Container } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Recipes } from '../../api/recipe/Recipes';
 import StuffRecipe from '../components/StuffRecipe';
 import { Tags } from '../../api/tag/Tags';
@@ -38,8 +39,8 @@ class MyRecipes extends React.Component {
                 <Table.HeaderCell id="table-header-style">Ingredients</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style">Tags</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style">Description</Table.HeaderCell>
-                <Table.HeaderCell id="table-header-style">Edit</Table.HeaderCell>
-                <Table.HeaderCell id="table-header-style">Delete</Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style"> </Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style"> </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body style = {tableStyle}>
@@ -47,8 +48,11 @@ class MyRecipes extends React.Component {
             </Table.Body>
           </Table> : ''}
         {(this.props.recipes.length === 0) ?
-          <Container>
-            <Header as='h4'>You haven&apos;t made any recipes yet!</Header>
+          <Container textAlign='center'>
+            <Header as='h4' style={{ marginTop: '20px' }}>You haven&apos;t made any recipes yet!</Header><br/>
+            <Link to='/add' style={{ marginTop: '20px' }}>Make one now!</Link>
+            <br/><br/>
+            <Link to='/search' style={{ marginTop: '20px' }}>See all recipes</Link>
           </Container> : ''}
       </div>
     );

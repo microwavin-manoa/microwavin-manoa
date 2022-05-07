@@ -1,9 +1,10 @@
 import React from 'react';
-import { Header, Image, Grid, Table, Container, Loader, Label } from 'semantic-ui-react';
+import { Header, Image, Grid, Table, Container, Loader, Label, Icon, Button } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
+import { Link } from 'react-router-dom';
 import { Recipes } from '../../api/recipe/Recipes';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import RecipeVendorPriceTable from '../components/RecipeVendorPriceTable';
@@ -59,12 +60,13 @@ class Recipe extends React.Component {
     const totalPrice = getTotalPrice(ingredientData);
     const tableHeadStyle = { backgroundColor: '#c9c9a9', fontFamily: 'Libre Bodoni', fontSize: 16 };
     const headerStyle = { fontFamily: 'Libre Bodoni', fontSize: 20 };
-    const topHeaderStyle = { fontFamily: 'Libre Bodoni', fontSize: 25};
+    const topHeaderStyle = { fontFamily: 'Libre Bodoni', fontSize: 25 };
     return (
       <Container id={'recipe-page'}>
         <Grid verticalAlign='middle' textAlign='center' padded>
           <Grid.Row stretched>
             <br/>
+            <Link to='/search'><Button id='back-button-style' content='See all recipes' icon='left arrow' labelPosition='left'/></Link>
             <Header as="h1" textAlign="center" style={topHeaderStyle}>{this.props.doc.name}</Header>
           </Grid.Row>
           <Grid.Row>
@@ -73,6 +75,9 @@ class Recipe extends React.Component {
           <Grid.Column width={5}>
             <Image size='large' rounded src={this.props.doc.imageURL}/><br/>
             <Grid.Row>{_.map(allTags, (tag, index) => <Label tag key={index} style={tagStyle}>{tag}</Label>)}</Grid.Row>
+            <br/>
+            <Grid.Row><Icon name={'food'} style={{ color: '#4F583D', marginBottom: '10px' }}/><b>Serving Size:</b> {this.props.doc.servingSize}</Grid.Row>
+            <Grid.Row><Icon name={'clock outline'} style={{ color: '#4F583D' }}/><b>Prep Time:</b> {this.props.doc.prepTime}</Grid.Row>
           </Grid.Column>
           <Grid.Column width={5}>
             <div>
@@ -122,7 +127,7 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
   // Get access to Stuff documents.
-  const sub1 = Meteor.subscribe(Recipes.userPublicationName);
+  const sub1 = Meteor.subscribe(Recipes.adminPublicationName);
   const sub2 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
   const sub3 = Meteor.subscribe(IngredientRecipe.userPublicationName);
   const sub4 = Meteor.subscribe(Ingredients.userPublicationName);

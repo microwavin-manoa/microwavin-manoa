@@ -5,6 +5,7 @@ import SimpleSchema from 'simpl-schema';
 import { Container, Header, Loader, Card, Segment, Image, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { HashLink as Link } from 'react-router-hash-link';
 import { _ } from 'meteor/underscore';
 import { AutoForm, SubmitField } from 'uniforms-semantic';
 import { Recipes } from '../../api/recipe/Recipes';
@@ -48,6 +49,7 @@ class SearchRecipe extends React.Component {
   }
 
   renderPage() {
+    const filterButtonStyle = { backgroundColor: '#85865F', color: 'white' };
     let fRef = null;
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allTags);
@@ -73,17 +75,20 @@ class SearchRecipe extends React.Component {
       <Container id="search-recipe-page" style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center" id='page-header-style'>Search Recipes</Header>
         <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-        <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
-          <Segment>
-            <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
-            <SubmitField id='submit' value='Filter'/>
-            <Button basic style={{ marginLeft: '20px' }} onClick={() => this.submit({ tags: [] }, fRef)}>Display all</Button>
-          </Segment>
-        </AutoForm>
+        <Segment className='form-style'>
+          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
+            <Segment>
+              <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
+              <SubmitField id='submit' value='Filter' style={filterButtonStyle}/>
+              <Button id='display-button-style' onClick={() => this.submit({ tags: [] }, fRef)}>Display all</Button>
+            </Segment>
+          </AutoForm>
+        </Segment>
         <br/><br/>
-        <Card.Group centered itemsPerRow={4}>
+        <Card.Group centered itemsPerRow={5}>
           {(this.state.isFiltered) ? recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>) : this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
         </Card.Group>
+        <Button as={Link} to='/search#search-recipe-page' icon='arrow up' circular id='to-top-button' size='big'/>
       </Container>
     );
   }
@@ -101,7 +106,7 @@ SearchRecipe.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Recipes.userPublicationName);
+  const subscription = Meteor.subscribe(Recipes.adminPublicationName);
   const subscription2 = Meteor.subscribe(Tags.userPublicationName);
   const subscription3 = Meteor.subscribe(TagRecipe.userPublicationName);
   // Determine if the subscription is ready

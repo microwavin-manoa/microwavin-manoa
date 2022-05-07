@@ -59,10 +59,11 @@ class AddIngredient extends React.Component {
     const allVendors = _.pluck(Vendors.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allVendors);
     const bridge = new SimpleSchema2Bridge(formSchema);
+    const accStyle = { backgroundColor: '#4f583d', width: '1100px' };
     return (
-      <Accordion styled>
-        <Accordion.Title active={activeIndex === -1} index={0} onClick={this.handleClick}>
-          <Icon name='dropdown' />
+      <Accordion styled style={accStyle}>
+        <Accordion.Title style={{ color: '#FFFFFF' }} active={activeIndex === -1} index={0} onClick={this.handleClick}>
+          <Icon name='dropdown'/>
           Add New Ingredient
         </Accordion.Title>
         <Accordion.Content active={activeIndex === -1}>

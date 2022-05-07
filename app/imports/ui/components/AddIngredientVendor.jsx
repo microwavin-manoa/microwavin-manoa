@@ -60,7 +60,7 @@ class AddIngredientVendor extends React.Component {
     const formSchema = makeSchema(allVendors);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
-      <Accordion styled>
+      <Accordion styled className='form-style'>
         <Accordion.Title active={activeIndex === -1} index={0} onClick={this.handleClick}>
           <Icon name='dropdown' />
           Add New Ingredient
