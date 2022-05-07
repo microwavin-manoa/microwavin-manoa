@@ -6,15 +6,13 @@ class NavBar {
   async ensureLogout(testController) {
     const loggedInUser = await Selector('#logout-button').exists;
     if (loggedInUser) {
-      await testController.click('#logout-button');
-      await testController.click('#logout-button');
+      await testController.hover('#logout-button');
       await testController.click('#logout-button');
     }
   }
 
   async gotoSigninPage(testController) {
     await testController.hover('#login-button');
-    await testController.click('#login-button');
     await testController.click('#login-button');
     await testController.click('#login-button');
   }
@@ -48,8 +46,7 @@ class NavBar {
   /** Check that someone is logged in, then click items to logout. */
   async logout(testController) {
     await testController.expect(Selector('#logout-button').exists).ok();
-    await testController.click('#logout-button');
-    await testController.click('#logout-button');
+    await testController.hover('#logout-button');
     await testController.click('#logout-button');
   }
 
