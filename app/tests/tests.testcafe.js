@@ -24,7 +24,7 @@ const addRecipe = { name: 'Egg', imageURL: '/egg.jpeg', prepTime: '2 minutes', s
 fixture('meteor-application-template-react localhost test with default db')
   .page('http://localhost:3000');
 
-test.only('Test that signin and signout work', async (testController) => {
+test('Test that signin and signout work', async (testController) => {
   await landingPage.isDisplayed(testController);
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
