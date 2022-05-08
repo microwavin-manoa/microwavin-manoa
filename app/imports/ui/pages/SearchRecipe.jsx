@@ -23,7 +23,7 @@ const makeSchema = (allTags) => new SimpleSchema({
 });
 
 const makeSchema2 = (allIng) => new SimpleSchema({
-  ing: { type: Array, label: 'Ing', optional: true },
+  ing: { type: Array, label: 'Ingredients', optional: true },
   'ing.$': { type: String, allowedValues: allIng },
 });
 
@@ -52,9 +52,9 @@ class SearchRecipe extends React.Component {
 
   ingsubmit(data, formRef) {
     if (data.ing.length > 0) {
-      this.setState({ tags: data.ing || [], isFiltered: true });
+      this.setState({ ing: data.ing || [], isFiltered: true });
     } else {
-      this.setState({ tags: data.ing || [], isFiltered: false });
+      this.setState({ ing: data.ing || [], isFiltered: false });
       formRef.reset();
     }
   }
@@ -93,8 +93,7 @@ class SearchRecipe extends React.Component {
     // vv all of tags' id's
     const tagIDPluck = _.pluck(Tags.collection.find({ name: { $in: this.state.tags } }).fetch(), '_id');
     const ingIDPluck = _.pluck(Ingredients.collection.find({ name: { $in: this.state.ing } }).fetch(), '_id');
-    console.log(tagIDPluck);
-    console.log(ingIDPluck);
+    console.log(this.state.ing);
     // vv all of the recipe ids that have any of those tags
     const tagPluck = _.uniq(_.pluck(TagRecipe.collection.find({ tagID: { $in: tagIDPluck } }).fetch(), 'recipeID'));
     const ingPluck = _.uniq(_.pluck(IngredientRecipe.collection.find({ ingredientID: { $in: ingIDPluck } }).fetch(), 'recipeID'));
