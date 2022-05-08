@@ -2,7 +2,7 @@ import React from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import { Container, Header, Loader, Card, Segment, Image, Button, Popup } from 'semantic-ui-react';
+import { Container, Header, Loader, Card, Segment, Image, Button, Popup, Grid } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { HashLink as Link } from 'react-router-hash-link';
@@ -113,30 +113,38 @@ class SearchRecipe extends React.Component {
       <Container id="search-recipe-page" style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center" id='page-header-style'>Search Recipes</Header>
         <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
+
         <Segment className='form-style'>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
-            <Segment>
-              <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
-              <SubmitField id='submit' value='Filter' style={filterButtonStyle}/>
-              <Button id='display-button-style' onClick={() => this.submit({ tags: [] }, fRef)}>Display all</Button>
-              <Popup
-                trigger={<Button id='random-button' icon='random' floated='right' onClick={() => this.randRecipe(this.props.recipes, fRef)}/>}
-                content='Surprise me!'
-                hideOnScroll
-                position='top right'
-                style={randButtonStyle}
-                inverted
-              />
-            </Segment>
-          </AutoForm>
-          <br/>
-          <AutoForm ref={ref => { fRef2 = ref; }} schema={bridge2} onSubmit={data => this.ingsubmit(data, fRef2)}>
-            <Segment>
-              <MultiSelectField id='ing' name='ing' showInlineError={true} placeholder={'Filter by Ingredients'}/>
-              <SubmitField id='ingsubmit' value='Filter' style={filterButtonStyle}/>
-              <Button id='display-button-style' onClick={() => this.ingsubmit({ ing: [] }, fRef2)}>Display all</Button>
-            </Segment>
-          </AutoForm>
+          <Grid columns={2}>
+            <Grid.Row>
+              <Grid.Column>
+                <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
+                  <Segment>
+                    <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
+                    <SubmitField id='submit' value='Filter' style={filterButtonStyle}/>
+                    <Button id='display-button-style' onClick={() => this.submit({ tags: [] }, fRef)}>Display all</Button>
+                    <Popup
+                      trigger={<Button id='random-button' icon='random' floated='right' onClick={() => this.randRecipe(this.props.recipes, fRef)}/>}
+                      content='Surprise me!'
+                      hideOnScroll
+                      position='top right'
+                      style={randButtonStyle}
+                      inverted
+                    />
+                  </Segment>
+                </AutoForm>
+              </Grid.Column>
+              <Grid.Column>
+                <AutoForm ref={ref => { fRef2 = ref; }} schema={bridge2} onSubmit={data => this.ingsubmit(data, fRef2)}>
+                  <Segment>
+                    <MultiSelectField id='ing' name='ing' showInlineError={true} placeholder={'Filter by Ingredients'}/>
+                    <SubmitField id='ingsubmit' value='Filter' style={filterButtonStyle}/>
+                    <Button id='display-button-style' onClick={() => this.ingsubmit({ ing: [] }, fRef2)}>Display all</Button>
+                  </Segment>
+                </AutoForm>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Segment>
         <br/><br/>
         <Card.Group centered itemsPerRow={5}>
