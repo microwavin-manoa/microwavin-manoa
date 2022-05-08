@@ -107,7 +107,7 @@ test('Test that all pages show up for Admin', async (testController) => {
 });
 
 // Testing functionality of forms
-test.only('Test that Add Vendor works', async (testController) => {
+test('Test that Add Vendor works', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoAddRecipePage(testController);
