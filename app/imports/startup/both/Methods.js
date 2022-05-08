@@ -59,13 +59,34 @@ Meteor.methods({
   },
 });
 
-const updateIngredientMethod = 'Ingredients.update';
+const updatePriceMethod = 'IngredientPrice.update';
 
-/** Creates a new ingredient in the Ingredients collection, and also updates IngredientVendorPrice. */
+/** Updates the price of ingredient in IngredientVendorPrice */
 Meteor.methods({
-  'Ingredients.update'({ name, vendor, price }) {
+  'IngredientPrice.update'({ name, vendor, price }) {
     const ingredientId = Ingredients.collection.findOne({ name })._id;
     IngredientVendorPrice.collection.update({ ingredient: name, vendor }, { $set: { name, vendor, price, ingredientId } });
+  },
+});
+
+const updateIngredientMethod = 'Ingredients.update';
+
+/** Updates Ingredient (for admin page)  */
+Meteor.methods({
+  'Ingredients.update'({ ingredient, ingredientId, vendor, price, oldVendor }) {
+    // check if updating vendor
+    if (vendor !== oldVendor) {
+      // check IngredientVendorPrice collection already has vendor with ingredient
+      const ings = IngredientVendorPrice.collection.find({ ingredient }).fetch();
+      if (!_.pluck(ings, 'vendor').includes(vendor)) {
+        IngredientVendorPrice.collection.update({ ingredient, vendor: oldVendor }, { $set: { ingredient, ingredientId, vendor, price } });
+      } else {
+        throw new Meteor.Error('Ingredient already exists at this vendor!');
+      }
+    } else {
+      // otherwise, can simply update the price
+      IngredientVendorPrice.collection.update({ ingredient, vendor }, { $set: { ingredient, vendor, price, ingredientId } });
+    }
   },
 });
 
@@ -127,11 +148,10 @@ Meteor.methods({
       const allIVP = IngredientVendorPrice.collection.find({ vendor: oldName }).fetch();
       for (let i = 0; i < allIVP.length; i++) {
         const { ingredient, ingredientId, price } = allIVP[i];
-        console.log(ingredient, ingredientId, price);
         IngredientVendorPrice.collection.update({ vendor: oldName }, { $set: { ingredient, ingredientId, vendor: name, price } });
       }
     }
   },
 });
 
-export { addIngredientMethod, addRecipeMethod, updateRecipeMethod, updateIngredientMethod, updateVendorMethod };
+export { addIngredientMethod, addRecipeMethod, updateRecipeMethod, updatePriceMethod, updateVendorMethod, updateIngredientMethod };
