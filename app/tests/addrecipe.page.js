@@ -25,9 +25,9 @@ class AddRecipePage {
     await testController.click('#addrecipe-form-ingredients');
 
     const tagsSelector = Selector('#addrecipe-form-tags');
-    const gfOption = tagsSelector().find('#Gluten-Free');
+    const mugOption = tagsSelector().find('#Mug');
     await testController.click('#addrecipe-form-tags');
-    await testController.click(gfOption);
+    await testController.click(mugOption);
     await testController.click('#addrecipe-form-tags');
 
     await testController.typeText('#addrecipe-form-description', description);
