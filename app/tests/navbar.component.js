@@ -6,15 +6,13 @@ class NavBar {
   async ensureLogout(testController) {
     const loggedInUser = await Selector('#logout-button').exists;
     if (loggedInUser) {
-      await testController.click('#logout-button');
-      await testController.click('#logout-button');
+      await testController.hover('#logout-button');
       await testController.click('#logout-button');
     }
   }
 
   async gotoSigninPage(testController) {
     await testController.hover('#login-button');
-    await testController.click('#login-button');
     await testController.click('#login-button');
     await testController.click('#login-button');
   }

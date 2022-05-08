@@ -170,3 +170,25 @@ h2.ui.header {
   color: white;
   margin-left: 20px;
 }
+
+#random-button {
+  background-color: #4f583d;
+  color: white;
+}
+
+#table-style {
+  display: block;
+  max-height: 525px;
+  overflow-y: scroll;
+}
+
+
+#table-style tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+
+
+

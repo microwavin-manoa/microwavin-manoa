@@ -18,7 +18,7 @@ class EditRecipe {
     const prepTime = '10 minutes';
     const description = ' Boil an egg and slice it when done. Add the sliced egg and lettuce to the sandwich. Enjoy!';
     const ingredients = Selector('#ingredients');
-    const avocadoOption = ingredients.find('#Avocado');
+    const saltOption = ingredients.find('#Salt');
     const lettuceOption = ingredients.find('#Lettuce');
     await this.isDisplayed(testController);
     await testController.selectText('#name').pressKey('delete');
@@ -29,7 +29,7 @@ class EditRecipe {
     await testController.typeText('#prepTime', prepTime);
     await testController.typeText('#description', description);
     await testController.click('#ingredients');
-    await testController.click(avocadoOption);
+    await testController.click(saltOption);
     await testController.click(lettuceOption);
     await testController.click('#ingredients');
     await testController.click('#submit');

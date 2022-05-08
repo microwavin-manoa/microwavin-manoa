@@ -24,7 +24,7 @@ const addRecipe = { name: 'Egg', imageURL: '/egg.jpeg', prepTime: '2 minutes', s
 fixture('meteor-application-template-react localhost test with default db')
   .page('http://localhost:3000');
 
-test.only('Test that signin and signout work', async (testController) => {
+test('Test that signin and signout work', async (testController) => {
   await landingPage.isDisplayed(testController);
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
@@ -107,11 +107,11 @@ test('Test that all pages show up for Admin', async (testController) => {
 });
 
 // Testing functionality of forms
-test('Test that Add Vendor works for admin', async (testController) => {
+test('Test that Add Vendor works', async (testController) => {
   await navBar.gotoSigninPage(testController);
-  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoAddRecipePage(testController);
-  await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
+  await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.serving, addRecipe.description);
   await navBar.logout(testController);
 });
 
@@ -123,9 +123,9 @@ test('Test that filter for Search Recipes form works for admin', async (testCont
   await navBar.logout(testController);
 });
 
-test('Test that Edit Recipes form works for admin', async (testController) => {
+test('Test that Edit Recipes form works', async (testController) => {
   await navBar.gotoSigninPage(testController);
-  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoMyRecipesPage(testController);
   await myRecipesPage.gotoEditRecipe(testController);
   await editRecipe.editRecipeForm(testController);

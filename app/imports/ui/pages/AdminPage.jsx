@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Table, Header, Loader, Button, Image } from 'semantic-ui-react';
+import { Table, Header, Loader, Button, Image, Container } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { HashLink as Link } from 'react-router-hash-link';
 // import { Link } from 'react-router-dom';
@@ -29,9 +29,9 @@ class AdminPage extends React.Component {
   renderPage() {
     // define styles
     const buttonStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
-    const margins = { marginLeft: 25, marginRight: 25 };
+    const margins = { paddingLeft: 30, paddingRight: 30 };
     return (
-      <div id='admin-page' style={margins}>
+      <Container id='admin-page' style={margins}>
         <AdminSidebar/>
         <div style={{ marginTop: '30px' }}>
           <Header as="h2" textAlign="center" id='recipeHeader'>All Recipes</Header>
@@ -81,10 +81,11 @@ class AdminPage extends React.Component {
                 <Table.HeaderCell id="table-header-style" >Price</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style" >Vendor</Table.HeaderCell>
                 <Table.HeaderCell id="table-header-style" > </Table.HeaderCell>
+                <Table.HeaderCell id="table-header-style" > </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.props.ingredients.map((ingredient) => <StuffIngredientVendorPriceAdmin key={ingredient._id} ivp={ingredient} vendorName={ingredient}/>)}
+              {this.props.ingredients.map((ingredient) => <StuffIngredientVendorPriceAdmin key={ingredient._id} ivp={ingredient}/>)}
             </Table.Body>
           </Table>
           <div>
@@ -92,7 +93,7 @@ class AdminPage extends React.Component {
           </div>
         </div>
         <Button as={Link} to='/admin#admin-page' icon='arrow up' circular id='to-top-button' size='big'/>
-      </div>
+      </Container>
     );
   }
 }
@@ -108,7 +109,7 @@ AdminPage.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Recipes and Vendors documents.
-  const sub1 = Meteor.subscribe(Recipes.userPublicationName);
+  const sub1 = Meteor.subscribe(Recipes.adminPublicationName);
   const sub2 = Meteor.subscribe(Vendors.userPublicationName);
   const sub3 = Meteor.subscribe(Tags.userPublicationName);
   const sub4 = Meteor.subscribe(TagRecipe.userPublicationName);

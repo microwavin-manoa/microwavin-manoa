@@ -7,7 +7,7 @@ import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import PropTypes from 'prop-types';
-import { updateIngredientMethod } from '../../startup/both/Methods';
+import { updatePriceMethod } from '../../startup/both/Methods';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -27,7 +27,7 @@ class EditIngredientVendor extends React.Component {
     // round price to 2 decimal places and get rid of negative if needed
     price = Math.abs(Number((Math.round(price * 100) / 100).toFixed(2)));
     const newData = { name, vendor, price };
-    Meteor.call(updateIngredientMethod, newData, (error) => {
+    Meteor.call(updatePriceMethod, newData, (error) => {
       if (error) {
         swal('Error', 'Ingredient already exists!', 'error');
       } else {

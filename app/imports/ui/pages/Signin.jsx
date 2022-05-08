@@ -41,6 +41,7 @@ export default class Signin extends React.Component {
       return <Redirect to={from}/>;
     }
     // Otherwise return the Login form.
+    const submitStyle = { backgroundColor: '#4f583d', color: 'white' };
     return (
       <Container id="signin-page" style={{ marginTop: '10px' }}>
         <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
@@ -49,31 +50,33 @@ export default class Signin extends React.Component {
               Login to your account
             </Header>
             <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-            <Form onSubmit={this.submit}>
-              <Segment stacked>
-                <Form.Input
-                  label="Email"
-                  id="signin-form-email"
-                  icon="user"
-                  iconPosition="left"
-                  name="email"
-                  type="email"
-                  placeholder="E-mail address"
-                  onChange={this.handleChange}
-                />
-                <Form.Input
-                  label="Password"
-                  id="signin-form-password"
-                  icon="lock"
-                  iconPosition="left"
-                  name="password"
-                  placeholder="Password"
-                  type="password"
-                  onChange={this.handleChange}
-                />
-                <Form.Button id="signin-form-submit" content="Submit"/>
-              </Segment>
-            </Form>
+            <Segment className='form-style'>
+              <Form onSubmit={this.submit}>
+                <Segment stacked>
+                  <Form.Input
+                    label="Email"
+                    id="signin-form-email"
+                    icon="user"
+                    iconPosition="left"
+                    name="email"
+                    type="email"
+                    placeholder="E-mail address"
+                    onChange={this.handleChange}
+                  />
+                  <Form.Input
+                    label="Password"
+                    id="signin-form-password"
+                    icon="lock"
+                    iconPosition="left"
+                    name="password"
+                    placeholder="Password"
+                    type="password"
+                    onChange={this.handleChange}
+                  />
+                  <Form.Button id="signin-form-submit" content="Submit" style={submitStyle}/>
+                </Segment>
+              </Form>
+            </Segment>
             <Message>
               <Link to="/signup">Click here to Register</Link>
             </Message>

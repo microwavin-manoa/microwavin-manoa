@@ -21,7 +21,7 @@ class Landing extends React.Component {
             <Grid.Column textAlign='center' style={{ paddingTop: '120px' }}>
               <Header as='h1' style={textStyle1}>About Us</Header>
               <Header as='h2'>
-                Create and discover recipes made tailor-made for UH Manoa students (on-campus or off)! We focus on recipes that can be made using minimal kitchen facilities (like a microwave!), and ingredients available within walking distance of UH
+                Create and discover recipes tailor-made for UH Manoa students (on-campus or off)! We focus on recipes that can be made using minimal kitchen facilities (like a microwave!), and ingredients available within walking distance of UH
               </Header>
             </Grid.Column>
           </Grid>

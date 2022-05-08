@@ -127,7 +127,7 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
   // Get access to Stuff documents.
-  const sub1 = Meteor.subscribe(Recipes.userPublicationName);
+  const sub1 = Meteor.subscribe(Recipes.adminPublicationName);
   const sub2 = Meteor.subscribe(IngredientVendorPrice.userPublicationName);
   const sub3 = Meteor.subscribe(IngredientRecipe.userPublicationName);
   const sub4 = Meteor.subscribe(Ingredients.userPublicationName);

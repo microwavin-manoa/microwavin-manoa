@@ -2,7 +2,7 @@ import React from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import { Container, Header, Loader, Card, Segment, Image, Button } from 'semantic-ui-react';
+import { Container, Header, Loader, Card, Segment, Image, Button, Popup } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { HashLink as Link } from 'react-router-hash-link';
@@ -37,15 +37,15 @@ function getTags(recID) {
 class SearchRecipe extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tags: [], ing: [], isFiltered: false };
+    this.state = { tags: [], ing: [], isFiltered: false, showRand: false };
   }
 
   // Submit the tags
   submit(data, formRef) {
     if (data.tags.length > 0) {
-      this.setState({ tags: data.tags || [], isFiltered: true });
+      this.setState({ tags: data.tags || [], isFiltered: true, showRand: false });
     } else {
-      this.setState({ tags: data.tags || [], isFiltered: false });
+      this.setState({ tags: data.tags || [], isFiltered: false, showRand: false });
       formRef.reset();
     }
   }
@@ -59,6 +59,21 @@ class SearchRecipe extends React.Component {
     }
   }
 
+  randRecipe(recipeMap, formRef) {
+    this.setState({ tags: [], isFiltered: false, showRand: true });
+    formRef.reset();
+  }
+
+  renderCards(recipeMap) {
+    if (this.state.showRand) {
+      return <RecipeCard recipe={_.shuffle(this.props.recipes)[0]}/>;
+    }
+    if (!this.state.showRand && this.state.isFiltered) {
+      return recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>);
+    }
+    return this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>);
+  }
+
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
@@ -66,6 +81,7 @@ class SearchRecipe extends React.Component {
 
   renderPage() {
     const filterButtonStyle = { backgroundColor: '#85865F', color: 'white' };
+    const randButtonStyle = { borderRadius: 10, opacity: 0.6, padding: '2em' };
     let fRef = null;
     let fRef2 = null;
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
@@ -104,6 +120,14 @@ class SearchRecipe extends React.Component {
               <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
               <SubmitField id='submit' value='Filter' style={filterButtonStyle}/>
               <Button id='display-button-style' onClick={() => this.submit({ tags: [] }, fRef)}>Display all</Button>
+              <Popup
+                trigger={<Button id='random-button' icon='random' floated='right' onClick={() => this.randRecipe(this.props.recipes, fRef)}/>}
+                content='Surprise me!'
+                hideOnScroll
+                position='top right'
+                style={randButtonStyle}
+                inverted
+              />
             </Segment>
           </AutoForm>
           <br/>
@@ -117,7 +141,7 @@ class SearchRecipe extends React.Component {
         </Segment>
         <br/><br/>
         <Card.Group centered itemsPerRow={5}>
-          {(this.state.isFiltered) ? recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>) : this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>)}
+          {this.renderCards(recipeMap)}
         </Card.Group>
         <Button as={Link} to='/search#search-recipe-page' icon='arrow up' circular id='to-top-button' size='big'/>
       </Container>
@@ -139,7 +163,7 @@ SearchRecipe.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Recipes.userPublicationName);
+  const subscription = Meteor.subscribe(Recipes.adminPublicationName);
   const subscription2 = Meteor.subscribe(Tags.userPublicationName);
   const subscription3 = Meteor.subscribe(TagRecipe.userPublicationName);
   const subscription4 = Meteor.subscribe(Ingredients.userPublicationName);

@@ -12,7 +12,7 @@ class AddRecipePage {
     await testController.wait(60000).expect(this.pageSelector.exists).ok();
   }
 
-  async enterRecipe(testController, name, imageURL, prepTime, ingredients, serving, tags, description) {
+  async enterRecipe(testController, name, imageURL, prepTime, serving, description) {
     await testController.typeText('#addrecipe-form-name', name);
     await testController.typeText('#addrecipe-form-imageURL', imageURL);
     await testController.typeText('#addrecipe-form-prep', prepTime);
@@ -25,9 +25,9 @@ class AddRecipePage {
     await testController.click('#addrecipe-form-ingredients');
 
     const tagsSelector = Selector('#addrecipe-form-tags');
-    const gfOption = tagsSelector().find('#Gluten-Free');
+    const mugOption = tagsSelector().find('#Mug');
     await testController.click('#addrecipe-form-tags');
-    await testController.click(gfOption);
+    await testController.click(mugOption);
     await testController.click('#addrecipe-form-tags');
 
     await testController.typeText('#addrecipe-form-description', description);
