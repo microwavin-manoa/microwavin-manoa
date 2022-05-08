@@ -22,13 +22,13 @@ class AddRecipePage {
     const eggOption = ingredientsSelector.find('#Egg');
     await testController.click('#addrecipe-form-ingredients');
     await testController.click(eggOption);
-    await testController.click('#addrecipe-form-ingredients');
+    await testController.click('#addrecipe-form-serving');
 
     const tagsSelector = Selector('#addrecipe-form-tags');
     const mugOption = tagsSelector().find('#Mug');
     await testController.click('#addrecipe-form-tags');
     await testController.click(mugOption);
-    await testController.click('#addrecipe-form-tags');
+    await testController.click('#addrecipe-form-serving');
 
     await testController.typeText('#addrecipe-form-description', description);
     await testController.click('#addrecipe-form-submit');
