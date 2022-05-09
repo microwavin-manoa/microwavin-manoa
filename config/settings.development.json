@@ -93,16 +93,16 @@
     { "name": "Potato", "vendor": "Safeway", "price": 1.28 },
     { "name": "Sour cream", "vendor": "Foodland", "price": 4.29 },
     { "name": "Raisins", "vendor": "Foodland", "price": 4.29 },
-    { "name": "Vegetable Broth", "vendor": "Safeway", "price": 2.50},
-    { "name": "Miso", "vendor": "Nijiya Market", "price": 9.45},
-    { "name": "Tofu", "vendor": "Foodland", "price": 2.40},
-    { "name": "Green Onion", "vendor": "Kokua Market", "price": 1.35},
-    { "name": "Peas", "vendor": "Kokua Market", "price": 1.12},
-    { "name": "Carrot", "vendor": "Kokua Market", "price": 1.18},
+    { "name": "Vegetable Broth", "vendor": "Safeway", "price": 2.50 },
+    { "name": "Miso", "vendor": "Nijiya Market", "price": 9.45 },
+    { "name": "Tofu", "vendor": "Foodland", "price": 2.40 },
+    { "name": "Green Onion", "vendor": "Kokua Market", "price": 1.35 },
+    { "name": "Peas", "vendor": "Kokua Market", "price": 1.12 },
+    { "name": "Carrot", "vendor": "Kokua Market", "price": 1.18 },
     { "name": "Mayo", "vendor": "Safeway", "price": 4.88 },
-    { "name": "Salmon", "vendor": "Foodland", "price": 12.99},
-    { "name": "Lemon", "vendor": "Kokua Market", "price": 0.59},
-    { "name": "Instant coffee", "vendor": "Safeway", "price": 7.98}
+    { "name": "Salmon", "vendor": "Foodland", "price": 12.99 },
+    { "name": "Lemon", "vendor": "Kokua Market", "price": 0.59 },
+    { "name": "Instant coffee", "vendor": "Safeway", "price": 7.98 }
   ],
 
   "defaultRecipes": [
