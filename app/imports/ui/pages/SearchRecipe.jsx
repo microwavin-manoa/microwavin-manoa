@@ -13,11 +13,14 @@ import { Tags } from '../../api/tag/Tags';
 import { TagRecipe } from '../../api/tag/TagRecipe';
 import RecipeCard from '../components/RecipeCard';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
+import { Ingredients } from '../../api/ingredient/Ingredient';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
-const makeSchema = (allTags) => new SimpleSchema({
+const makeSchema = (allTags, allIng) => new SimpleSchema({
   tags: { type: Array, label: 'Tags', optional: true },
   'tags.$': { type: String, allowedValues: allTags },
+  ing: { type: Array, label: 'Ingredients', optional: true },
+  'ing.$': { type: String, allowedValues: allIng },
 });
 
 // Get the tags associated with a recipe
@@ -68,16 +71,13 @@ class SearchRecipe extends React.Component {
     const randButtonStyle = { borderRadius: 10, opacity: 0.6, padding: '2em' };
     let fRef = null;
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
-    const formSchema = makeSchema(allTags);
+    const allIng = _.pluck(Ingredients.collection.find().fetch(), 'name');
+    const formSchema = makeSchema(allTags, allIng);
     const bridge = new SimpleSchema2Bridge(formSchema);
-    // console.log(this.state.tags);
     // vv all of tags' id's
     const tagIDPluck = _.pluck(Tags.collection.find({ name: { $in: this.state.tags } }).fetch(), '_id');
     // vv all of the recipe ids that have any of those tags
     const tagPluck = _.uniq(_.pluck(TagRecipe.collection.find({ tagID: { $in: tagIDPluck } }).fetch(), 'recipeID'));
-    // const tagPluckTags = tagPluck.map((recId) => (getTags(recId))) // array of the tags for each recID
-    // const tagPluckObj = _.object(tagPluck, tagPluckTags); // object has recipeID: [array of tags]
-    // const checkTagPluckObj = checkTags(tagPluckObj);
     const mapTagPluck = _.map(tagPluck, (rec) => ({ id: rec, tags: getTags(rec), stateTags: this.state.tags }));
     const testing = _.map(mapTagPluck, function (rec) {
       if (_.every(rec.stateTags, (tag) => (rec.tags.includes(tag)))) {
@@ -95,6 +95,7 @@ class SearchRecipe extends React.Component {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
             <Segment>
               <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
+              <MultiSelectField id='ing' name='ing' showInlineError={true} placeholder={'Filter by Ingredients'}/>
               <SubmitField id='submit' value='Filter' style={filterButtonStyle}/>
               <Button id='display-button-style' onClick={() => this.submit({ tags: [] }, fRef)}>Display all</Button>
               <Popup
@@ -133,8 +134,9 @@ export default withTracker(() => {
   const subscription = Meteor.subscribe(Recipes.adminPublicationName);
   const subscription2 = Meteor.subscribe(Tags.userPublicationName);
   const subscription3 = Meteor.subscribe(TagRecipe.userPublicationName);
+  const subscription4 = Meteor.subscribe(Ingredients.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready() && subscription2.ready() && subscription3.ready();
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
   // Get the Stuff documents
   let recipes = Recipes.collection.find().fetch();
   recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
