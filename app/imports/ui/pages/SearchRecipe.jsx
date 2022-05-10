@@ -39,26 +39,25 @@ function getIngredients(recID) {
 class SearchRecipe extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tags: [], ing: [], filterTag: false, filterIng: false, showRand: false };
+    this.state = { tags: [], ing: [], isFiltered: false, showRand: false };
   }
 
   // Submit the tags
   submit(data, formRef) {
-    console.log('submit', data);
     if (data.tags && data.ing) {
-      this.setState({ tags: data.tags, ing: data.ing, filterTag: true, filterIng: true, showRand: false });
+      this.setState({ tags: data.tags, ing: data.ing, isFiltered: true, showRand: false });
     } else if (data.tags) {
-      this.setState({ tags: data.tags, ing: [], filterTag: true, filterIng: false, showRand: false });
+      this.setState({ tags: data.tags, ing: [], isFiltered: true, showRand: false });
     } else if (data.ing) {
-      this.setState({ tags: [], ing: data.ing, filterTag: false, filterIng: true, showRand: false });
+      this.setState({ tags: [], ing: data.ing, isFiltered: true, showRand: false });
     } else {
-      this.setState({ tags: [], ing: [], filterTag: false, filterIng: false, showRand: false });
+      this.setState({ tags: [], ing: [], isFiltered: false, showRand: false });
       formRef.reset();
     }
   }
 
   randRecipe(recipeMap, formRef) {
-    this.setState({ tags: [], ing: [], filterTag: true, filterIng: true, showRand: true });
+    this.setState({ tags: [], ing: [], isFiltered: false, showRand: true });
     formRef.reset();
   }
 
@@ -66,11 +65,9 @@ class SearchRecipe extends React.Component {
     if (this.state.showRand) {
       return <RecipeCard recipe={_.shuffle(this.props.recipes)[0]}/>;
     }
-    if (!this.state.showRand && (this.state.filterIng || this.state.filterTag)) {
-      console.log('filter');
+    if (!this.state.showRand && this.state.isFiltered) {
       return recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>);
     }
-    console.log('no filter');
     return this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>);
   }
 
@@ -89,7 +86,6 @@ class SearchRecipe extends React.Component {
     const formSchema = makeSchema(allTags, allIng);
     const bridge = new SimpleSchema2Bridge(formSchema);
     // tag filtering
-    console.log('tags', this.state.tags);
     const tagIDPluck = _.pluck(Tags.collection.find({ name: { $in: this.state.tags } }).fetch(), '_id');
     const tagPluck = _.uniq(_.pluck(TagRecipe.collection.find({ tagID: { $in: tagIDPluck } }).fetch(), 'recipeID'));
     const mapTagPluck = _.map(tagPluck, (rec) => ({ id: rec, tags: getTags(rec), stateTags: this.state.tags }));
@@ -100,7 +96,6 @@ class SearchRecipe extends React.Component {
       return [];
     });
     // ingredient filtering
-    console.log('ings', this.state.ing);
     const ingIDPluck = _.pluck(Ingredients.collection.find({ name: { $in: this.state.ing } }).fetch(), '_id');
     const ingPluck = _.uniq(_.pluck(IngredientRecipe.collection.find({ ingredientID: { $in: ingIDPluck } }).fetch(), 'recipeID'));
     const mapIngPluck = _.map(ingPluck, (rec) => ({ id: rec, ing: getIngredients(rec), stateIng: this.state.ing }));
