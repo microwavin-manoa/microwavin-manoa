@@ -30,36 +30,35 @@ function getTags(recID) {
   return _.flatten(tagVal.map(tagID => _.pluck(Tags.collection.find({ _id: tagID }).fetch(), 'name')));
 }
 
-// returns an array of ingredients for this recipe
-function getIngredients(name) {
-  const recipeID = Recipes.collection.findOne({ name })._id;
-  const ingredientVal = _.pluck(IngredientRecipe.collection.find({ recipeID: recipeID }).fetch(), 'ingredientID');
-  return _.flatten(ingredientVal.map(ingID => _.pluck(Ingredients.collection.find({ _id: ingID }).fetch(), 'name')));
+function getIngredients(recID) {
+  const ingVal = _.pluck(IngredientRecipe.collection.find({ recipeID: recID }).fetch(), 'ingredientID');
+  return _.flatten(ingVal.map(ingID => _.pluck(Ingredients.collection.find({ _id: ingID }).fetch(), 'name')));
 }
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class SearchRecipe extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tags: [], ing: [], isFiltered: false, showRand: false };
+    this.state = { tags: [], ing: [], filterTag: false, filterIng: false, showRand: false };
   }
 
   // Submit the tags
   submit(data, formRef) {
-    console.log(data.ing, data.ing.length);
-    if (data.tags.length > 0 || data.ing.length > 0) {
-      console.log('in');
-      this.setState({ tags: data.tags || [], ing: data.ing || [], isFiltered: true, showRand: false });
+    console.log('submit', data);
+    if (data.tags && data.ing) {
+      this.setState({ tags: data.tags, ing: data.ing, filterTag: true, filterIng: true, showRand: false });
+    } else if (data.tags) {
+      this.setState({ tags: data.tags, ing: [], filterTag: true, filterIng: false, showRand: false });
+    } else if (data.ing) {
+      this.setState({ tags: [], ing: data.ing, filterTag: false, filterIng: true, showRand: false });
     } else {
-      console.log('not');
-      this.setState({ tags: data.tags || [], ing: data.ing || [], isFiltered: false, showRand: false });
+      this.setState({ tags: [], ing: [], filterTag: false, filterIng: false, showRand: false });
       formRef.reset();
     }
-    console.log(this.state.isFiltered);
   }
 
   randRecipe(recipeMap, formRef) {
-    this.setState({ tags: [], ing: [], isFiltered: false, showRand: true });
+    this.setState({ tags: [], ing: [], filterTag: true, filterIng: true, showRand: true });
     formRef.reset();
   }
 
@@ -67,9 +66,11 @@ class SearchRecipe extends React.Component {
     if (this.state.showRand) {
       return <RecipeCard recipe={_.shuffle(this.props.recipes)[0]}/>;
     }
-    if (!this.state.showRand && this.state.isFiltered) {
+    if (!this.state.showRand && (this.state.filterIng || this.state.filterTag)) {
+      console.log('filter');
       return recipeMap.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>);
     }
+    console.log('no filter');
     return this.props.recipes.map((recipe, index) => <RecipeCard key={index} recipe={recipe}/>);
   }
 
@@ -87,32 +88,38 @@ class SearchRecipe extends React.Component {
     allIng = allIng.sort();
     const formSchema = makeSchema(allTags, allIng);
     const bridge = new SimpleSchema2Bridge(formSchema);
-    // vv all of tags' id's
+    // tag filtering
+    console.log('tags', this.state.tags);
     const tagIDPluck = _.pluck(Tags.collection.find({ name: { $in: this.state.tags } }).fetch(), '_id');
-    // vv all of the recipe ids that have any of those tags
     const tagPluck = _.uniq(_.pluck(TagRecipe.collection.find({ tagID: { $in: tagIDPluck } }).fetch(), 'recipeID'));
     const mapTagPluck = _.map(tagPluck, (rec) => ({ id: rec, tags: getTags(rec), stateTags: this.state.tags }));
-    const testing = _.map(mapTagPluck, function (rec) {
+    const tagIDs = _.map(mapTagPluck, function (rec) {
       if (_.every(rec.stateTags, (tag) => (rec.tags.includes(tag)))) {
         return rec.id;
       }
       return [];
     });
     // ingredient filtering
+    console.log('ings', this.state.ing);
     const ingIDPluck = _.pluck(Ingredients.collection.find({ name: { $in: this.state.ing } }).fetch(), '_id');
     const ingPluck = _.uniq(_.pluck(IngredientRecipe.collection.find({ ingredientID: { $in: ingIDPluck } }).fetch(), 'recipeID'));
     const mapIngPluck = _.map(ingPluck, (rec) => ({ id: rec, ing: getIngredients(rec), stateIng: this.state.ing }));
-    const testing2 = _.map(mapIngPluck, function (rec) {
+    const ingIDs = _.map(mapIngPluck, function (rec) {
       if (_.every(rec.stateIng, (ingredient) => (rec.ing.includes(ingredient)))) {
         return rec.id;
       }
       return [];
     });
-    let recipeMapTag = _.flatten(testing.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
-    // console.log(recipeMapTag);
-    const recipeMapIng = _.flatten(testing2.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
-    console.log(recipeMapIng);
-    recipeMapTag = recipeMapTag.sort((a, b) => a.name.localeCompare(b.name));
+    let recipeMap;
+    if (tagIDs.length === 0) {
+      recipeMap = ingIDs;
+    } else if (ingIDs.length === 0) {
+      recipeMap = tagIDs;
+    } else {
+      recipeMap = _.intersection(ingIDs, tagIDs);
+    }
+    let recipeMapFinal = _.flatten(recipeMap.map((recipeID) => Recipes.collection.find({ _id: recipeID }).fetch()));
+    recipeMapFinal = recipeMapFinal.sort((a, b) => a.name.localeCompare(b.name));
     return (
       <Container id="search-recipe-page" style={{ marginTop: '30px' }}>
         <Header as="h2" textAlign="center" id='page-header-style'>Search Recipes</Header>
@@ -123,7 +130,7 @@ class SearchRecipe extends React.Component {
               <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
               <MultiSelectField id='ing' name='ing' showInlineError={true} placeholder={'Filter by Ingredients'}/>
               <SubmitField id='submit' value='Filter' style={filterButtonStyle}/>
-              <Button id='display-button-style' onClick={() => this.submit({ tags: [], ing: [] }, fRef)}>Display all</Button>
+              <Button id='display-button-style' onClick={() => this.submit({ tags: undefined, ing: undefined }, fRef)}>Display all</Button>
               <Popup
                 trigger={<Button id='random-button' icon='random' floated='right' onClick={() => this.randRecipe(this.props.recipes, fRef)}/>}
                 content='Surprise me!'
@@ -137,7 +144,7 @@ class SearchRecipe extends React.Component {
         </Segment>
         <br/><br/>
         <Card.Group centered itemsPerRow={5}>
-          {this.renderCards(recipeMapIng)}
+          {this.renderCards(recipeMapFinal)}
         </Card.Group>
         <Button as={Link} to='/search#search-recipe-page' icon='arrow up' circular id='to-top-button' size='big'/>
       </Container>
@@ -149,6 +156,8 @@ class SearchRecipe extends React.Component {
 // Require an array of Stuff documents in the props.
 SearchRecipe.propTypes = {
   recipes: PropTypes.array.isRequired,
+  ingCol: PropTypes.array.isRequired,
+  ingRep: PropTypes.array.isRequired,
   tagsCol: PropTypes.array.isRequired,
   tagRep: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
@@ -169,8 +178,12 @@ export default withTracker(() => {
   recipes = recipes.sort((a, b) => a.name.localeCompare(b.name));
   const tagsCol = Tags.collection.find({}).fetch();
   const tagRep = TagRecipe.collection.find({}).fetch();
+  const ingCol = Ingredients.collection.find({}).fetch();
+  const ingRep = IngredientRecipe.collection.find({}).fetch();
   return {
     recipes,
+    ingCol,
+    ingRep,
     tagsCol,
     tagRep,
     ready,
