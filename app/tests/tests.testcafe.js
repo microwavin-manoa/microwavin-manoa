@@ -107,11 +107,11 @@ test('Test that all pages show up for Admin', async (testController) => {
 });
 
 // Testing functionality of forms
-test('Test that Add Vendor works for admin', async (testController) => {
+test('Test that Add Vendor works', async (testController) => {
   await navBar.gotoSigninPage(testController);
-  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoAddRecipePage(testController);
-  await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.ingredients, addRecipe.serving, addRecipe.tags, addRecipe.description);
+  await addRecipePage.enterRecipe(testController, addRecipe.name, addRecipe.imageURL, addRecipe.prepTime, addRecipe.serving, addRecipe.description);
   await navBar.logout(testController);
 });
 
