@@ -45,7 +45,7 @@ class AddVendor extends React.Component {
       <Grid id={'add-vendor-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>
           <Link to='/admin'><Button id='back-button-style' content='Back to admin' icon='left arrow' labelPosition='left'/></Link>
-          <Header as="h2" textAlign="center">Add Vendor</Header>
+          <Header as="h2" textAlign="center" id='page-header-style'>Add Vendor</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
           <Segment className='form-style'>
             <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
