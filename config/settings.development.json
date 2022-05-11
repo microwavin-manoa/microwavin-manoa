@@ -1,6 +1,6 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin"}, { "email": "john@foo.com", "password": "changeme" },
+    { "email": "admin@foo.com", "password": "admin", "role": "admin"}, { "email": "john@foo.com", "password": "changeme" },
     { "email": "dinahmite@pmail.com", "password": "dina32mite!" }, { "email": "HollyWood123@foo.com", "password": "qwertyMV321" }, { "email": "theking001@pmail.com", "password": "jqhfdj294fj39f" }, { "email": "misterjay@pmail.com", "password": "69hehenice" }, { "email": "zoowiemama@foo.com", "password": "420hehbjdkw29@#!" }, { "email": "Jay91Walker@pmail.com", "password": "!osmanthus91wine!" },
     { "email": "leviackerman@pmail.com", "password": "qZwMVCo" }, { "email": "percyjackson@foo.com", "password": "cS3bozY" }, { "email": "vinventure@foo.com", "password": "@5xxPLtx" }, { "email": "nekoneko@pmail.com", "password": "mud9y6P6" }, { "email": "raihanrulez@pmail.com", "password": "w6RfayC" }, { "email": "snipssoka@foo.com", "password": "uOoXaGP" },
     { "email": "sunnyhippo@pmail.com", "password": "iLoveK@zuh@" }, { "email": "walter-lau@foo.com", "password": "$eah@wks55" }, { "email": "jkmiyamoto@pmail.com", "password": " 333b&ck333" }, { "email": "lonna578@tahoo.com", "password": " noOneKnows" }, { "email": "rosespoise@tahoo.com", "password": "#platapus@54" }, { "email": "vollyballLover@tahoo.com", "password": "Tr!ick0ff" },
