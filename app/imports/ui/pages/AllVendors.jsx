@@ -1,8 +1,9 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader, Card, Image } from 'semantic-ui-react';
+import { Container, Header, Loader, Card, Image, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { HashLink as Link } from 'react-router-hash-link';
 import { Vendors } from '../../api/vendor/Vendors';
 import VendorCard from '../components/VendorCard';
 
@@ -23,6 +24,7 @@ class AllVendors extends React.Component {
         <Card.Group centered>
           {this.props.vendor.map((vendor, index) => <VendorCard key={index} vendor={vendor}/>)}
         </Card.Group>
+        <Button as={Link} to='/vendors#navbar' icon='arrow up' circular id='to-top-button' size='big'/>
       </Container>
     );
   }

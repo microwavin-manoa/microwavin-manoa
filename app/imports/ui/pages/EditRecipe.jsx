@@ -99,7 +99,8 @@ class EditRecipe extends React.Component {
             : ''}
           <Header as="h2" textAlign="center" id='page-header-style'>Edit Recipe</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-          <Segment style={submitStyle}>
+          {/*<Segment style={submitStyle}>*/}
+          <Segment className='form-style'>
             <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>
               <Segment>
                 <TextField name='name' id='name'/>

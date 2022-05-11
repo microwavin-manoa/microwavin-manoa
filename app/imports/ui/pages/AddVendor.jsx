@@ -40,7 +40,7 @@ class AddVendor extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   render() {
     let fRef = null;
-    const submitStyle = { backgroundColor: '#85865F', color: 'white' };
+    const submitStyle = { backgroundColor: '#4f583d', color: 'white' };
     return (
       <Grid id={'add-vendor-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>

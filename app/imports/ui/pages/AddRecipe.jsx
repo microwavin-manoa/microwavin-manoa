@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Header, Form, Segment, Image } from 'semantic-ui-react';
+import { Grid, Header, Form, Segment, Image, Button, Container } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -18,6 +18,7 @@ import AddIngredient from '../components/AddIngredient';
 import { addRecipeMethod } from '../../startup/both/Methods';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import { Vendors } from '../../api/vendor/Vendors';
+import { HashLink as Link } from 'react-router-hash-link';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const makeSchema = (allIngredients, allTags) => new SimpleSchema({
@@ -49,6 +50,7 @@ class AddRecipe extends React.Component {
   render() {
     // const color = { color: '#4f583d' };
     const textStyle = { color: '#4f583d', fontSize: '16px' };
+    // const submitStyle = { backgroundColor: '#85865F', color: '#FFFFFF' };
     const submitStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
     let fRef = null;
     // get all ingredients and tags to choose from
@@ -59,30 +61,33 @@ class AddRecipe extends React.Component {
     const formSchema = makeSchema(allIngredients, allTags);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
-      <Grid container centered style={{ marginTop: '10px' }} id={'add-recipe-page'}>
-        <Grid.Column centered>
-          <Header as="h2" textAlign="center" id='page-header-style'>Add Recipe</Header>
-          <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-          <Segment style={submitStyle}>
-            <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
-              <Segment>
-                <TextField name='name' id='addrecipe-form-name' style={textStyle}/>
-                <TextField name='imageURL' id='addrecipe-form-imageURL' style={textStyle}/>
-                <Form.Group widths={'equal'}>
-                  <TextField name='prepTime' id='addrecipe-form-prep' placeholder='5 minutes' style={textStyle}/>
-                  <TextField name='servingSize' id='addrecipe-form-serving' style={textStyle}/>
-                </Form.Group>
-                <MultiSelectField name='ingredients' id='addrecipe-form-ingredients' placeholder='Select ingredients' style={textStyle}/>
-                <AddIngredient/><br/>
-                <MultiSelectField name='tags' id='addrecipe-form-tags' placeholder='Select tags' style={textStyle}/>
-                <LongTextField name='description' id='addrecipe-form-description' style={textStyle}/>
-                <SubmitField value='Submit' id='addrecipe-form-submit' style={submitStyle}/>
-                <ErrorsField/>
-              </Segment>
-            </AutoForm>
-          </Segment>
-        </Grid.Column>
-      </Grid>
+      <Container>
+        <Grid container centered style={{ marginTop: '10px' }} id={'add-recipe-page'}>
+          <Grid.Column centered>
+            <Header as="h2" textAlign="center" id='page-header-style'>Add Recipe</Header>
+            <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
+            <Segment style={{ backgroundColor: '#85865F' }}>
+              <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
+                <Segment>
+                  <TextField name='name' id='addrecipe-form-name' style={textStyle}/>
+                  <TextField name='imageURL' id='addrecipe-form-imageURL' style={textStyle}/>
+                  <Form.Group widths={'equal'}>
+                    <TextField name='prepTime' id='addrecipe-form-prep' placeholder='5 minutes' style={textStyle}/>
+                    <TextField name='servingSize' id='addrecipe-form-serving' style={textStyle}/>
+                  </Form.Group>
+                  <MultiSelectField name='ingredients' id='addrecipe-form-ingredients' placeholder='Select ingredients' style={textStyle}/>
+                  <AddIngredient/><br/>
+                  <MultiSelectField name='tags' id='addrecipe-form-tags' placeholder='Select tags' style={textStyle}/>
+                  <LongTextField name='description' id='addrecipe-form-description' style={textStyle}/>
+                  <SubmitField value='Submit' id='addrecipe-form-submit' style={submitStyle}/>
+                  <ErrorsField/>
+                </Segment>
+              </AutoForm>
+            </Segment>
+          </Grid.Column>
+        </Grid>
+        <Button as={Link} to='/add#navbar' icon='arrow up' circular id='to-top-button' size='big'/>
+      </Container>
     );
   }
 }

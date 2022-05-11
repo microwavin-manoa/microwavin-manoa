@@ -47,7 +47,7 @@ class EditIngredient extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     console.log(this.props.doc.ingredientId);
-    const submitStyle = { backgroundColor: '#85865F', color: 'white' };
+    const submitStyle = { backgroundColor: '#4f583d', color: 'white' };
     const allVendors = _.pluck(Vendors.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allVendors);
     const bridge = new SimpleSchema2Bridge(formSchema);

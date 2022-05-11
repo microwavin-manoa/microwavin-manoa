@@ -38,13 +38,14 @@ class EditIngredientVendor extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   render() {
+    const submitStyle = { backgroundColor: '#c9c9a9' };
     const model = _.extend({}, this.props.ing);
     model.price = this.props.ing.price;
     return (
       <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>
         <Segment>
           <NumField name='price' decimal={true}/>
-          <SubmitField value='Submit'/>
+          <SubmitField value='Submit' style={submitStyle}/>
           <ErrorsField/>
         </Segment>
       </AutoForm>

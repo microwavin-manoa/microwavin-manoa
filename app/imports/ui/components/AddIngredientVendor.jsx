@@ -59,8 +59,10 @@ class AddIngredientVendor extends React.Component {
     const allVendors = _.pluck(Vendors.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allVendors);
     const bridge = new SimpleSchema2Bridge(formSchema);
+    const formStyle = { backgroundColor: '#c9c9a9' };
+    const submitStyle = { backgroundColor: '#85865F', color: '#FFFFFF' };
     return (
-      <Accordion styled className='form-style'>
+      <Accordion styled style={formStyle}>
         <Accordion.Title active={activeIndex === -1} index={0} onClick={this.handleClick}>
           <Icon name='dropdown' />
           Add New Ingredient
@@ -71,7 +73,7 @@ class AddIngredientVendor extends React.Component {
               <TextField name='name' size={'small'}/>
               <Form.Group widths={'equal'}><SelectField name='vendor' value={this.props.vendorName} disabled={true}/>
                 <NumField name='price' decimal={true}/></Form.Group>
-              <SubmitField value='Submit'/>
+              <SubmitField value='Submit' style={submitStyle}/>
               <ErrorsField/>
             </Segment>
           </AutoForm>

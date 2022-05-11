@@ -14,7 +14,7 @@ a:hover {
   color: #4F583D !important;
 }
 #navbar a, #navbar a:hover {
-  color: #f5f0e6 !important;
+  color: white !important;
 }
 #navbar {
  background-color: #ceb793;
@@ -72,7 +72,7 @@ h2.ui.header {
 }
 
 #page-header-style, #recipeHeader, #vendorHeader, #ingredientHeader {
-  font-family: 'Libre Bodoni', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: 'Merienda', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 28px;
   color: #4F583D;
 }
@@ -148,7 +148,7 @@ h2.ui.header {
   bottom: 40px;
   right: 40px;
   background-color: #bca37e;
-  color: #f5f0e6 !important;
+  color: white !important;
   z-index: 1;
 }
 #to-top-button:hover {
@@ -160,7 +160,7 @@ h2.ui.header {
 }
 
 .ui.segment.form-style, .accordion.ui.styled.form-style {
-  background-color: #c9c9a9;
+  background-color: #85865F;
   color: #f5f0e6;
   border-width: 0;
 }

@@ -92,7 +92,7 @@ class AdminPage extends React.Component {
             <AddIngredient id='add-ingredient' fluid style={buttonStyle}/>
           </div>
         </div>
-        <Button as={Link} to='/admin#admin-page' icon='arrow up' circular id='to-top-button' size='big'/>
+        <Button as={Link} to='/admin#navbar' icon='arrow up' circular id='to-top-button' size='big'/>
       </Container>
     );
   }

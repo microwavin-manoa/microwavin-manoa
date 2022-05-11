@@ -89,7 +89,7 @@ class SearchRecipe extends React.Component {
   }
 
   renderPage() {
-    const filterButtonStyle = { backgroundColor: '#85865F', color: 'white' };
+    const filterButtonStyle = { backgroundColor: '#4f583d', color: 'white', float: 'right' };
     const randButtonStyle = { borderRadius: 10, opacity: 0.6, padding: '2em' };
     let fRef = null;
     const allTags = _.pluck(Tags.collection.find().fetch(), 'name');
@@ -137,22 +137,22 @@ class SearchRecipe extends React.Component {
             <Segment>
               <Form.Group widths='equal' inline>
                 <Form.Field>
-                  <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder={'Filter by Tag'}/>
+                  <MultiSelectField id='tags' name='tags' showInlineError={true} placeholder='Type or select to filter by tag'/>
                 </Form.Field>
                 <Form.Field>
-                  <MultiSelectField id='ing' name='ing' showInlineError={true} placeholder={'Filter by Ingredients'}/>
+                  <MultiSelectField id='ing' name='ing' showInlineError={true} placeholder={'Type or select to filter ingredients'}/>
                 </Form.Field>
               </Form.Group>
-              <SubmitField id='submit' value='Filter' style={filterButtonStyle}/>
-              <Button id='display-button-style' onClick={() => this.submit({ tags: undefined, ing: undefined }, fRef)}>Display all</Button>
               <Popup
-                trigger={<Button id='random-button' icon='random' floated='right' onClick={() => this.randRecipe(this.props.recipes, fRef)}/>}
+                trigger={<Button id='random-button' icon='random' floated='left' onClick={() => this.randRecipe(this.props.recipes, fRef)}/>}
                 content='Surprise me!'
                 hideOnScroll
                 position='top right'
                 style={randButtonStyle}
                 inverted
               />
+              <Button id='display-button-style' onClick={() => this.submit({ tags: undefined, ing: undefined }, fRef)}>Clear filters</Button>
+              <SubmitField id='submit' value='Filter' style={filterButtonStyle} floated='right'/>
             </Segment>
           </AutoForm>
         </Segment>
@@ -160,7 +160,7 @@ class SearchRecipe extends React.Component {
         <Card.Group centered itemsPerRow={5}>
           {this.renderCards(recipeMapFinal)}
         </Card.Group>
-        <Button as={Link} to='/search#search-recipe-page' icon='arrow up' circular id='to-top-button' size='big'/>
+        <Button as={Link} to='/search#navbar' icon='arrow up' circular id='to-top-button' size='big'/>
       </Container>
     );
   }

@@ -13,7 +13,8 @@ class NavBar extends React.Component {
     const headerFont = { fontSize: '16px' };
     const signinButton = { backgroundColor: '#85865f', color: '#f5f0e6' };
     const signupButton = { backgroundColor: '#4f583d', color: '#f5f0e6' };
-    const font = { color: '#f5f0e6' };
+    // const font = { color: '#f5f0e6' };
+    const font = { color: '#FFFFFF' };
     // const headerColor = { color: '#4f583d' };
     return (
       <Segment id={'navbar'}>
@@ -35,11 +36,11 @@ class NavBar extends React.Component {
             {this.props.currentUser === '' ? (
               <Button.Group>
                 <Button style={signupButton} to="/signup" as={NavLink}>
-                  <Button.Content style={font} visible exact><Icon name='signup'/></Button.Content>
+                  <Button.Content style={font} visible exact>Register</Button.Content>
                 </Button>
                 <ButtonOr/>
                 <Button id="login-button" style={signinButton} to="/signin" as={NavLink}>
-                  <Button.Content style={font} inverted visible exact><Icon name='sign-in'/></Button.Content>
+                  <Button.Content style={font} inverted visible exact>Sign in</Button.Content>
                 </Button>
               </Button.Group>
             ) : (

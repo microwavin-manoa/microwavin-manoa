@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Accordion, Icon, Form } from 'semantic-ui-react';
+import { Segment, Accordion, Icon, Form, Container } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -59,7 +59,8 @@ class AddIngredient extends React.Component {
     const allVendors = _.pluck(Vendors.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allVendors);
     const bridge = new SimpleSchema2Bridge(formSchema);
-    const accStyle = { backgroundColor: '#4f583d', width: '1100px' };
+    const accStyle = { backgroundColor: '#85865F', width: '1100px' };
+    const submitStyle = { backgroundColor: '#4f583d', color: '#FFFFFF' };
     return (
       <Accordion styled style={accStyle}>
         <Accordion.Title style={{ color: '#FFFFFF' }} active={activeIndex === -1} index={0} onClick={this.handleClick}>
@@ -74,9 +75,10 @@ class AddIngredient extends React.Component {
                 <SelectField name='vendor'/>
                 <NumField id='addIng-form-price' name='price' decimal={true}/>
               </Form.Group>
-              <SubmitField id='addIng-form-submit' value='Submit'/>
+              <SubmitField id='addIng-form-submit' value='Submit' style={submitStyle}/>
               <ErrorsField/>
             </Segment>
+            <Container text style={{ float: 'left', paddingBottom: '5px', color: 'white' }}><Icon inverted name='shopping basket' style={{ marginRight: '8px' }}/>After you submit, you can now see the ingredient above</Container><br/>
           </AutoForm>
         </Accordion.Content>
       </Accordion>

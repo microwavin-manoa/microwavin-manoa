@@ -42,7 +42,7 @@ class EditVendor extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
-    const submitStyle = { backgroundColor: '#85865F', color: 'white' };
+    const submitStyle = { backgroundColor: '#4f583d', color: 'white' };
     return (
       <Grid id={'edit-vendor-page'} container centered style={{ marginTop: '10px' }}>
         <Grid.Column>

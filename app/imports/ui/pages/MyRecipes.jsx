@@ -1,9 +1,9 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Table, Header, Loader, Image, Container } from 'semantic-ui-react';
+import { Table, Header, Loader, Image, Container, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import { Recipes } from '../../api/recipe/Recipes';
 import StuffRecipe from '../components/StuffRecipe';
 import { Tags } from '../../api/tag/Tags';
@@ -54,6 +54,7 @@ class MyRecipes extends React.Component {
             <br/><br/>
             <Link to='/search' style={{ marginTop: '20px' }}>See all recipes</Link>
           </Container> : ''}
+        <Button as={Link} to='/myrecipes#navbar' icon='arrow up' circular id='to-top-button' size='big'/>
       </div>
     );
   }

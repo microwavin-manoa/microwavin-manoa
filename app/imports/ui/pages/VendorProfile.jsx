@@ -131,7 +131,7 @@ class VendorProfile extends React.Component {
                     <Table.Row>
                       <Table.Cell style={tableHeadStyle}><Grid>
                         <Grid.Column style={ { width: 160 } }>
-                          Ingredeint
+                          Ingredient
                         </Grid.Column>
                         <Grid.Column>
                           Price
