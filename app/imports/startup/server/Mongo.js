@@ -22,11 +22,8 @@ function addContact(data) {
   Contacts.collection.insert(data);
 }
 
-// to be changed
 function addIngredient({ name, vendor, price }) {
-  if (!Ingredients.collection.findOne({ name })) {
-    Ingredients.collection.insert({ name: name });
-  }
+  Ingredients.collection.insert({ name: name });
   const nameId = Ingredients.collection.findOne({ name: name })._id;
   IngredientVendorPrice.collection.insert({ ingredient: name, ingredientId: nameId, vendor: vendor, price: price });
 }
