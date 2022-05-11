@@ -40,8 +40,8 @@ class Landing extends React.Component {
               </Grid.Column>
               <Grid.Column textAlign='center'>
                 <Header as='h2' style={{ fontSize: '40px' }}>Admins!</Header>
-                <Header as='h3'>Edit all recipes and ingredients in the system</Header>
-                <Header as='h3'>Add and edit vendors</Header>
+                <Header as='h3'>Edit and delete all recipes and ingredients in the system</Header>
+                <Header as='h3'>Add, edit, and delete vendors</Header>
                 <br/>
                 <Image src='images/leafy-divide.png' size='medium' floated='right'/>
               </Grid.Column>
@@ -80,7 +80,7 @@ class Landing extends React.Component {
         <div className='plain-background' style={{ height: '460px' }}>
           <Grid container centered stackable columns='equal' verticalAlign='middle' className='landing-content2'>
             <Grid.Row>
-              <Header as='h2' style={{ paddingTop: '10px' }}>Create recipes, view and edit your own recipes</Header>
+              <Header as='h2' style={{ paddingTop: '10px' }}>Create recipes! View, edit, and delete your own recipes</Header>
             </Grid.Row>
             <Grid.Column textAlign='center'>
               <Image src='images/addrecipe.png'/>
