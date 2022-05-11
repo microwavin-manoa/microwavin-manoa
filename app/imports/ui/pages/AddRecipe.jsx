@@ -8,6 +8,7 @@ import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
+import { HashLink as Link } from 'react-router-hash-link';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Ingredients } from '../../api/ingredient/Ingredient';
 // import { Recipes } from '../../api/recipe/Recipes';
@@ -18,7 +19,6 @@ import AddIngredient from '../components/AddIngredient';
 import { addRecipeMethod } from '../../startup/both/Methods';
 import { IngredientVendorPrice } from '../../api/ingredient/IngredientVendorPrice';
 import { Vendors } from '../../api/vendor/Vendors';
-import { HashLink as Link } from 'react-router-hash-link';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const makeSchema = (allIngredients, allTags) => new SimpleSchema({
@@ -75,9 +75,9 @@ class AddRecipe extends React.Component {
                     <TextField name='prepTime' id='addrecipe-form-prep' placeholder='5 minutes' style={textStyle}/>
                     <TextField name='servingSize' id='addrecipe-form-serving' style={textStyle}/>
                   </Form.Group>
-                  <MultiSelectField name='ingredients' id='addrecipe-form-ingredients' placeholder='Select ingredients' style={textStyle}/>
+                  <MultiSelectField name='ingredients' id='addrecipe-form-ingredients' placeholder='Type or select ingredients' style={textStyle}/>
                   <AddIngredient/><br/>
-                  <MultiSelectField name='tags' id='addrecipe-form-tags' placeholder='Select tags' style={textStyle}/>
+                  <MultiSelectField name='tags' id='addrecipe-form-tags' placeholder='Type or select tags' style={textStyle}/>
                   <LongTextField name='description' id='addrecipe-form-description' style={textStyle}/>
                   <SubmitField value='Submit' id='addrecipe-form-submit' style={submitStyle}/>
                   <ErrorsField/>

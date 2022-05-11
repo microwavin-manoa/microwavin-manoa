@@ -18,7 +18,7 @@ import { recipeCard } from './recipecard.component';
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const credentials = { username: 'john@foo.com', password: 'changeme' };
-const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
+const adminCredentials = { username: 'admin@foo.com', password: 'admin' };
 const addRecipe = { name: 'Egg', imageURL: '/egg.jpeg', prepTime: '2 minutes', serving: '5 servings', description: 'Boil egg.' };
 
 fixture('meteor-application-template-react localhost test with default db')

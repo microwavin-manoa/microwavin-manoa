@@ -57,7 +57,7 @@ class Landing extends React.Component {
               <Grid.Column textAlign='center'>
                 <Header as='h2' style={{ fontSize: '40px' }}>Create an account<br/>and log in</Header>
                 <br/>
-                {/*<Image src='images/leafy-divide.png' size='medium' floated='right'/>*/}
+                {/* <Image src='images/leafy-divide.png' size='medium' floated='right'/> */}
                 <Button.Group>
                   <Button style={signupButton} to="/signup" as={NavLink} animated='vertical'>
                     <Button.Content style={font} visible exact>Register</Button.Content>

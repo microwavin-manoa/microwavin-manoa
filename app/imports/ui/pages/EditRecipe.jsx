@@ -99,7 +99,6 @@ class EditRecipe extends React.Component {
             : ''}
           <Header as="h2" textAlign="center" id='page-header-style'>Edit Recipe</Header>
           <Image centered size={'medium'} src={'images/leaf-break.png'} style={{ marginTop: '-10px' }}/><br/>
-          {/*<Segment style={submitStyle}>*/}
           <Segment className='form-style'>
             <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={model}>
               <Segment>
@@ -107,9 +106,9 @@ class EditRecipe extends React.Component {
                 <TextField name='imageURL' id='imageURL'/>
                 <TextField name='prepTime' placeholder='5 minutes' id='prepTime'/>
                 <TextField name='servingSize' id='servings'/>
-                <MultiSelectField name='ingredients' id='ingredients' placeholder='Select ingredients'/>
+                <MultiSelectField name='ingredients' id='ingredients' placeholder='Type or select ingredients'/>
                 <AddIngredient/><br/>
-                <MultiSelectField name='tags' id='tags' placeholder='Select tags'/>
+                <MultiSelectField name='tags' id='tags' placeholder='Type or select tags'/>
                 <LongTextField contenteditable id='description' name='description'/>
                 <SubmitField value='Submit' id='submit' style={submitStyle}/>
                 <ErrorsField/>
